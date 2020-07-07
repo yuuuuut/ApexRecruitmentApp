@@ -234,6 +234,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1445,7 +1447,7 @@ var render = function() {
             "v-tabs",
             {
               attrs: {
-                "background-color": "deep-purple accent-4",
+                "background-color": "light-blue darken-1",
                 "center-active": "",
                 grow: "",
                 dark: ""
@@ -1459,9 +1461,11 @@ var render = function() {
               }
             },
             _vm._l(_vm.items, function(item) {
-              return _c("v-tab", { key: item.tab }, [
-                _vm._v("\n        " + _vm._s(item.tab) + "\n      ")
-              ])
+              return _c(
+                "v-tab",
+                { key: item.tab, staticClass: "font-weight-bold" },
+                [_vm._v("\n        " + _vm._s(item.tab) + "\n      ")]
+              )
             }),
             1
           ),
@@ -1504,7 +1508,7 @@ var render = function() {
                       },
                       [
                         _c("v-text-field", {
-                          staticClass: "mt-3 ml-10 mr-10",
+                          staticClass: "mt-5 ml-10 mr-10",
                           attrs: {
                             rules: _vm.emailRules,
                             label: "メールアドレス",
@@ -1544,12 +1548,22 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c(
-                          "button",
-                          {
-                            staticClass: "button button--inverse",
-                            attrs: { type: "submit" }
-                          },
-                          [_vm._v("login")]
+                          "div",
+                          { staticClass: "mt-3 mb-5 d-flex justify-center" },
+                          [
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: {
+                                  width: "300px",
+                                  color: "primary",
+                                  dark: ""
+                                }
+                              },
+                              [_vm._v("ログイン")]
+                            )
+                          ],
+                          1
                         )
                       ],
                       1
