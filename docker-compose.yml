@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  apex_web:
+    build: .
+    volumes:
+        - ./web:/var/www
+    ports:
+        - 8081:8081
+        - 3000:3000
+  db:
+    image: mysql:8.0
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: apex
+        MYSQL_USER: root
+        MYSQL_PASSWORD: root
+        TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+        - ./database:/var/lib/mysql
+    ports:
+        - 3305:3306
