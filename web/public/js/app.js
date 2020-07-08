@@ -236,11 +236,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       tab: null,
       show1: false,
+      show2: false,
+      show3: false,
       items: [{
         tab: 'ログイン'
       }, {
@@ -249,6 +282,12 @@ __webpack_require__.r(__webpack_exports__);
       loginForm: {
         email: '',
         password: ''
+      },
+      registerForm: {
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: ''
       },
       //Validations
       emailRules: [function (v) {
@@ -261,6 +300,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     login: function login() {
       console.log(this.loginForm);
+    },
+    register: function register() {
+      console.log(this.registerForm);
     }
   }
 });
@@ -1502,7 +1544,6 @@ var render = function() {
                         on: {
                           submit: function($event) {
                             $event.preventDefault()
-                            return _vm.login($event)
                           }
                         }
                       },
@@ -1558,7 +1599,8 @@ var render = function() {
                                   width: "300px",
                                   color: "primary",
                                   dark: ""
-                                }
+                                },
+                                on: { click: _vm.login }
                               },
                               [_vm._v("ログイン")]
                             )
@@ -1583,7 +1625,120 @@ var render = function() {
                       }
                     ]
                   },
-                  [_vm._v("\n          あ\n        ")]
+                  [
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                          }
+                        }
+                      },
+                      [
+                        _c("v-text-field", {
+                          staticClass: "mt-5 ml-10 mr-10",
+                          attrs: { label: "名前", "hide-details": "auto" },
+                          model: {
+                            value: _vm.registerForm.name,
+                            callback: function($$v) {
+                              _vm.$set(_vm.registerForm, "name", $$v)
+                            },
+                            expression: "registerForm.name"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("v-text-field", {
+                          staticClass: "mt-5 ml-10 mr-10",
+                          attrs: {
+                            rules: _vm.emailRules,
+                            label: "メールアドレス",
+                            "hide-details": "auto"
+                          },
+                          model: {
+                            value: _vm.registerForm.email,
+                            callback: function($$v) {
+                              _vm.$set(_vm.registerForm, "email", $$v)
+                            },
+                            expression: "registerForm.email"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("v-text-field", {
+                          staticClass: "mt-5 ml-10 mr-10",
+                          attrs: {
+                            "append-icon": _vm.show2
+                              ? "mdi-eye"
+                              : "mdi-eye-off",
+                            type: _vm.show2 ? "text" : "password",
+                            label: "パスワード",
+                            counter: ""
+                          },
+                          on: {
+                            "click:append": function($event) {
+                              _vm.show2 = !_vm.show2
+                            }
+                          },
+                          model: {
+                            value: _vm.registerForm.password,
+                            callback: function($$v) {
+                              _vm.$set(_vm.registerForm, "password", $$v)
+                            },
+                            expression: "registerForm.password"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("v-text-field", {
+                          staticClass: "mt-2 ml-10 mr-10",
+                          attrs: {
+                            "append-icon": _vm.show3
+                              ? "mdi-eye"
+                              : "mdi-eye-off",
+                            type: _vm.show3 ? "text" : "password",
+                            label: "パスワード(確認)",
+                            counter: ""
+                          },
+                          on: {
+                            "click:append": function($event) {
+                              _vm.show3 = !_vm.show3
+                            }
+                          },
+                          model: {
+                            value: _vm.registerForm.password_confirmation,
+                            callback: function($$v) {
+                              _vm.$set(
+                                _vm.registerForm,
+                                "password_confirmation",
+                                $$v
+                              )
+                            },
+                            expression: "registerForm.password_confirmation"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "mt-3 mb-5 d-flex justify-center" },
+                          [
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: {
+                                  width: "300px",
+                                  color: "primary",
+                                  dark: ""
+                                },
+                                on: { click: _vm.register }
+                              },
+                              [_vm._v("新規登録")]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]
                 )
               ])
             }),
