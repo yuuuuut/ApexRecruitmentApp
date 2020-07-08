@@ -2,7 +2,7 @@
   <v-toolbar dark>
     <v-toolbar-title>えぺぼ!!</v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-menu top>
+    <v-menu v-if="isLogin" top>
       <template v-slot:activator="{ on, attrs }">
         <v-btn 
           v-bind="attrs"
@@ -31,6 +31,11 @@ export default {
       items: [
         { title: 'ログアウト' },
       ]
+    }
+  },
+  computed: {
+    isLogin () {
+      return this.$store.getters['auth/check']
     }
   },
   methods: {

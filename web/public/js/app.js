@@ -2077,6 +2077,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }]
     };
   },
+  computed: {
+    isLogin: function isLogin() {
+      return this.$store.getters['auth/check'];
+    }
+  },
   methods: {
     logout: function logout() {
       var _this = this;
@@ -4210,64 +4215,78 @@ var render = function() {
       _vm._v(" "),
       _c("v-spacer"),
       _vm._v(" "),
-      _c(
-        "v-menu",
-        {
-          attrs: { top: "" },
-          scopedSlots: _vm._u([
+      _vm.isLogin
+        ? _c(
+            "v-menu",
             {
-              key: "activator",
-              fn: function(ref) {
-                var on = ref.on
-                var attrs = ref.attrs
-                return [
-                  _c(
-                    "v-btn",
-                    _vm._g(
-                      _vm._b({ attrs: { icon: "" } }, "v-btn", attrs, false),
-                      on
-                    ),
-                    [_c("v-icon", [_vm._v("mdi-dots-vertical")])],
-                    1
-                  )
-                ]
-              }
-            }
-          ])
-        },
-        [
-          _vm._v(" "),
-          _c(
-            "v-list",
-            _vm._l(_vm.items, function(item, index) {
-              return _c(
-                "v-list-item",
-                { key: index, on: { click: function($event) {} } },
+              attrs: { top: "" },
+              scopedSlots: _vm._u(
                 [
-                  item.title === "ログアウト"
-                    ? _c("div", [
+                  {
+                    key: "activator",
+                    fn: function(ref) {
+                      var on = ref.on
+                      var attrs = ref.attrs
+                      return [
                         _c(
-                          "button",
-                          {
-                            staticClass: "button button--link",
-                            on: { click: _vm.logout }
-                          },
-                          [
-                            _vm._v("ログアウト"),
-                            _c("v-icon", [_vm._v("mdi-seat-individual-suite")])
-                          ],
+                          "v-btn",
+                          _vm._g(
+                            _vm._b(
+                              { attrs: { icon: "" } },
+                              "v-btn",
+                              attrs,
+                              false
+                            ),
+                            on
+                          ),
+                          [_c("v-icon", [_vm._v("mdi-dots-vertical")])],
                           1
                         )
-                      ])
-                    : _vm._e()
-                ]
+                      ]
+                    }
+                  }
+                ],
+                null,
+                false,
+                3221905750
               )
-            }),
+            },
+            [
+              _vm._v(" "),
+              _c(
+                "v-list",
+                _vm._l(_vm.items, function(item, index) {
+                  return _c(
+                    "v-list-item",
+                    { key: index, on: { click: function($event) {} } },
+                    [
+                      item.title === "ログアウト"
+                        ? _c("div", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "button button--link",
+                                on: { click: _vm.logout }
+                              },
+                              [
+                                _vm._v("ログアウト"),
+                                _c("v-icon", [
+                                  _vm._v("mdi-seat-individual-suite")
+                                ])
+                              ],
+                              1
+                            )
+                          ])
+                        : _vm._e()
+                    ]
+                  )
+                }),
+                1
+              )
+            ],
             1
           )
-        ],
-        1
-      )
+        : _vm._e()
     ],
     1
   )
@@ -65120,7 +65139,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var state = {
   user: null
 };
-var getters = {};
+var getters = {
+  check: function check(state) {
+    return !!state.user;
+  }
+};
 var mutations = {
   setUser: function setUser(state, user) {
     state.user = user;

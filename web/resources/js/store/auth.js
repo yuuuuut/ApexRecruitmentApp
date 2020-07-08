@@ -4,7 +4,9 @@ const state = {
   user: null
 }
 
-const getters = {}
+const getters = {
+  check: state => !! state.user,
+}
 
 const mutations = {
   setUser (state, user) {
