@@ -1,12 +1,12 @@
 <template>
-  <v-app>
+
     <v-card
-      class="mx-auto"
-      width="900px"
+      class="mx-auto mt-10"
+      width="830px"
       outlined>
       <v-tabs
         v-model="tab"
-        background-color="light-blue darken-1"
+        background-color="light-blue darken-2"
         center-active
         grow
         dark>
@@ -82,7 +82,7 @@
         </v-tab-item>
       </v-tabs-items>
     </v-card>
-  </v-app>
+
 </template>
 
 <script>

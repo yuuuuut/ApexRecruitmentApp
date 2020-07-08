@@ -1,7 +1,20 @@
 <template>
-  <div>
+  <v-app>
+    <header>
+      <Header />
+    </header>
     <main>
       <RouterView />
     </main>
-  </div>
+  </v-app>
 </template>
+
+<script>
+import Header from './components/Header.vue'
+
+export default {
+  components: {
+    Header,
+  }
+}
+</script>
