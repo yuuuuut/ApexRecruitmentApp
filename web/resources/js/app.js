@@ -15,19 +15,19 @@ Vue.use(Vuetify);
 
 const createApp = async () => {
   await store.dispatch('auth/currentUser')
-}
 
-new Vue({
-  el: '#app',
-  router,
-  store,
-  vuetify: new Vuetify({
-    icons: {
-      iconfont: 'mdi',
-    },
-  }),
-  components: { App },
-  template: '<App />'
-})
+  new Vue({
+    el: '#app',
+    router,
+    store,
+    vuetify: new Vuetify({
+      icons: {
+        iconfont: 'mdi',
+      },
+    }),
+    components: { App },
+    template: '<App />'
+  })
+}
 
 createApp()

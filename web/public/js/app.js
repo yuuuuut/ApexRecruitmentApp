@@ -64872,6 +64872,22 @@ var createApp = /*#__PURE__*/function () {
             return _store__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('auth/currentUser');
 
           case 2:
+            new vue__WEBPACK_IMPORTED_MODULE_2___default.a({
+              el: '#app',
+              router: _router__WEBPACK_IMPORTED_MODULE_3__["default"],
+              store: _store__WEBPACK_IMPORTED_MODULE_4__["default"],
+              vuetify: new vuetify__WEBPACK_IMPORTED_MODULE_5___default.a({
+                icons: {
+                  iconfont: 'mdi'
+                }
+              }),
+              components: {
+                App: _App_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+              },
+              template: '<App />'
+            });
+
+          case 3:
           case "end":
             return _context.stop();
         }
@@ -64884,20 +64900,6 @@ var createApp = /*#__PURE__*/function () {
   };
 }();
 
-new vue__WEBPACK_IMPORTED_MODULE_2___default.a({
-  el: '#app',
-  router: _router__WEBPACK_IMPORTED_MODULE_3__["default"],
-  store: _store__WEBPACK_IMPORTED_MODULE_4__["default"],
-  vuetify: new vuetify__WEBPACK_IMPORTED_MODULE_5___default.a({
-    icons: {
-      iconfont: 'mdi'
-    }
-  }),
-  components: {
-    App: _App_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
-  },
-  template: '<App />'
-});
 createApp();
 
 /***/ }),
@@ -65128,6 +65130,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _pages_PostIndex_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/PostIndex.vue */ "./resources/js/pages/PostIndex.vue");
 /* harmony import */ var _pages_Login_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/Login.vue */ "./resources/js/pages/Login.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+
 
 
 
@@ -65138,7 +65142,14 @@ var routes = [{
   component: _pages_PostIndex_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
   path: '/login',
-  component: _pages_Login_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  component: _pages_Login_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+  beforeEnter: function beforeEnter(to, from, next) {
+    if (_store__WEBPACK_IMPORTED_MODULE_4__["default"].getters['auth/check']) {
+      next('/');
+    } else {
+      next();
+    }
+  }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
