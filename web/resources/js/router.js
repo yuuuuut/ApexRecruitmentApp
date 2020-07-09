@@ -1,8 +1,9 @@
 import Vue       from 'vue'
 import VueRouter from 'vue-router'
 
-import PostIndex from './pages/PostIndex.vue'
-import Login     from './pages/Login.vue'
+import PostIndex   from './pages/PostIndex.vue'
+import Login       from './pages/Login.vue'
+import SystemError from './pages/errors/System.vue'
 
 import store     from './store'
 
@@ -23,6 +24,10 @@ const routes = [
                 next()
             }
         }
+    },
+    {
+        path: '/500',
+        component: SystemError
     }
 ]
 
