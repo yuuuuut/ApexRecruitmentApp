@@ -14,3 +14,8 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 |------User
 -----*/
 Route::get('/user', fn() => Auth::user())->name('user');
+
+/*-----
+|------Profile
+-----*/
+Route::post('/profiles', 'ProfileController@create')->name('profile.create');
