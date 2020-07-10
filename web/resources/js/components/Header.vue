@@ -22,7 +22,26 @@
             :key="index"
             @click="">
             <div v-if="item.title === 'ログアウト'">
-              <button class="button button--link" @click="logout">ログアウト<v-icon>mdi-seat-individual-suite</v-icon></button>
+              <button  @click.stop="dialog = true">ログアウト<v-icon>mdi-seat-individual-suite</v-icon></button>
+              <v-dialog
+                v-model="dialog"
+                max-width="290">
+                <v-card>
+                  <v-card-title class="headline">ログアウトしますか?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="green darken-1"
+                      text
+                      @click="dialog = false">
+                      いいえ</v-btn>
+                    <v-btn
+                      color="green darken-1"
+                      text
+                      @click="logout">はい</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </div>
           </v-list-item>
         </v-list>
@@ -37,23 +56,33 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
       items: [
         { title: 'ログアウト' },
-      ]
+      ],
+      dialog: false,
     }
   },
   computed: {
-    isLogin () {
-      return this.$store.getters['auth/check']
-    }
+    ...mapState({
+      apiStatus: state => state.auth.apiStatus
+    }),
+    ...mapGetters({
+      isLogin: 'auth/check'
+    })
   },
   methods: {
     async logout () {
       await this.$store.dispatch('auth/logout')
-      this.$router.push('/login')
+      
+      if (this.apiStatus) {
+        this.dialog = false
+        this.$router.push('/login')
+      }
     }
   }
 }
