@@ -1,5 +1,15 @@
 <template>
   <form @submit.prevent>
+    <!-- ErrorMessage -->
+    <div v-if="loginErrors" style="color: red;">
+      <ul v-if="loginErrors.email">
+        <li v-for="msg in loginErrors.email" :key="msg">{{ msg }}</li>
+      </ul>
+      <ul v-if="loginErrors.password">
+        <li v-for="msg in loginErrors.password" :key="msg">{{ msg }}</li>
+      </ul>
+    </div>
+    <!-- / -->
     <v-text-field
       class="mt-5 ml-10 mr-10"
       v-model="loginForm.email"
@@ -22,6 +32,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data () {
     return {
@@ -40,10 +52,14 @@ export default {
       ],
     }
   },
-  computed: {
-    apiStatus () {
-      return this.$store.state.auth.apiStatus
-    }
+  computed:  {
+    ...mapState({
+      apiStatus: state => state.auth.apiStatus,
+      loginErrors: state => state.auth.loginErrorMessages
+    })
+  },
+  created () {
+    this.clearError()
   },
   methods: {
     async login () {
@@ -53,6 +69,9 @@ export default {
         this.$router.push('/')
       }
     },
+    clearError () {
+      this.$store.commit('auth/setLoginErrorMessages', null)
+    }
   }
 }
 </script>

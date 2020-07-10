@@ -1,6 +1,7 @@
 const state = {
   user: null,
   apiStatus: null,
+  loginErrorMessages: null,
 }
 
 const getters = {
@@ -13,7 +14,10 @@ const mutations = {
   },
   setApiStatus (state, status) {
     state.apiStatus = status
-  }
+  },
+  setLoginErrorMessages (state, messages) {
+    state.loginErrorMessages = messages
+  },
 }
 
 const actions = {
@@ -24,8 +28,7 @@ const actions = {
   async login (context, data) {
     context.commit('setApiStatus', null)
     const response = await axios.post('/api/login', data)
-      .catch(e => e.response || e)
-    
+
     if (response.status === 200) {
       context.commit('setApiStatus', true)
       context.commit('setUser', response.data)
@@ -33,7 +36,11 @@ const actions = {
     }
 
     context.commit('setApiStatus', false)
-    context.commit('error/setCode', response.status, { root: true })
+    if (response.status === 422) {
+      context.commit('setLoginErrorMessages', response.data.errors)
+    } else {
+      context.commit('error/setCode', response.status, { root: true })
+    }
   },
   async logout (context) {
     const response = await axios.post('/api/logout')
