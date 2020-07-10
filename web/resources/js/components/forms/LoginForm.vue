@@ -15,8 +15,8 @@
       :rules="passRules"
       counter
       @click:append="show1 = !show1"></v-text-field>
-    <div class="mt-3 mb-5 d-flex justify-center">
-      <v-btn @click="login" width="300px" color="primary" dark>ログイン</v-btn>
+    <div class="mt-3 d-flex justify-center">
+      <v-btn @click="login" class="mb-5" width="300px" color="primary" dark>ログイン</v-btn>
     </div>
   </form>
 </template>

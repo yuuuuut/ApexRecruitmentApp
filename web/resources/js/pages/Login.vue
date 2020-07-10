@@ -2,10 +2,11 @@
   <v-card
     class="mx-auto mt-10"
     width="830px"
-    outlined>
+    elevation="10"
+    tile>
     <v-tabs
       v-model="tab"
-      background-color="light-blue darken-2"
+      background-color="cyan "
       center-active
       grow
       dark>

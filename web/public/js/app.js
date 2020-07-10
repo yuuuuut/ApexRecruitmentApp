@@ -2087,6 +2087,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2337,6 +2349,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_forms_LoginForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/forms/LoginForm.vue */ "./resources/js/components/forms/LoginForm.vue");
 /* harmony import */ var _components_forms_RegisterForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/forms/RegisterForm.vue */ "./resources/js/components/forms/RegisterForm.vue");
+//
 //
 //
 //
@@ -4308,84 +4321,124 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-toolbar",
-    { attrs: { dark: "" } },
+    { attrs: { color: "primary" } },
     [
-      _c("v-toolbar-title", [_vm._v("えぺぼ!!")]),
+      _c(
+        "v-toolbar-title",
+        [
+          _c(
+            "RouterLink",
+            {
+              staticStyle: { "text-decoration": "none", color: "white" },
+              attrs: { to: "/" }
+            },
+            [_vm._v("\n      エペぼ!!\n    ")]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("v-spacer"),
       _vm._v(" "),
       _vm.isLogin
         ? _c(
-            "v-menu",
-            {
-              attrs: { top: "" },
-              scopedSlots: _vm._u(
-                [
-                  {
-                    key: "activator",
-                    fn: function(ref) {
-                      var on = ref.on
-                      var attrs = ref.attrs
-                      return [
-                        _c(
-                          "v-btn",
-                          _vm._g(
-                            _vm._b(
-                              { attrs: { icon: "" } },
-                              "v-btn",
-                              attrs,
-                              false
-                            ),
-                            on
-                          ),
-                          [_c("v-icon", [_vm._v("mdi-dots-vertical")])],
-                          1
-                        )
-                      ]
-                    }
-                  }
-                ],
-                null,
-                false,
-                3221905750
-              )
-            },
+            "div",
             [
-              _vm._v(" "),
               _c(
-                "v-list",
-                _vm._l(_vm.items, function(item, index) {
-                  return _c(
-                    "v-list-item",
-                    { key: index, on: { click: function($event) {} } },
+                "v-menu",
+                {
+                  attrs: { top: "" },
+                  scopedSlots: _vm._u(
                     [
-                      item.title === "ログアウト"
-                        ? _c("div", [
+                      {
+                        key: "activator",
+                        fn: function(ref) {
+                          var on = ref.on
+                          var attrs = ref.attrs
+                          return [
                             _c(
-                              "button",
-                              {
-                                staticClass: "button button--link",
-                                on: { click: _vm.logout }
-                              },
-                              [
-                                _vm._v("ログアウト"),
-                                _c("v-icon", [
-                                  _vm._v("mdi-seat-individual-suite")
-                                ])
-                              ],
+                              "v-btn",
+                              _vm._g(
+                                _vm._b(
+                                  {
+                                    staticStyle: { color: "white" },
+                                    attrs: { icon: "" }
+                                  },
+                                  "v-btn",
+                                  attrs,
+                                  false
+                                ),
+                                on
+                              ),
+                              [_c("v-icon", [_vm._v("mdi-dots-vertical")])],
                               1
                             )
-                          ])
-                        : _vm._e()
-                    ]
+                          ]
+                        }
+                      }
+                    ],
+                    null,
+                    false,
+                    2442109385
                   )
-                }),
+                },
+                [
+                  _vm._v(" "),
+                  _c(
+                    "v-list",
+                    _vm._l(_vm.items, function(item, index) {
+                      return _c(
+                        "v-list-item",
+                        { key: index, on: { click: function($event) {} } },
+                        [
+                          item.title === "ログアウト"
+                            ? _c("div", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "button button--link",
+                                    on: { click: _vm.logout }
+                                  },
+                                  [
+                                    _vm._v("ログアウト"),
+                                    _c("v-icon", [
+                                      _vm._v("mdi-seat-individual-suite")
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ])
+                            : _vm._e()
+                        ]
+                      )
+                    }),
+                    1
+                  )
+                ],
                 1
               )
             ],
             1
           )
-        : _vm._e()
+        : _c(
+            "div",
+            [
+              _c(
+                "RouterLink",
+                {
+                  staticStyle: { "text-decoration": "none" },
+                  attrs: { to: "/login" }
+                },
+                [
+                  _c("v-btn", { attrs: { color: "success", dark: "" } }, [
+                    _vm._v("ログイン / 新規登録")
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
     ],
     1
   )
@@ -4463,11 +4516,12 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "mt-3 mb-5 d-flex justify-center" },
+        { staticClass: "mt-3 d-flex justify-center" },
         [
           _c(
             "v-btn",
             {
+              staticClass: "mb-5",
               attrs: { width: "300px", color: "primary", dark: "" },
               on: { click: _vm.login }
             },
@@ -4593,6 +4647,7 @@ var render = function() {
           _c(
             "v-btn",
             {
+              staticClass: "mb-5",
               attrs: { width: "300px", color: "primary", dark: "" },
               on: { click: _vm.register }
             },
@@ -4629,13 +4684,16 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-card",
-    { staticClass: "mx-auto mt-10", attrs: { width: "830px", outlined: "" } },
+    {
+      staticClass: "mx-auto mt-10",
+      attrs: { width: "830px", elevation: "10", tile: "" }
+    },
     [
       _c(
         "v-tabs",
         {
           attrs: {
-            "background-color": "light-blue darken-2",
+            "background-color": "cyan ",
             "center-active": "",
             grow: "",
             dark: ""

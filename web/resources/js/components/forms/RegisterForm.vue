@@ -30,7 +30,7 @@
       counter
       @click:append="show2 = !show2"></v-text-field>
     <div class="mt-3 mb-5 d-flex justify-center">
-      <v-btn @click="register" width="300px" color="primary" dark>新規登録</v-btn>
+      <v-btn @click="register" width="300px" class="mb-5" color="primary" dark>新規登録</v-btn>
     </div>
   </form>
 </template>
