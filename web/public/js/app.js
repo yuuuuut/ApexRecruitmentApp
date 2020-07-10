@@ -2222,10 +2222,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Login.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Login.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/RegisterForm.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forms/RegisterForm.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2233,7 +2233,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_forms_LoginForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/forms/LoginForm.vue */ "./resources/js/components/forms/LoginForm.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2277,56 +2276,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    LoginForm: _components_forms_LoginForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
-  },
   data: function data() {
     return {
-      tab: null,
+      show1: false,
       show2: false,
-      show3: false,
-      items: [{
-        tab: 'ログイン'
-      }, {
-        tab: '新規登録'
-      }],
       registerForm: {
         name: '',
         email: '',
         password: '',
         password_confirmation: ''
-      }
+      },
+      //Validations
+      emailRules: [function (v) {
+        return !!v || 'メールアドレスを入力してください';
+      }, function (v) {
+        return /.+@.+\..+/.test(v) || '無効なメールアドレスです';
+      }],
+      passRules: [function (v) {
+        return !!v || 'パスワードを入力してください';
+      }]
     };
   },
   methods: {
@@ -2352,6 +2321,73 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Login.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Login.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_forms_LoginForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/forms/LoginForm.vue */ "./resources/js/components/forms/LoginForm.vue");
+/* harmony import */ var _components_forms_RegisterForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/forms/RegisterForm.vue */ "./resources/js/components/forms/RegisterForm.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    LoginForm: _components_forms_LoginForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    RegisterForm: _components_forms_RegisterForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      tab: null,
+      items: [{
+        tab: 'ログイン'
+      }, {
+        tab: '新規登録'
+      }]
+    };
   }
 });
 
@@ -4451,6 +4487,131 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/RegisterForm.vue?vue&type=template&id=1fff0612&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forms/RegisterForm.vue?vue&type=template&id=1fff0612& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+        }
+      }
+    },
+    [
+      _c("v-text-field", {
+        staticClass: "mt-5 ml-10 mr-10",
+        attrs: { label: "名前", "hide-details": "auto" },
+        model: {
+          value: _vm.registerForm.name,
+          callback: function($$v) {
+            _vm.$set(_vm.registerForm, "name", $$v)
+          },
+          expression: "registerForm.name"
+        }
+      }),
+      _vm._v(" "),
+      _c("v-text-field", {
+        staticClass: "mt-5 ml-10 mr-10",
+        attrs: {
+          label: "メールアドレス",
+          rules: _vm.emailRules,
+          "hide-details": "auto"
+        },
+        model: {
+          value: _vm.registerForm.email,
+          callback: function($$v) {
+            _vm.$set(_vm.registerForm, "email", $$v)
+          },
+          expression: "registerForm.email"
+        }
+      }),
+      _vm._v(" "),
+      _c("v-text-field", {
+        staticClass: "mt-5 ml-10 mr-10",
+        attrs: {
+          "append-icon": _vm.show1 ? "mdi-eye" : "mdi-eye-off",
+          type: _vm.show1 ? "text" : "password",
+          label: "パスワード",
+          rules: _vm.passRules,
+          counter: ""
+        },
+        on: {
+          "click:append": function($event) {
+            _vm.show1 = !_vm.show1
+          }
+        },
+        model: {
+          value: _vm.registerForm.password,
+          callback: function($$v) {
+            _vm.$set(_vm.registerForm, "password", $$v)
+          },
+          expression: "registerForm.password"
+        }
+      }),
+      _vm._v(" "),
+      _c("v-text-field", {
+        staticClass: "mt-2 ml-10 mr-10",
+        attrs: {
+          "append-icon": _vm.show2 ? "mdi-eye" : "mdi-eye-off",
+          type: _vm.show2 ? "text" : "password",
+          label: "パスワード(確認)",
+          rules: _vm.passRules,
+          counter: ""
+        },
+        on: {
+          "click:append": function($event) {
+            _vm.show2 = !_vm.show2
+          }
+        },
+        model: {
+          value: _vm.registerForm.password_confirmation,
+          callback: function($$v) {
+            _vm.$set(_vm.registerForm, "password_confirmation", $$v)
+          },
+          expression: "registerForm.password_confirmation"
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "mt-3 mb-5 d-flex justify-center" },
+        [
+          _c(
+            "v-btn",
+            {
+              attrs: { width: "300px", color: "primary", dark: "" },
+              on: { click: _vm.register }
+            },
+            [_vm._v("新規登録")]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Login.vue?vue&type=template&id=3b6adb30&":
 /*!***************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Login.vue?vue&type=template&id=3b6adb30& ***!
@@ -4538,115 +4699,8 @@ var render = function() {
                   }
                 ]
               },
-              [
-                _c(
-                  "form",
-                  {
-                    on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                      }
-                    }
-                  },
-                  [
-                    _c("v-text-field", {
-                      staticClass: "mt-5 ml-10 mr-10",
-                      attrs: { label: "名前", "hide-details": "auto" },
-                      model: {
-                        value: _vm.registerForm.name,
-                        callback: function($$v) {
-                          _vm.$set(_vm.registerForm, "name", $$v)
-                        },
-                        expression: "registerForm.name"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("v-text-field", {
-                      staticClass: "mt-5 ml-10 mr-10",
-                      attrs: {
-                        label: "メールアドレス",
-                        "hide-details": "auto"
-                      },
-                      model: {
-                        value: _vm.registerForm.email,
-                        callback: function($$v) {
-                          _vm.$set(_vm.registerForm, "email", $$v)
-                        },
-                        expression: "registerForm.email"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("v-text-field", {
-                      staticClass: "mt-5 ml-10 mr-10",
-                      attrs: {
-                        "append-icon": _vm.show2 ? "mdi-eye" : "mdi-eye-off",
-                        type: _vm.show2 ? "text" : "password",
-                        label: "パスワード",
-                        counter: ""
-                      },
-                      on: {
-                        "click:append": function($event) {
-                          _vm.show2 = !_vm.show2
-                        }
-                      },
-                      model: {
-                        value: _vm.registerForm.password,
-                        callback: function($$v) {
-                          _vm.$set(_vm.registerForm, "password", $$v)
-                        },
-                        expression: "registerForm.password"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("v-text-field", {
-                      staticClass: "mt-2 ml-10 mr-10",
-                      attrs: {
-                        "append-icon": _vm.show3 ? "mdi-eye" : "mdi-eye-off",
-                        type: _vm.show3 ? "text" : "password",
-                        label: "パスワード(確認)",
-                        counter: ""
-                      },
-                      on: {
-                        "click:append": function($event) {
-                          _vm.show3 = !_vm.show3
-                        }
-                      },
-                      model: {
-                        value: _vm.registerForm.password_confirmation,
-                        callback: function($$v) {
-                          _vm.$set(
-                            _vm.registerForm,
-                            "password_confirmation",
-                            $$v
-                          )
-                        },
-                        expression: "registerForm.password_confirmation"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "mt-3 mb-5 d-flex justify-center" },
-                      [
-                        _c(
-                          "v-btn",
-                          {
-                            attrs: {
-                              width: "300px",
-                              color: "primary",
-                              dark: ""
-                            },
-                            on: { click: _vm.register }
-                          },
-                          [_vm._v("新規登録")]
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]
+              [_c("RegisterForm")],
+              1
             )
           ])
         }),
@@ -65165,6 +65219,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginForm_vue_vue_type_template_id_727b6bd2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginForm_vue_vue_type_template_id_727b6bd2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/forms/RegisterForm.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/forms/RegisterForm.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _RegisterForm_vue_vue_type_template_id_1fff0612___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RegisterForm.vue?vue&type=template&id=1fff0612& */ "./resources/js/components/forms/RegisterForm.vue?vue&type=template&id=1fff0612&");
+/* harmony import */ var _RegisterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RegisterForm.vue?vue&type=script&lang=js& */ "./resources/js/components/forms/RegisterForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _RegisterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _RegisterForm_vue_vue_type_template_id_1fff0612___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _RegisterForm_vue_vue_type_template_id_1fff0612___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/forms/RegisterForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/forms/RegisterForm.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/forms/RegisterForm.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RegisterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./RegisterForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/RegisterForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RegisterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/forms/RegisterForm.vue?vue&type=template&id=1fff0612&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/forms/RegisterForm.vue?vue&type=template&id=1fff0612& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RegisterForm_vue_vue_type_template_id_1fff0612___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./RegisterForm.vue?vue&type=template&id=1fff0612& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/RegisterForm.vue?vue&type=template&id=1fff0612&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RegisterForm_vue_vue_type_template_id_1fff0612___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RegisterForm_vue_vue_type_template_id_1fff0612___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
