@@ -14,6 +14,7 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 |------User
 -----*/
 Route::get('/user', fn() => Auth::user())->name('user');
+Route::get('/users/{id}', 'UserController@show')->name('user.show');
 
 /*-----
 |------Profile
