@@ -14,13 +14,13 @@ class ProfileController extends Controller
 {
     public function create(Request $request)
     {
-        $profile = new Profile();
-
-        $profile->user_id  = Auth::user()->id;
-        $profile->psid     = $request->input('psid');
-        $profile->content  = $request->input('content');
-        $profile->platform = $request->input('platform');
-        $profile->save();
+        $profile = Profile::updateOrCreate([
+            'user_id' => Auth::user()->id
+        ], [
+            'psid'     => $request->input('psid'),
+            'content'  => $request->input('content'),
+            'platform' => $request->input('platform'),
+        ]);
 
         return response($profile, 201);
     }
