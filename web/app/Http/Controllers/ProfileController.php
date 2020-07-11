@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProfile;
+
 use Illuminate\Http\Request;
 
 use Auth;
@@ -9,10 +11,9 @@ use Auth;
 use App\Models\User;
 use App\Models\Profile;
 
-
 class ProfileController extends Controller
 {
-    public function create(Request $request)
+    public function create(StoreProfile $request)
     {
         $profile = Profile::updateOrCreate([
             'user_id' => Auth::user()->id

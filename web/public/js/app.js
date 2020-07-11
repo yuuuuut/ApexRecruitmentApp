@@ -2341,10 +2341,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       sending: false,
+      errors: '',
       profileForm: {
         psid: '',
         content: '',
@@ -2357,32 +2365,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var data;
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!_this.sending) {
-                  _context.next = 2;
+                _this.sending = true;
+                _context.next = 3;
+                return axios.post('/api/profiles', _this.profileForm);
+
+              case 3:
+                response = _context.sent;
+                console.log(response.data);
+
+                if (!(response.status === 422)) {
+                  _context.next = 9;
                   break;
                 }
 
-                return _context.abrupt("return");
-
-              case 2:
-                _this.sending = true;
-                _context.next = 5;
-                return axios.post('/api/profiles', _this.profileForm);
-
-              case 5:
-                data = _context.sent;
-
-                _this.resetValue();
-
-                console.log(data);
+                _this.errors = response.data.errors;
                 _this.sending = false;
+                return _context.abrupt("return", false);
 
               case 9:
+                _this.resetValue();
+
+                _this.sending = false;
+
+              case 11:
               case "end":
                 return _context.stop();
             }
@@ -4892,8 +4902,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v("Tets")]),
-    _vm._v(" "),
     _c(
       "form",
       {
@@ -4904,6 +4912,30 @@ var render = function() {
         }
       },
       [
+        _vm.errors.length != 0
+          ? _c("div", [
+              _vm.errors.psid
+                ? _c(
+                    "div",
+                    _vm._l(_vm.errors.psid, function(e) {
+                      return _c("div", { key: e }, [_vm._v(_vm._s(e))])
+                    }),
+                    0
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.errors.content
+                ? _c(
+                    "div",
+                    _vm._l(_vm.errors.content, function(e) {
+                      return _c("div", { key: e }, [_vm._v(_vm._s(e))])
+                    }),
+                    0
+                  )
+                : _vm._e()
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c("v-text-field", {
           staticClass: "mt-5 ml-10 mr-10",
           attrs: { "hide-details": "auto" },

@@ -1,8 +1,15 @@
 <template>
   <div>
-  <h1>Tets</h1>
-
   <form @submit.prevent>
+    <div v-if="errors.length != 0">
+      <div v-if="errors.psid">
+        <div v-for="e in errors.psid" :key="e">{{ e }}</div>
+      </div>
+      <div v-if="errors.content">
+        <div v-for="e in errors.content" :key="e">{{ e }}</div>
+      </div>
+    </div>
+
     <v-text-field
       v-model="profileForm.psid"
       class="mt-5 ml-10 mr-10"
@@ -32,6 +39,7 @@ export default {
   data () {
     return {
       sending: false,
+      errors: '',
       profileForm: {
         psid: '',
         content: '',
@@ -41,13 +49,15 @@ export default {
   },
   methods: {
     async submit () {
-      if (this.sending) {
-        return
-      }
       this.sending = true
-      const data = await axios.post('/api/profiles', this.profileForm)
+      const response = await axios.post('/api/profiles', this.profileForm)
+      console.log(response.data)
+      if (response.status === 422) {
+        this.errors = response.data.errors;
+        this.sending = false
+        return false
+      }
       this.resetValue()
-      console.log(data)
       this.sending = false
     },
     resetValue () {
