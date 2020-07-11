@@ -16,7 +16,12 @@
       class="mt-5 ml-10 mr-10"
       hide-details="auto"></v-text-field>
     <div class="mt-3 mb-5 d-flex justify-center">
-      <v-btn @click="submit" width="300px" class="mb-5" color="primary" dark>新規登録</v-btn>
+      <v-btn v-if="!sending" @click="submit" width="300px" class="mb-5" color="primary" dark>完了</v-btn>
+      <v-progress-circular
+        v-else
+        indeterminate
+        color="green"
+      ></v-progress-circular>
     </div>
   </form>
   </div>
@@ -26,6 +31,7 @@
 export default {
   data () {
     return {
+      sending: false,
       profileForm: {
         psid: '',
         content: '',
@@ -35,8 +41,19 @@ export default {
   },
   methods: {
     async submit () {
+      if (this.sending) {
+        return
+      }
+      this.sending = true
       const data = await axios.post('/api/profiles', this.profileForm)
+      this.resetValue()
       console.log(data)
+      this.sending = false
+    },
+    resetValue () {
+      this.profileForm.psid = ''
+      this.profileForm.content = ''
+      this.profileForm.platform = ''
     }
   }
 }

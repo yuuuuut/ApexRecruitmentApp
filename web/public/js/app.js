@@ -2336,9 +2336,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      sending: false,
       profileForm: {
         psid: '',
         content: '',
@@ -2356,20 +2362,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return axios.post('/api/profiles', _this.profileForm);
+                if (!_this.sending) {
+                  _context.next = 2;
+                  break;
+                }
+
+                return _context.abrupt("return");
 
               case 2:
-                data = _context.sent;
-                console.log(data);
+                _this.sending = true;
+                _context.next = 5;
+                return axios.post('/api/profiles', _this.profileForm);
 
-              case 4:
+              case 5:
+                data = _context.sent;
+
+                _this.resetValue();
+
+                console.log(data);
+                _this.sending = false;
+
+              case 9:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    },
+    resetValue: function resetValue() {
+      this.profileForm.psid = '';
+      this.profileForm.content = '';
+      this.profileForm.platform = '';
     }
   }
 });
@@ -4920,15 +4944,19 @@ var render = function() {
           "div",
           { staticClass: "mt-3 mb-5 d-flex justify-center" },
           [
-            _c(
-              "v-btn",
-              {
-                staticClass: "mb-5",
-                attrs: { width: "300px", color: "primary", dark: "" },
-                on: { click: _vm.submit }
-              },
-              [_vm._v("新規登録")]
-            )
+            !_vm.sending
+              ? _c(
+                  "v-btn",
+                  {
+                    staticClass: "mb-5",
+                    attrs: { width: "300px", color: "primary", dark: "" },
+                    on: { click: _vm.submit }
+                  },
+                  [_vm._v("完了")]
+                )
+              : _c("v-progress-circular", {
+                  attrs: { indeterminate: "", color: "green" }
+                })
           ],
           1
         )
