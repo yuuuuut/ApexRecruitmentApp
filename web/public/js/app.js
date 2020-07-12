@@ -2364,6 +2364,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5096,7 +5097,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("v-text-field", {
                     staticClass: "mt-5 ml-10 mr-10",
-                    attrs: { "hide-details": "auto" },
+                    attrs: { label: "PSID" },
                     model: {
                       value: _vm.profileForm.psid,
                       callback: function($$v) {
@@ -5106,9 +5107,9 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _c("v-text-field", {
+                  _c("v-textarea", {
                     staticClass: "mt-5 ml-10 mr-10",
-                    attrs: { "hide-details": "auto" },
+                    attrs: { counter: "", label: "自己紹介" },
                     model: {
                       value: _vm.profileForm.content,
                       callback: function($$v) {
@@ -5118,9 +5119,12 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _c("v-text-field", {
+                  _c("v-select", {
                     staticClass: "mt-5 ml-10 mr-10",
-                    attrs: { "hide-details": "auto" },
+                    attrs: {
+                      items: ["PS4", "PC", "XBOX"],
+                      label: "プラットフォーム"
+                    },
                     model: {
                       value: _vm.profileForm.platform,
                       callback: function($$v) {
@@ -5173,7 +5177,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Close")]
+                    [_vm._v("閉じる")]
                   )
                 ],
                 1

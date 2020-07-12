@@ -19,18 +19,20 @@
             </div>
           </div>
           <!-- / -->
-          <v-text-field
-            v-model="profileForm.psid"
+          <v-text-field 
             class="mt-5 ml-10 mr-10"
-            hide-details="auto"></v-text-field>
-          <v-text-field
-            v-model="profileForm.content"
+            label="PSID" 
+            v-model="profileForm.psid"></v-text-field>
+          <v-textarea
             class="mt-5 ml-10 mr-10"
-            hide-details="auto"></v-text-field>
-          <v-text-field
+            counter
+            label="自己紹介"
+            v-model="profileForm.content"></v-textarea>
+          <v-select
+            class="mt-5 ml-10 mr-10"
+            :items="['PS4', 'PC', 'XBOX']"
             v-model="profileForm.platform"
-            class="mt-5 ml-10 mr-10"
-            hide-details="auto"></v-text-field>
+            label="プラットフォーム"></v-select>
           <div class="mt-3 mb-5 d-flex justify-center">
             <v-btn v-if="!sending" @click="submit" width="300px" class="mb-5" color="primary" dark>完了</v-btn>
             <v-progress-circular
@@ -40,10 +42,9 @@
             ></v-progress-circular>
           </div>
         </form>
-
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+          <v-btn color="blue darken-1" text @click="dialog = false">閉じる</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
