@@ -1,7 +1,6 @@
 <template>
   <div>
     <h3>{{ user.name }}のマイページ</h3>
-    <div>{{ user.profile.psid }}</div>
     <ProfileForm />
   </div>
 </template>

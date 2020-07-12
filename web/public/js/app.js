@@ -2365,16 +2365,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       dialog: false,
       sending: false,
+      ps4Flag: false,
+      pcFlag: false,
       errors: '',
       profileForm: {
-        psid: '',
         content: '',
-        platform: ''
+        platform: '',
+        psid: '',
+        originid: ''
       }
     };
   },
@@ -2421,8 +2435,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     resetValue: function resetValue() {
       this.profileForm.psid = '';
+      this.profileForm.originid = '';
       this.profileForm.content = '';
       this.profileForm.platform = '';
+    },
+    changePlatForm: function changePlatForm() {
+      if (this.profileForm.platform === 'PS4') {
+        this.ps4Flag = true;
+        this.pcFlag = false;
+      } else if (this.profileForm.platform === 'PC') {
+        this.pcFlag = true;
+        this.ps4Flag = false;
+      }
     }
   }
 });
@@ -2678,7 +2702,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
 //
 //
 //
@@ -5095,18 +5118,6 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _c("v-text-field", {
-                    staticClass: "mt-5 ml-10 mr-10",
-                    attrs: { label: "PSID" },
-                    model: {
-                      value: _vm.profileForm.psid,
-                      callback: function($$v) {
-                        _vm.$set(_vm.profileForm, "psid", $$v)
-                      },
-                      expression: "profileForm.psid"
-                    }
-                  }),
-                  _vm._v(" "),
                   _c("v-textarea", {
                     staticClass: "mt-5 ml-10 mr-10",
                     attrs: { counter: "", label: "自己紹介" },
@@ -5120,11 +5131,9 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("v-select", {
-                    staticClass: "mt-5 ml-10 mr-10",
-                    attrs: {
-                      items: ["PS4", "PC", "XBOX"],
-                      label: "プラットフォーム"
-                    },
+                    staticClass: "mt-4 ml-10 mr-10",
+                    attrs: { items: ["PS4", "PC"], label: "プラットフォーム" },
+                    on: { change: _vm.changePlatForm },
                     model: {
                       value: _vm.profileForm.platform,
                       callback: function($$v) {
@@ -5134,9 +5143,49 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
+                  _c("v-text-field", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.ps4Flag,
+                        expression: "ps4Flag"
+                      }
+                    ],
+                    staticClass: "mt-1 ml-10 mr-10",
+                    attrs: { label: "PSID", "hide-details": "auto" },
+                    model: {
+                      value: _vm.profileForm.psid,
+                      callback: function($$v) {
+                        _vm.$set(_vm.profileForm, "psid", $$v)
+                      },
+                      expression: "profileForm.psid"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.pcFlag,
+                        expression: "pcFlag"
+                      }
+                    ],
+                    staticClass: "mt-1 ml-10 mr-10",
+                    attrs: { label: "OriginID", "hide-details": "auto" },
+                    model: {
+                      value: _vm.profileForm.originid,
+                      callback: function($$v) {
+                        _vm.$set(_vm.profileForm, "originid", $$v)
+                      },
+                      expression: "profileForm.originid"
+                    }
+                  }),
+                  _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "mt-3 mb-5 d-flex justify-center" },
+                    { staticClass: "mt-5 mb-5 d-flex justify-center" },
                     [
                       !_vm.sending
                         ? _c(
@@ -5144,7 +5193,7 @@ var render = function() {
                             {
                               staticClass: "mb-5",
                               attrs: {
-                                width: "300px",
+                                width: "255px",
                                 color: "primary",
                                 dark: ""
                               },
@@ -5521,8 +5570,6 @@ var render = function() {
     "div",
     [
       _c("h3", [_vm._v(_vm._s(_vm.user.name) + "のマイページ")]),
-      _vm._v(" "),
-      _c("div", [_vm._v(_vm._s(_vm.user.profile.psid))]),
       _vm._v(" "),
       _c("ProfileForm")
     ],
