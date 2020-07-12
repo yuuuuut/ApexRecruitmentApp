@@ -1,8 +1,14 @@
 <template>
-  <h1>Photo Detail</h1>
+  <div>
+    <h3>{{ user.name }}のマイページ</h3>
+    <div>{{ user.profile.psid }}</div>
+    <ProfileForm />
+  </div>
 </template>
 
 <script>
+import ProfileForm from '../components/forms/ProfileForm.vue'
+
 export default {
   props: {
     id: {
@@ -10,9 +16,12 @@ export default {
       required: true,
     }
   },
+  components: {
+    ProfileForm
+  },
   data () {
     return {
-      user: null
+      user: null,
     }
   },
   methods: {
