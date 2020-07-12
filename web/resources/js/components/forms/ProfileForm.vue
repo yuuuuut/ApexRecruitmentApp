@@ -2,7 +2,7 @@
   <div>
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="primary" dark v-bind="attrs" v-on="on">Profile編集</v-btn>
+        <v-icon v-bind="attrs" v-on="on">mdi-cog</v-icon>
       </template>
       <v-card>
         <v-card-title>
@@ -20,7 +20,7 @@
           </div>
         <!-- / -->
           <v-textarea
-            class="mt-5 ml-10 mr-10"
+            class="mt-1 ml-10 mr-10"
             counter
             label="自己紹介"
             v-model="profileForm.content"></v-textarea>
@@ -55,7 +55,7 @@
         </form>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">閉じる</v-btn>
+          <v-btn color="blue darken-1" text @click="dialog = false; resetValue()">閉じる</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

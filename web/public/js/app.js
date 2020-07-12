@@ -2709,6 +2709,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -5044,19 +5067,9 @@ var render = function() {
                 var on = ref.on
                 var attrs = ref.attrs
                 return [
-                  _c(
-                    "v-btn",
-                    _vm._g(
-                      _vm._b(
-                        { attrs: { color: "primary", dark: "" } },
-                        "v-btn",
-                        attrs,
-                        false
-                      ),
-                      on
-                    ),
-                    [_vm._v("Profile編集")]
-                  )
+                  _c("v-icon", _vm._g(_vm._b({}, "v-icon", attrs, false), on), [
+                    _vm._v("mdi-cog")
+                  ])
                 ]
               }
             }
@@ -5119,7 +5132,7 @@ var render = function() {
                     : _vm._e(),
                   _vm._v(" "),
                   _c("v-textarea", {
-                    staticClass: "mt-5 ml-10 mr-10",
+                    staticClass: "mt-1 ml-10 mr-10",
                     attrs: { counter: "", label: "自己紹介" },
                     model: {
                       value: _vm.profileForm.content,
@@ -5223,6 +5236,7 @@ var render = function() {
                       on: {
                         click: function($event) {
                           _vm.dialog = false
+                          _vm.resetValue()
                         }
                       }
                     },
@@ -5569,9 +5583,95 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h3", [_vm._v(_vm._s(_vm.user.name) + "のマイページ")]),
-      _vm._v(" "),
-      _c("ProfileForm")
+      _c(
+        "v-card",
+        {
+          staticClass: "mx-auto mt-8",
+          attrs: { width: "720px", outlined: "" }
+        },
+        [
+          _c(
+            "v-list-item",
+            { attrs: { "three-line": "" } },
+            [
+              _c("v-list-item-content", [
+                _c(
+                  "div",
+                  { staticClass: "d-flex justify-space-between" },
+                  [
+                    _c("v-list-item-title", { staticClass: "headline mb-3" }, [
+                      _vm._v(_vm._s(_vm.user.name))
+                    ]),
+                    _vm._v(" "),
+                    _c("ProfileForm")
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _vm.user.profile.content
+                  ? _c(
+                      "div",
+                      { staticClass: "blue-grey--text text--lighten-1" },
+                      [_vm._v(_vm._s(_vm.user.profile.content))]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "pt-3" },
+                  [
+                    _vm.user.profile.platform
+                      ? _c(
+                          "v-list-item-subtitle",
+                          [
+                            _c("v-icon", [_vm._v("mdi-laptop-mac")]),
+                            _vm._v(
+                              "PlatForm " +
+                                _vm._s(_vm.user.profile.platform) +
+                                "\n          "
+                            )
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.user.profile.platform === "PS4"
+                      ? _c(
+                          "v-list-item-subtitle",
+                          [
+                            _c("v-icon", [_vm._v("mdi-video-input-antenna")]),
+                            _vm._v(
+                              "PSID: " +
+                                _vm._s(_vm.user.profile.psid) +
+                                "\n          "
+                            )
+                          ],
+                          1
+                        )
+                      : _vm.user.profile.platform === "PC"
+                      ? _c(
+                          "v-list-item-subtitle",
+                          [
+                            _c("v-icon", [_vm._v("mdi-video-input-antenna")]),
+                            _vm._v(
+                              "OriginID: " +
+                                _vm._s(_vm.user.profile.originid) +
+                                "\n          "
+                            )
+                          ],
+                          1
+                        )
+                      : _vm._e()
+                  ],
+                  1
+                )
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -66554,6 +66654,9 @@ var state = {
 var getters = {
   check: function check(state) {
     return !!state.user;
+  },
+  username: function username(state) {
+    return state.user ? state.user.name : '';
   }
 };
 var mutations = {

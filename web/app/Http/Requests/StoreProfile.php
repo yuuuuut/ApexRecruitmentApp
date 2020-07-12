@@ -25,7 +25,7 @@ class StoreProfile extends FormRequest
     {
         return [
             'psid' => 'max:15',
-            'content' => 'max:20',
+            'content' => 'max:150',
         ];
     }
 }
