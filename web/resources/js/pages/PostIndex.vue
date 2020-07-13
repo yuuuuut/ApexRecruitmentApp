@@ -1,6 +1,6 @@
 <template>
   <div>
-  <h1>PostIndex</h1>
+    <h1>PostIndex</h1>
   </div>
 </template>
 

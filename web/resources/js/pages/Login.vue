@@ -3,24 +3,28 @@
     class="mx-auto mt-10"
     width="830px"
     elevation="10"
-    tile>
+    tile
+  >
     <v-tabs
       v-model="tab"
       background-color="cyan "
       center-active
       grow
-      dark>
+      dark
+    >
       <v-tab
         v-for="item in items"
         :key="item.tab"
-        class="font-weight-bold">
+        class="font-weight-bold"
+      >
         {{ item.tab }}
       </v-tab>
     </v-tabs>
     <v-tabs-items v-model="tab">
       <v-tab-item
         v-for="item in items"
-        :key="item.tab">
+        :key="item.tab"
+      >
         <!-- ログインフォーム -->
         <div v-show="item.tab === 'ログイン'">
           <LoginForm />

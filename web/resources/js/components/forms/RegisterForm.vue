@@ -18,13 +18,15 @@
       v-model="registerForm.name"
       label="名前 (例: コブラツイスト山中)"
       :rules="nameRules"
-      hide-details="auto"></v-text-field>
+      hide-details="auto"
+    ></v-text-field>
     <v-text-field
       class="mt-5 ml-10 mr-10"
       v-model="registerForm.email"
       label="メールアドレス"
       :rules="emailRules"
-      hide-details="auto"></v-text-field>
+      hide-details="auto"
+    ></v-text-field>
     <v-text-field
       class="mt-5 ml-10 mr-10"
       v-model="registerForm.password"
@@ -33,7 +35,8 @@
       label="パスワード"
       :rules="passRules"
       counter
-      @click:append="show1 = !show1"></v-text-field>
+      @click:append="show1 = !show1"
+    ></v-text-field>
     <v-text-field
       class="mt-2 ml-10 mr-10"
       v-model="registerForm.password_confirmation"
@@ -42,7 +45,8 @@
       label="パスワード(確認)"
       :rules="passRules"
       counter
-      @click:append="show2 = !show2"></v-text-field>
+      @click:append="show2 = !show2"
+    ></v-text-field>
     <div class="mt-3 mb-5 d-flex justify-center">
       <v-btn  v-if="!sending" @click="register" width="300px" class="mb-5" color="primary" dark>新規登録</v-btn>
       <v-progress-circular

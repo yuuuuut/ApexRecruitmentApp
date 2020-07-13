@@ -2,9 +2,10 @@
   <div v-if="dataReady">
     <Todo :user="user" />
     <v-card
-    class="mx-auto mt-4"
-    width="720px"
-    outlined>
+      class="mx-auto mt-4"
+      width="720px"
+      outlined
+    >
       <v-list-item three-line>
         <v-list-item-content>
           <div class="d-flex justify-space-between">

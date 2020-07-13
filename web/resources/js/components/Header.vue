@@ -12,15 +12,17 @@
           <v-btn
             style="color: white;"
             v-bind="attrs"
-            v-on="on" icon>
-              <v-icon>mdi-dots-vertical</v-icon>
+            v-on="on" icon
+          >
+            <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
         <v-list>
           <v-list-item
             v-for="(item, index) in items"
             :key="index"
-            @click="">
+            @click=""
+          >
             <div v-if="item.title === 'マイページ'">
               <button>
                 <router-link :to="{ name: 'userDetail', params: { id: user.id.toString() }}" class="mypage--link">マイページ<v-icon>mdi-account</v-icon></router-link>
@@ -30,7 +32,8 @@
               <button  @click.stop="dialog = true">ログアウト<v-icon>mdi-seat-individual-suite</v-icon></button>
               <v-dialog
                 v-model="dialog"
-                max-width="290">
+                max-width="290"
+              >
                 <v-card>
                   <v-card-title class="headline">ログアウトしますか?</v-card-title>
                   <v-card-actions>
@@ -38,12 +41,16 @@
                     <v-btn
                       color="green darken-1"
                       text
-                      @click="dialog = false">
-                      いいえ</v-btn>
+                      @click="dialog = false"
+                    >
+                      いいえ
+                    </v-btn>
                     <v-btn
                       color="green darken-1"
                       text
-                      @click="logout">はい</v-btn>
+                      @click="logout">
+                      はい
+                    </v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
