@@ -21,6 +21,11 @@
             v-for="(item, index) in items"
             :key="index"
             @click="">
+            <div v-if="item.title === 'マイページ'">
+              <button>
+                <router-link :to="{ name: 'userDetail', params: { id: user.id.toString() }}" class="mypage--link">マイページ<v-icon>mdi-account</v-icon></router-link>
+              </button>
+            </div>
             <div v-if="item.title === 'ログアウト'">
               <button  @click.stop="dialog = true">ログアウト<v-icon>mdi-seat-individual-suite</v-icon></button>
               <v-dialog
@@ -62,6 +67,7 @@ export default {
   data () {
     return {
       items: [
+        { title: 'マイページ' },
         { title: 'ログアウト' },
       ],
       dialog: false,
@@ -69,7 +75,8 @@ export default {
   },
   computed: {
     ...mapState({
-      apiStatus: state => state.auth.apiStatus
+      apiStatus: state => state.auth.apiStatus,
+      user: state => state.auth.user
     }),
     ...mapGetters({
       isLogin: 'auth/check'
@@ -87,3 +94,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.mypage--link {
+  color: black;
+  text-decoration: none;
+}
+</style>

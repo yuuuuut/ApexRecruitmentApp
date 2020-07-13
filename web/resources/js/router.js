@@ -17,6 +17,7 @@ const routes = [
     },
     {
         path: '/users/:id',
+        name: 'userDetail',
         component: UserDetail,
         props: true,
         beforeEnter (to, from, next) {
