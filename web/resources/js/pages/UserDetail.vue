@@ -8,19 +8,23 @@
         <v-list-item-content>
           <div class="d-flex justify-space-between">
             <v-list-item-title class="headline mb-3">{{ user.name }}</v-list-item-title>
-            <ProfileForm />
+            <div v-if="currentUser.id === user.id">
+              <ProfileForm />
+            </div>
           </div>
-          <div class="blue-grey--text text--lighten-1" v-if="user.profile.content">{{ user.profile.content }}</div>
-          <div class="pt-3">
-            <v-list-item-subtitle v-if="user.profile.platform">
-              <v-icon>mdi-laptop-mac</v-icon>PlatForm {{ user.profile.platform }}
-            </v-list-item-subtitle>
-            <v-list-item-subtitle v-if="user.profile.platform === 'PS4'">
-              <v-icon>mdi-video-input-antenna</v-icon>PSID: {{ user.profile.psid }}
-            </v-list-item-subtitle>
-            <v-list-item-subtitle v-else-if="user.profile.platform === 'PC'">
-              <v-icon>mdi-video-input-antenna</v-icon>OriginID: {{ user.profile.originid }}
-            </v-list-item-subtitle>
+          <div v-if="user.profile">
+            <div class="blue-grey--text text--lighten-1" v-if="user.profile.content">{{ user.profile.content }}</div>
+            <div class="pt-3">
+              <v-list-item-subtitle v-if="user.profile.platform">
+                <v-icon>mdi-laptop-mac</v-icon>PlatForm {{ user.profile.platform }}
+              </v-list-item-subtitle>
+              <v-list-item-subtitle v-if="user.profile.platform === 'PS4'">
+                <v-icon>mdi-video-input-antenna</v-icon>PSID: {{ user.profile.psid }}
+              </v-list-item-subtitle>
+              <v-list-item-subtitle v-else-if="user.profile.platform === 'PC'">
+                <v-icon>mdi-video-input-antenna</v-icon>OriginID: {{ user.profile.originid }}
+              </v-list-item-subtitle>
+            </div>
           </div>
         </v-list-item-content>
       </v-list-item>
@@ -44,6 +48,11 @@ export default {
   data () {
     return {
       user: null,
+    }
+  },
+  computed: {
+    currentUser () {
+      return this.$store.getters['auth/currentUser']
     }
   },
   methods: {

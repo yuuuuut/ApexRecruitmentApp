@@ -18,10 +18,20 @@ const routes = [
     {
         path: '/users/:id',
         component: UserDetail,
-        props: true
+        props: true,
+        beforeEnter (to, from, next) {
+            if (store.getters['auth/check']) {
+                next()
+            } else {
+                next({
+                    name: 'Login'
+                })
+            }
+        }
     },
     {
         path: '/login',
+        name: 'Login',
         component: Login,
         beforeEnter (to, from, next) {
             if (store.getters['auth/check']) {
