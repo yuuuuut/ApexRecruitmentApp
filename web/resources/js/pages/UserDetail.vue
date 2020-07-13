@@ -1,7 +1,8 @@
 <template>
   <div v-if="dataReady">
+    <Todo :user="user" />
     <v-card
-    class="mx-auto mt-8"
+    class="mx-auto mt-4"
     width="720px"
     outlined>
       <v-list-item three-line>
@@ -31,20 +32,17 @@
     </v-card>
   </div>
   <div v-else>
-    <v-row justify="center" align-content="center">
-      <v-col cols="1">
-        <v-progress-circular
-          indeterminate
-          color="green"
-          class="d-flex justify-center"
-        ></v-progress-circular>
-      </v-col>
-    </v-row>
+    <v-skeleton-loader
+      class="mx-auto mt-8"
+      width="720px"
+      type="card"
+    ></v-skeleton-loader>
   </div>
 </template>
 
 <script>
 import ProfileForm from '../components/forms/ProfileForm.vue'
+import Todo from '../components/Todo.vue'
 
 export default {
   props: {
@@ -54,7 +52,8 @@ export default {
     }
   },
   components: {
-    ProfileForm
+    ProfileForm,
+    Todo
   },
   data () {
     return {
