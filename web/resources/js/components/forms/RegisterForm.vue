@@ -44,7 +44,13 @@
       counter
       @click:append="show2 = !show2"></v-text-field>
     <div class="mt-3 mb-5 d-flex justify-center">
-      <v-btn @click="register" width="300px" class="mb-5" color="primary" dark>新規登録</v-btn>
+      <v-btn  v-if="!sending" @click="register" width="300px" class="mb-5" color="primary" dark>新規登録</v-btn>
+      <v-progress-circular
+        v-else
+        indeterminate
+        color="green"
+        class="mb-3"
+      ></v-progress-circular>
     </div>
   </form>
 </template>
@@ -55,6 +61,7 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
+      sending: false,
       show1: false,
       show2: false,
       registerForm: {
@@ -88,11 +95,13 @@ export default {
   },
   methods: {
     async register () {
+      this.sending = true
       await this.$store.dispatch('auth/register', this.registerForm)
-      
+
       if (this.apiStatus) {
         this.$router.push('/')
       }
+      this.sending = false
     },
     clearError () {
       this.$store.commit('auth/setRegisterErrorMessages', null)

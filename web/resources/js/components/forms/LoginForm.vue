@@ -26,7 +26,13 @@
       counter
       @click:append="show1 = !show1"></v-text-field>
     <div class="mt-3 d-flex justify-center">
-      <v-btn @click="login" class="mb-5" width="300px" color="primary" dark>ログイン</v-btn>
+      <v-btn v-if="!sending" @click="login" class="mb-5" width="300px" color="primary" dark>ログイン</v-btn>
+      <v-progress-circular
+        v-else
+        indeterminate
+        color="green"
+        class="mb-3"
+      ></v-progress-circular>
     </div>
   </form>
 </template>
@@ -37,6 +43,7 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
+      sending: false,
       show1: false,
       loginForm: {
         email: '',
@@ -63,11 +70,13 @@ export default {
   },
   methods: {
     async login () {
+      this.sending = true
       await this.$store.dispatch('auth/login', this.loginForm)
 
       if (this.apiStatus) {
         this.$router.push('/')
       }
+      this.sending = false
     },
     clearError () {
       this.$store.commit('auth/setLoginErrorMessages', null)
