@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="dataReady">
     <v-card
     class="mx-auto mt-8"
     width="720px"
@@ -30,6 +30,17 @@
       </v-list-item>
     </v-card>
   </div>
+  <div v-else>
+    <v-row justify="center" align-content="center">
+      <v-col cols="1">
+        <v-progress-circular
+          indeterminate
+          color="green"
+          class="d-flex justify-center"
+        ></v-progress-circular>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
@@ -48,6 +59,7 @@ export default {
   data () {
     return {
       user: null,
+      dataReady: false,
     }
   },
   computed: {
@@ -60,6 +72,7 @@ export default {
       const response = await axios.get(`/api/users/${this.id}`)
       console.log(response)
       this.user = response.data
+      this.dataReady = true
     }
   },
   watch: {

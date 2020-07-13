@@ -2766,6 +2766,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2779,7 +2790,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      user: null
+      user: null,
+      dataReady: false
     };
   },
   computed: {
@@ -2804,8 +2816,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context.sent;
                 console.log(response);
                 _this.user = response.data;
+                _this.dataReady = true;
 
-              case 5:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -5708,111 +5721,140 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "v-card",
-        {
-          staticClass: "mx-auto mt-8",
-          attrs: { width: "720px", outlined: "" }
-        },
+  return _vm.dataReady
+    ? _c(
+        "div",
         [
           _c(
-            "v-list-item",
-            { attrs: { "three-line": "" } },
+            "v-card",
+            {
+              staticClass: "mx-auto mt-8",
+              attrs: { width: "720px", outlined: "" }
+            },
             [
-              _c("v-list-item-content", [
-                _c(
-                  "div",
-                  { staticClass: "d-flex justify-space-between" },
-                  [
-                    _c("v-list-item-title", { staticClass: "headline mb-3" }, [
-                      _vm._v(_vm._s(_vm.user.name))
-                    ]),
+              _c(
+                "v-list-item",
+                { attrs: { "three-line": "" } },
+                [
+                  _c("v-list-item-content", [
+                    _c(
+                      "div",
+                      { staticClass: "d-flex justify-space-between" },
+                      [
+                        _c(
+                          "v-list-item-title",
+                          { staticClass: "headline mb-3" },
+                          [_vm._v(_vm._s(_vm.user.name))]
+                        ),
+                        _vm._v(" "),
+                        _vm.currentUser.id === _vm.user.id
+                          ? _c("div", [_c("ProfileForm")], 1)
+                          : _vm._e()
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
-                    _vm.currentUser.id === _vm.user.id
-                      ? _c("div", [_c("ProfileForm")], 1)
-                      : _vm._e()
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _vm.user.profile
-                  ? _c("div", [
-                      _vm.user.profile.content
-                        ? _c(
-                            "div",
-                            { staticClass: "blue-grey--text text--lighten-1" },
-                            [_vm._v(_vm._s(_vm.user.profile.content))]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "pt-3" },
-                        [
-                          _vm.user.profile.platform
+                    _vm.user.profile
+                      ? _c("div", [
+                          _vm.user.profile.content
                             ? _c(
-                                "v-list-item-subtitle",
-                                [
-                                  _c("v-icon", [_vm._v("mdi-laptop-mac")]),
-                                  _vm._v(
-                                    "PlatForm " +
-                                      _vm._s(_vm.user.profile.platform) +
-                                      "\n            "
-                                  )
-                                ],
-                                1
+                                "div",
+                                {
+                                  staticClass: "blue-grey--text text--lighten-1"
+                                },
+                                [_vm._v(_vm._s(_vm.user.profile.content))]
                               )
                             : _vm._e(),
                           _vm._v(" "),
-                          _vm.user.profile.platform === "PS4"
-                            ? _c(
-                                "v-list-item-subtitle",
-                                [
-                                  _c("v-icon", [
-                                    _vm._v("mdi-video-input-antenna")
-                                  ]),
-                                  _vm._v(
-                                    "PSID: " +
-                                      _vm._s(_vm.user.profile.psid) +
-                                      "\n            "
+                          _c(
+                            "div",
+                            { staticClass: "pt-3" },
+                            [
+                              _vm.user.profile.platform
+                                ? _c(
+                                    "v-list-item-subtitle",
+                                    [
+                                      _c("v-icon", [_vm._v("mdi-laptop-mac")]),
+                                      _vm._v(
+                                        "PlatForm " +
+                                          _vm._s(_vm.user.profile.platform) +
+                                          "\n            "
+                                      )
+                                    ],
+                                    1
                                   )
-                                ],
-                                1
-                              )
-                            : _vm.user.profile.platform === "PC"
-                            ? _c(
-                                "v-list-item-subtitle",
-                                [
-                                  _c("v-icon", [
-                                    _vm._v("mdi-video-input-antenna")
-                                  ]),
-                                  _vm._v(
-                                    "OriginID: " +
-                                      _vm._s(_vm.user.profile.originid) +
-                                      "\n            "
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.user.profile.platform === "PS4"
+                                ? _c(
+                                    "v-list-item-subtitle",
+                                    [
+                                      _c("v-icon", [
+                                        _vm._v("mdi-video-input-antenna")
+                                      ]),
+                                      _vm._v(
+                                        "PSID: " +
+                                          _vm._s(_vm.user.profile.psid) +
+                                          "\n            "
+                                      )
+                                    ],
+                                    1
                                   )
-                                ],
-                                1
-                              )
-                            : _vm._e()
-                        ],
-                        1
-                      )
-                    ])
-                  : _vm._e()
-              ])
+                                : _vm.user.profile.platform === "PC"
+                                ? _c(
+                                    "v-list-item-subtitle",
+                                    [
+                                      _c("v-icon", [
+                                        _vm._v("mdi-video-input-antenna")
+                                      ]),
+                                      _vm._v(
+                                        "OriginID: " +
+                                          _vm._s(_vm.user.profile.originid) +
+                                          "\n            "
+                                      )
+                                    ],
+                                    1
+                                  )
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                ],
+                1
+              )
             ],
             1
           )
         ],
         1
       )
-    ],
-    1
-  )
+    : _c(
+        "div",
+        [
+          _c(
+            "v-row",
+            { attrs: { justify: "center", "align-content": "center" } },
+            [
+              _c(
+                "v-col",
+                { attrs: { cols: "1" } },
+                [
+                  _c("v-progress-circular", {
+                    staticClass: "d-flex justify-center",
+                    attrs: { indeterminate: "", color: "green" }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
 }
 var staticRenderFns = []
 render._withStripped = true
