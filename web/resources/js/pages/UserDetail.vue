@@ -1,7 +1,9 @@
 <template>
   <div v-if="dataReady">
     <Todo :user="user" />
-    <FollowForm :user="user" />
+    <div v-if="currentUser.id !== user.id">
+      <FollowForm :user="user" />
+    </div>
     <v-card
     class="mx-auto mt-4"
     width="720px"

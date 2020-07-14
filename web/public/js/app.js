@@ -2951,6 +2951,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 
@@ -6025,7 +6027,9 @@ var render = function() {
         [
           _c("Todo", { attrs: { user: _vm.user } }),
           _vm._v(" "),
-          _c("FollowForm", { attrs: { user: _vm.user } }),
+          _vm.currentUser.id !== _vm.user.id
+            ? _c("div", [_c("FollowForm", { attrs: { user: _vm.user } })], 1)
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "v-card",
