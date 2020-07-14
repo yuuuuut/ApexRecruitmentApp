@@ -2259,16 +2259,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    userId: {
-      type: Number
+    user: {
+      type: Object
     }
   },
   data: function data() {
     return {
-      sending: false
+      sending: false,
+      isFollowing: this.user.is_following
     };
+  },
+  computed: {
+    currentUser: function currentUser() {
+      return this.$store.getters['auth/currentUser'];
+    }
   },
   methods: {
     follow: function follow() {
@@ -2282,11 +2296,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _this.sending = true;
                 _context.next = 3;
-                return axios.post("/api/follow/".concat(_this.userId));
+                return axios.post("/api/follow/".concat(_this.user.id));
 
               case 3:
                 response = _context.sent;
-                console.log(response);
+                //console.log(response)
+                _this.isFollowing = true;
                 _this.sending = false;
 
               case 6:
@@ -2308,11 +2323,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _this2.sending = true;
                 _context2.next = 3;
-                return axios["delete"]("/api/unfollow/".concat(_this2.userId));
+                return axios["delete"]("/api/unfollow/".concat(_this2.user.id));
 
               case 3:
                 response = _context2.sent;
-                console.log(response);
+                //console.log(response)
+                _this2.isFollowing = false;
                 _this2.sending = false;
 
               case 6:
@@ -5278,25 +5294,55 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-point btn-raised",
-        attrs: { type: "button" },
-        on: { click: _vm.unfollow }
-      },
-      [_vm._v("\n    unfollow\n  ")]
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-default btn-raised",
-        attrs: { type: "button" },
-        on: { click: _vm.follow }
-      },
-      [_vm._v("\n    follow\n  ")]
-    )
+    _vm.isFollowing
+      ? _c(
+          "button",
+          {
+            staticClass: "btn btn-point btn-raised",
+            attrs: { type: "button" },
+            on: { click: _vm.unfollow }
+          },
+          [
+            _vm.sending
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "spinner-border spinner-border-sm",
+                    attrs: { role: "status" }
+                  },
+                  [
+                    _c("span", { staticClass: "sr-only" }, [
+                      _vm._v("Sending...")
+                    ])
+                  ]
+                )
+              : _c("div", [_vm._v("フォロー中")])
+          ]
+        )
+      : _c(
+          "button",
+          {
+            staticClass: "btn btn-default btn-raised",
+            attrs: { type: "button" },
+            on: { click: _vm.follow }
+          },
+          [
+            _vm.sending
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "spinner-border spinner-border-sm",
+                    attrs: { role: "status" }
+                  },
+                  [
+                    _c("span", { staticClass: "sr-only" }, [
+                      _vm._v("Sending...")
+                    ])
+                  ]
+                )
+              : _c("div", [_vm._v("\n      フォローする\n    ")])
+          ]
+        )
   ])
 }
 var staticRenderFns = []
@@ -5979,7 +6025,7 @@ var render = function() {
         [
           _c("Todo", { attrs: { user: _vm.user } }),
           _vm._v(" "),
-          _c("FollowForm", { attrs: { userId: _vm.user.id } }),
+          _c("FollowForm", { attrs: { user: _vm.user } }),
           _vm._v(" "),
           _c(
             "v-card",

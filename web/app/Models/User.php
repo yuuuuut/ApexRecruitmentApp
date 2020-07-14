@@ -14,8 +14,13 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $appends = [
+        'is_following'
+    ];
+
     protected $visible = [
-        'id', 'name', 'profile'
+        'id', 'name', 'profile',
+        'is_following'
     ];
 
     protected $fillable = [
@@ -41,6 +46,12 @@ class User extends Authenticatable
                     ->using(FollowUser::class);
     }
 
+    public function followers()
+    {
+        return $this->belongsToMany(self::class, 'follow_users', 'followed_user_id', 'user_id')
+                    ->using(FollowUser::class);
+    }
+
     public function follow($id)
     {
         $followedUser = User::findOrFail($id);
@@ -60,5 +71,12 @@ class User extends Authenticatable
         if ($followedUser) {
             $this->followings()->detach($followedUser->id);
         }
+    }
+
+    public function getIsFollowingAttribute()
+    {
+        return $this->followers->contains(function ($user) {
+            return $user->id === Auth::user()->id;
+        });
     }
 }

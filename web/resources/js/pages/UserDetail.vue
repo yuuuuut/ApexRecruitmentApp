@@ -1,7 +1,7 @@
 <template>
   <div v-if="dataReady">
     <Todo :user="user" />
-    <FollowForm :userId="user.id" />
+    <FollowForm :user="user" />
     <v-card
     class="mx-auto mt-4"
     width="720px"
