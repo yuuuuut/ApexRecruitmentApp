@@ -6,6 +6,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Models\FollowUser;
+
+use Auth;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -35,6 +39,18 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(self::class, 'follow_users', 'user_id', 'followed_user_id')
                     ->using(FollowUser::class);
+    }
+
+    public function follow($id)
+    {
+        $followedUser = User::findOrFail($id);
+
+        if ($followedUser) {
+            FollowUser::firstOrCreate([
+                'user_id' => Auth::id(),
+                'followed_user_id' => $followedUser->id,
+            ]);
+        }
     }
 
     public function unfollow($id)

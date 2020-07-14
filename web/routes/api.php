@@ -24,5 +24,5 @@ Route::post('/profiles', 'ProfileController@create')->name('profile.create');
 /*-----
 |------FollowUser
 -----*/
-Route::post('/follow', 'FollowUserController@store')->name('follow');
+Route::post('/follow/{id}', 'FollowUserController@store')->name('follow');
 Route::delete('/unfollow/{id}', 'FollowUserController@destroy')->name('unfollow');

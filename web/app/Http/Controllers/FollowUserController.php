@@ -10,24 +10,17 @@ use Auth;
 
 class FollowUserController extends Controller
 {
-    public function store(Request $request)
+    public function store($id)
     {
-        $followedUser = User::findOrFail($request->input('id'));
-
-        FollowUser::firstOrCreate([
-            'user_id' => Auth::id(),
-            'followed_user_id' => $followedUser->id,
-        ]);
+        Auth::user()->follow($id);
 
         return ["result" => 'OK'];
     }
 
     public function destroy($id)
     {
-        //$followedUser = User::findOrFail($id);
-        //$user = Auth::user();
-        //$user->followings()->detach($followedUser->id);
         Auth::user()->unfollow($id);
+
         return ["result" => 'OK'];
     }
 }
