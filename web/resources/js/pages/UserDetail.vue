@@ -1,6 +1,7 @@
 <template>
   <div v-if="dataReady">
     <Todo :user="user" />
+    <FollowCount :user="user" />
     <v-card
     class="mx-auto mt-4"
     width="720px"
@@ -46,6 +47,7 @@
 <script>
 import ProfileForm from '../components/forms/ProfileForm.vue'
 import FollowForm  from '../components/forms/FollowForm.vue'
+import FollowCount from '../components/FollowCount.vue'
 import Todo from '../components/Todo.vue'
 
 export default {
@@ -58,6 +60,7 @@ export default {
   components: {
     ProfileForm,
     FollowForm,
+    FollowCount,
     Todo
   },
   data () {
