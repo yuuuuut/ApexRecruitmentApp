@@ -4,15 +4,17 @@
       <div v-if="sending" class="spinner-border spinner-border-sm" role="status">
         <span class="sr-only">Sending...</span>
       </div>
-      <div v-else>フォロー中</div>
+      <v-btn v-else class="ma-2" tile color="success">
+        フォロー中
+      </v-btn>
     </button>
-    <button v-else type="button" class="btn btn-default btn-raised" @click="follow">
+    <button v-else type="button" @click="follow">
       <div v-if="sending" class="spinner-border spinner-border-sm" role="status">
         <span class="sr-only">Sending...</span>
       </div>
-      <div v-else>
-        フォローする
-      </div>
+      <v-btn v-else class="ma-2" tile outlined color="success">
+        <v-icon left>mdi-plus</v-icon>フォロー
+      </v-btn>
     </button>
   </div>
 </template>

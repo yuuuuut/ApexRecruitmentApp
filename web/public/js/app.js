@@ -2267,6 +2267,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     user: {
@@ -5318,16 +5320,20 @@ var render = function() {
                     ])
                   ]
                 )
-              : _c("div", [_vm._v("フォロー中")])
-          ]
+              : _c(
+                  "v-btn",
+                  {
+                    staticClass: "ma-2",
+                    attrs: { tile: "", color: "success" }
+                  },
+                  [_vm._v("\n      フォロー中\n    ")]
+                )
+          ],
+          1
         )
       : _c(
           "button",
-          {
-            staticClass: "btn btn-default btn-raised",
-            attrs: { type: "button" },
-            on: { click: _vm.follow }
-          },
+          { attrs: { type: "button" }, on: { click: _vm.follow } },
           [
             _vm.sending
               ? _c(
@@ -5342,8 +5348,20 @@ var render = function() {
                     ])
                   ]
                 )
-              : _c("div", [_vm._v("\n      フォローする\n    ")])
-          ]
+              : _c(
+                  "v-btn",
+                  {
+                    staticClass: "ma-2",
+                    attrs: { tile: "", outlined: "", color: "success" }
+                  },
+                  [
+                    _c("v-icon", { attrs: { left: "" } }, [_vm._v("mdi-plus")]),
+                    _vm._v("フォロー\n    ")
+                  ],
+                  1
+                )
+          ],
+          1
         )
   ])
 }
@@ -6027,10 +6045,6 @@ var render = function() {
         [
           _c("Todo", { attrs: { user: _vm.user } }),
           _vm._v(" "),
-          _vm.currentUser.id !== _vm.user.id
-            ? _c("div", [_c("FollowForm", { attrs: { user: _vm.user } })], 1)
-            : _vm._e(),
-          _vm._v(" "),
           _c(
             "v-card",
             {
@@ -6055,7 +6069,11 @@ var render = function() {
                         _vm._v(" "),
                         _vm.currentUser.id === _vm.user.id
                           ? _c("div", [_c("ProfileForm")], 1)
-                          : _vm._e()
+                          : _c(
+                              "div",
+                              [_c("FollowForm", { attrs: { user: _vm.user } })],
+                              1
+                            )
                       ],
                       1
                     ),
@@ -66663,15 +66681,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************!*\
   !*** ./resources/js/components/forms/FollowForm.vue ***!
   \******************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FollowForm_vue_vue_type_template_id_d3367440___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FollowForm.vue?vue&type=template&id=d3367440& */ "./resources/js/components/forms/FollowForm.vue?vue&type=template&id=d3367440&");
 /* harmony import */ var _FollowForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FollowForm.vue?vue&type=script&lang=js& */ "./resources/js/components/forms/FollowForm.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _FollowForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _FollowForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -66701,7 +66718,7 @@ component.options.__file = "resources/js/components/forms/FollowForm.vue"
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/forms/FollowForm.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

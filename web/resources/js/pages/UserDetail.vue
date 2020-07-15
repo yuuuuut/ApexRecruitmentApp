@@ -1,9 +1,6 @@
 <template>
   <div v-if="dataReady">
     <Todo :user="user" />
-    <div v-if="currentUser.id !== user.id">
-      <FollowForm :user="user" />
-    </div>
     <v-card
     class="mx-auto mt-4"
     width="720px"
@@ -14,6 +11,9 @@
             <v-list-item-title class="headline mb-3">{{ user.name }}</v-list-item-title>
             <div v-if="currentUser.id === user.id">
               <ProfileForm />
+            </div>
+            <div v-else>
+              <FollowForm :user="user" />
             </div>
           </div>
           <div v-if="user.profile">
