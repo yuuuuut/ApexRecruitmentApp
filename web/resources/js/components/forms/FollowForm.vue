@@ -2,9 +2,7 @@
   <div>
     <div v-if="isFollowing">
       <div v-if="sending" class="spinner-border spinner-border-sm" role="status">
-        <v-btn class="ma-2" tile outlined color="success" disabled>
-          フォロー中
-        </v-btn>
+        <v-btn class="ma-2" tile outlined color="success" disabled>フォロー中</v-btn>
       </div>
       <v-btn v-else @click="unfollow" class="ma-2" tile color="success">
         フォロー中
@@ -12,9 +10,7 @@
     </div>
     <div v-else>
       <div v-if="sending" class="spinner-border spinner-border-sm" role="status">
-        <v-btn class="ma-2" tile outlined color="success" disabled>
-          <v-icon left>mdi-plus</v-icon>フォロー
-        </v-btn>
+        <v-btn class="ma-2" tile outlined color="success" disabled><v-icon left>mdi-plus</v-icon>フォロー</v-btn>
       </div>
       <v-btn v-else @click="follow" class="ma-2" tile outlined color="success">
         <v-icon left>mdi-plus</v-icon>フォロー
@@ -33,12 +29,7 @@ export default {
   data () {
     return {
       sending: false,
-      isFollowing: this.user.is_following
-    }
-  },
-  computed: {
-    currentUser () {
-      return this.$store.getters['auth/currentUser']
+      isFollowing: this.user.is_following,
     }
   },
   methods: {
@@ -47,6 +38,7 @@ export default {
 
       const response = await axios.post(`/api/follow/${this.user.id}`)
       //console.log(response)
+      this.$emit('addCount')
       this.isFollowing = true
       this.sending = false
     },
@@ -55,6 +47,7 @@ export default {
 
       const response = await axios.delete(`/api/unfollow/${this.user.id}`)
       //console.log(response)
+      this.$emit('removeCount')
       this.isFollowing = false
       this.sending = false
     }

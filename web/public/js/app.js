@@ -2060,17 +2060,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    user: {
-      type: Object
+    followingCount: {
+      type: Number
+    },
+    followersCount: {
+      type: Number
     }
-  },
-  data: function data() {
-    return {
-      followingCount: this.user.following_count,
-      followersCount: this.user.followers_count
-    };
   }
 });
 
@@ -2301,10 +2300,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     user: {
@@ -2316,11 +2311,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       sending: false,
       isFollowing: this.user.is_following
     };
-  },
-  computed: {
-    currentUser: function currentUser() {
-      return this.$store.getters['auth/currentUser'];
-    }
   },
   methods: {
     follow: function follow() {
@@ -2338,11 +2328,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 response = _context.sent;
+
                 //console.log(response)
+                _this.$emit('addCount');
+
                 _this.isFollowing = true;
                 _this.sending = false;
 
-              case 6:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -2365,11 +2358,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 response = _context2.sent;
+
                 //console.log(response)
+                _this2.$emit('removeCount');
+
                 _this2.isFollowing = false;
                 _this2.sending = false;
 
-              case 6:
+              case 7:
               case "end":
                 return _context2.stop();
             }
@@ -2993,6 +2989,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3013,7 +3017,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       user: null,
-      dataReady: false
+      dataReady: false,
+      followingCount: 0,
+      followersCount: 0
     };
   },
   computed: {
@@ -3038,15 +3044,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context.sent;
                 console.log(response);
                 _this.user = response.data;
+                _this.followingCount = response.data.following_count;
+                _this.followersCount = response.data.followers_count;
                 _this.dataReady = true;
 
-              case 6:
+              case 8:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    },
+    addFollowerCount: function addFollowerCount() {
+      this.followersCount += 1;
+    },
+    removeFollowerCount: function removeFollowerCount() {
+      this.followersCount -= 1;
     }
   },
   watch: {
@@ -5040,13 +5054,15 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._v(
-      "\n  " +
-        _vm._s(this.followingCount) +
-        "フォロー中\n  " +
-        _vm._s(this.followersCount) +
-        "フォロワー\n"
-    )
+    _c("div", { staticClass: "d-flex justify-start" }, [
+      _vm._v(
+        "\n    " +
+          _vm._s(this.followingCount) +
+          "フォロー中\n    " +
+          _vm._s(this.followersCount) +
+          "フォロワー\n  "
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -5393,7 +5409,7 @@ var render = function() {
                           disabled: ""
                         }
                       },
-                      [_vm._v("\n        フォロー中\n      ")]
+                      [_vm._v("フォロー中")]
                     )
                   ],
                   1
@@ -5436,7 +5452,7 @@ var render = function() {
                         _c("v-icon", { attrs: { left: "" } }, [
                           _vm._v("mdi-plus")
                         ]),
-                        _vm._v("フォロー\n      ")
+                        _vm._v("フォロー")
                       ],
                       1
                     )
@@ -6141,8 +6157,6 @@ var render = function() {
         [
           _c("Todo", { attrs: { user: _vm.user } }),
           _vm._v(" "),
-          _c("FollowCount", { attrs: { user: _vm.user } }),
-          _vm._v(" "),
           _c(
             "v-card",
             {
@@ -6154,96 +6168,118 @@ var render = function() {
                 "v-list-item",
                 { attrs: { "three-line": "" } },
                 [
-                  _c("v-list-item-content", [
-                    _c(
-                      "div",
-                      { staticClass: "d-flex justify-space-between" },
-                      [
-                        _c(
-                          "v-list-item-title",
-                          { staticClass: "headline mb-3" },
-                          [_vm._v(_vm._s(_vm.user.name))]
-                        ),
-                        _vm._v(" "),
-                        _vm.currentUser.id === _vm.user.id
-                          ? _c("div", [_c("ProfileForm")], 1)
-                          : _c(
+                  _c(
+                    "v-list-item-content",
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "d-flex justify-space-between" },
+                        [
+                          _c(
+                            "v-list-item-title",
+                            { staticClass: "headline mb-3" },
+                            [_vm._v(_vm._s(_vm.user.name))]
+                          ),
+                          _vm._v(" "),
+                          _vm.currentUser.id === _vm.user.id
+                            ? _c("div", [_c("ProfileForm")], 1)
+                            : _c(
+                                "div",
+                                [
+                                  _c("FollowForm", {
+                                    attrs: { user: _vm.user },
+                                    on: {
+                                      addCount: _vm.addFollowerCount,
+                                      removeCount: _vm.removeFollowerCount
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _vm.user.profile
+                        ? _c("div", [
+                            _vm.user.profile.content
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "blue-grey--text text--lighten-1"
+                                  },
+                                  [_vm._v(_vm._s(_vm.user.profile.content))]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c(
                               "div",
-                              [_c("FollowForm", { attrs: { user: _vm.user } })],
+                              { staticClass: "pt-3" },
+                              [
+                                _vm.user.profile.platform
+                                  ? _c(
+                                      "v-list-item-subtitle",
+                                      [
+                                        _c("v-icon", [
+                                          _vm._v("mdi-laptop-mac")
+                                        ]),
+                                        _vm._v(
+                                          "PlatForm " +
+                                            _vm._s(_vm.user.profile.platform) +
+                                            "\n            "
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.user.profile.platform === "PS4"
+                                  ? _c(
+                                      "v-list-item-subtitle",
+                                      [
+                                        _c("v-icon", [
+                                          _vm._v("mdi-video-input-antenna")
+                                        ]),
+                                        _vm._v(
+                                          "PSID: " +
+                                            _vm._s(_vm.user.profile.psid) +
+                                            "\n            "
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  : _vm.user.profile.platform === "PC"
+                                  ? _c(
+                                      "v-list-item-subtitle",
+                                      [
+                                        _c("v-icon", [
+                                          _vm._v("mdi-video-input-antenna")
+                                        ]),
+                                        _vm._v(
+                                          "OriginID: " +
+                                            _vm._s(_vm.user.profile.originid) +
+                                            "\n            "
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  : _vm._e()
+                              ],
                               1
                             )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _vm.user.profile
-                      ? _c("div", [
-                          _vm.user.profile.content
-                            ? _c(
-                                "div",
-                                {
-                                  staticClass: "blue-grey--text text--lighten-1"
-                                },
-                                [_vm._v(_vm._s(_vm.user.profile.content))]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "pt-3" },
-                            [
-                              _vm.user.profile.platform
-                                ? _c(
-                                    "v-list-item-subtitle",
-                                    [
-                                      _c("v-icon", [_vm._v("mdi-laptop-mac")]),
-                                      _vm._v(
-                                        "PlatForm " +
-                                          _vm._s(_vm.user.profile.platform) +
-                                          "\n            "
-                                      )
-                                    ],
-                                    1
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.user.profile.platform === "PS4"
-                                ? _c(
-                                    "v-list-item-subtitle",
-                                    [
-                                      _c("v-icon", [
-                                        _vm._v("mdi-video-input-antenna")
-                                      ]),
-                                      _vm._v(
-                                        "PSID: " +
-                                          _vm._s(_vm.user.profile.psid) +
-                                          "\n            "
-                                      )
-                                    ],
-                                    1
-                                  )
-                                : _vm.user.profile.platform === "PC"
-                                ? _c(
-                                    "v-list-item-subtitle",
-                                    [
-                                      _c("v-icon", [
-                                        _vm._v("mdi-video-input-antenna")
-                                      ]),
-                                      _vm._v(
-                                        "OriginID: " +
-                                          _vm._s(_vm.user.profile.originid) +
-                                          "\n            "
-                                      )
-                                    ],
-                                    1
-                                  )
-                                : _vm._e()
-                            ],
-                            1
-                          )
-                        ])
-                      : _vm._e()
-                  ])
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("FollowCount", {
+                        attrs: {
+                          followersCount: _vm.followersCount,
+                          followingCount: _vm.followingCount
+                        }
+                      })
+                    ],
+                    1
+                  )
                 ],
                 1
               )

@@ -1,11 +1,11 @@
 <template>
   <div v-if="dataReady">
     <Todo :user="user" />
-    <FollowCount :user="user" />
     <v-card
-    class="mx-auto mt-4"
-    width="720px"
-    outlined>
+      class="mx-auto mt-4"
+      width="720px"
+      outlined
+    >
       <v-list-item three-line>
         <v-list-item-content>
           <div class="d-flex justify-space-between">
@@ -14,7 +14,11 @@
               <ProfileForm />
             </div>
             <div v-else>
-              <FollowForm :user="user" />
+              <FollowForm 
+                :user="user"
+                @addCount="addFollowerCount"
+                @removeCount="removeFollowerCount"
+              />
             </div>
           </div>
           <div v-if="user.profile">
@@ -31,6 +35,10 @@
               </v-list-item-subtitle>
             </div>
           </div>
+          <FollowCount 
+            :followersCount="followersCount"
+            :followingCount="followingCount"
+          />
         </v-list-item-content>
       </v-list-item>
     </v-card>
@@ -61,12 +69,14 @@ export default {
     ProfileForm,
     FollowForm,
     FollowCount,
-    Todo
+    Todo,
   },
   data () {
     return {
       user: null,
       dataReady: false,
+      followingCount: 0,
+      followersCount: 0,
     }
   },
   computed: {
@@ -79,7 +89,15 @@ export default {
       const response = await axios.get(`/api/users/${this.id}`)
       console.log(response)
       this.user = response.data
+      this.followingCount = response.data.following_count
+      this.followersCount = response.data.followers_count
       this.dataReady = true
+    },
+    addFollowerCount () {
+      this.followersCount += 1
+    },
+    removeFollowerCount () {
+      this.followersCount -= 1
     }
   },
   watch: {
