@@ -1,21 +1,25 @@
 <template>
   <div>
-    <button v-if="isFollowing" type="button" class="btn btn-point btn-raised" @click="unfollow">
+    <div v-if="isFollowing">
       <div v-if="sending" class="spinner-border spinner-border-sm" role="status">
-        <span class="sr-only">Sending...</span>
+        <v-btn class="ma-2" tile outlined color="success" disabled>
+          フォロー中
+        </v-btn>
       </div>
-      <v-btn v-else class="ma-2" tile color="success">
+      <v-btn v-else @click="unfollow" class="ma-2" tile color="success">
         フォロー中
       </v-btn>
-    </button>
-    <button v-else type="button" @click="follow">
+    </div>
+    <div v-else>
       <div v-if="sending" class="spinner-border spinner-border-sm" role="status">
-        <span class="sr-only">Sending...</span>
+        <v-btn class="ma-2" tile outlined color="success" disabled>
+          <v-icon left>mdi-plus</v-icon>フォロー
+        </v-btn>
       </div>
-      <v-btn v-else class="ma-2" tile outlined color="success">
+      <v-btn v-else @click="follow" class="ma-2" tile outlined color="success">
         <v-icon left>mdi-plus</v-icon>フォロー
       </v-btn>
-    </button>
+    </div>
   </div>
 </template>
 

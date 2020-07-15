@@ -2269,6 +2269,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     user: {
@@ -5300,12 +5304,7 @@ var render = function() {
   return _c("div", [
     _vm.isFollowing
       ? _c(
-          "button",
-          {
-            staticClass: "btn btn-point btn-raised",
-            attrs: { type: "button" },
-            on: { click: _vm.unfollow }
-          },
+          "div",
           [
             _vm.sending
               ? _c(
@@ -5315,16 +5314,28 @@ var render = function() {
                     attrs: { role: "status" }
                   },
                   [
-                    _c("span", { staticClass: "sr-only" }, [
-                      _vm._v("Sending...")
-                    ])
-                  ]
+                    _c(
+                      "v-btn",
+                      {
+                        staticClass: "ma-2",
+                        attrs: {
+                          tile: "",
+                          outlined: "",
+                          color: "success",
+                          disabled: ""
+                        }
+                      },
+                      [_vm._v("\n        フォロー中\n      ")]
+                    )
+                  ],
+                  1
                 )
               : _c(
                   "v-btn",
                   {
                     staticClass: "ma-2",
-                    attrs: { tile: "", color: "success" }
+                    attrs: { tile: "", color: "success" },
+                    on: { click: _vm.unfollow }
                   },
                   [_vm._v("\n      フォロー中\n    ")]
                 )
@@ -5332,8 +5343,7 @@ var render = function() {
           1
         )
       : _c(
-          "button",
-          { attrs: { type: "button" }, on: { click: _vm.follow } },
+          "div",
           [
             _vm.sending
               ? _c(
@@ -5343,16 +5353,34 @@ var render = function() {
                     attrs: { role: "status" }
                   },
                   [
-                    _c("span", { staticClass: "sr-only" }, [
-                      _vm._v("Sending...")
-                    ])
-                  ]
+                    _c(
+                      "v-btn",
+                      {
+                        staticClass: "ma-2",
+                        attrs: {
+                          tile: "",
+                          outlined: "",
+                          color: "success",
+                          disabled: ""
+                        }
+                      },
+                      [
+                        _c("v-icon", { attrs: { left: "" } }, [
+                          _vm._v("mdi-plus")
+                        ]),
+                        _vm._v("フォロー\n      ")
+                      ],
+                      1
+                    )
+                  ],
+                  1
                 )
               : _c(
                   "v-btn",
                   {
                     staticClass: "ma-2",
-                    attrs: { tile: "", outlined: "", color: "success" }
+                    attrs: { tile: "", outlined: "", color: "success" },
+                    on: { click: _vm.follow }
                   },
                   [
                     _c("v-icon", { attrs: { left: "" } }, [_vm._v("mdi-plus")]),
