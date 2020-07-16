@@ -2093,6 +2093,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     user: {
@@ -2107,11 +2112,27 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      dialog: false
+      dialog: false,
+      loading: false,
+      overlay: false
     };
   },
-  created: function created() {
-    console.log(this.user.followings);
+
+  /*
+  created: function () {
+    console.log(this.user.followings)
+  },
+  */
+  methods: {
+    userLoading: function userLoading() {
+      this.loading = true;
+      this.overlay = true;
+      setTimeout(function () {
+        this.dialog = false;
+        this.loading = false;
+        this.overlay = false;
+      }.bind(this), 3500);
+    }
   }
 });
 
@@ -5145,123 +5166,148 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
+  return !_vm.loading
+    ? _c(
         "div",
-        { staticClass: "d-flex justify-start" },
         [
           _c(
             "div",
-            {
-              on: {
-                click: function($event) {
-                  $event.stopPropagation()
-                  _vm.dialog = true
-                }
-              }
-            },
-            [_vm._v(_vm._s(this.followingCount))]
-          ),
-          _vm._v("フォロー中\n    "),
-          _c("v-divider", { staticClass: "mx-4", attrs: { vertical: "" } }),
-          _vm._v("\n    " + _vm._s(this.followersCount) + "フォロワー\n  ")
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-dialog",
-        {
-          attrs: { "max-width": "290" },
-          model: {
-            value: _vm.dialog,
-            callback: function($$v) {
-              _vm.dialog = $$v
-            },
-            expression: "dialog"
-          }
-        },
-        [
-          _c(
-            "v-card",
+            { staticClass: "d-flex justify-start" },
             [
-              _c("v-virtual-scroll", {
-                attrs: {
-                  items: this.user.followings.data,
-                  "item-height": 73,
-                  height: "270"
-                },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(ref) {
-                      var item = ref.item
-                      return [
-                        _c(
-                          "v-list-item",
-                          [
-                            _c(
-                              "v-list-item-content",
-                              [
-                                _c(
-                                  "v-list-item-title",
-                                  [
-                                    _c(
-                                      "router-link",
-                                      {
-                                        staticClass: "mypage--link",
-                                        attrs: {
-                                          to: {
-                                            name: "userDetail",
-                                            params: { id: item.id.toString() }
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "div",
-                                          {
-                                            on: {
-                                              click: function($event) {
-                                                _vm.dialog = false
-                                              }
-                                            }
-                                          },
-                                          [_vm._v(_vm._s(item.name))]
-                                        )
-                                      ]
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                item.profile
-                                  ? _c(
-                                      "div",
-                                      [
-                                        item.profile.content
-                                          ? _c("v-list-item-subtitle", [
-                                              _vm._v(
-                                                _vm._s(item.profile.content)
-                                              )
-                                            ])
-                                          : _vm._e()
-                                      ],
-                                      1
-                                    )
-                                  : _vm._e()
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ]
+              _c(
+                "div",
+                {
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      _vm.dialog = true
                     }
                   }
-                ])
+                },
+                [_vm._v(_vm._s(this.followingCount))]
+              ),
+              _vm._v("フォロー中\n    "),
+              _c("v-divider", { staticClass: "mx-4", attrs: { vertical: "" } }),
+              _vm._v("\n    " + _vm._s(this.followersCount) + "フォロワー\n  ")
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-dialog",
+            {
+              attrs: { "max-width": "290" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              _c(
+                "v-card",
+                [
+                  _c("v-virtual-scroll", {
+                    attrs: {
+                      items: this.user.followings.data,
+                      "item-height": 73,
+                      height: "270"
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "default",
+                          fn: function(ref) {
+                            var item = ref.item
+                            return [
+                              _c(
+                                "v-list-item",
+                                [
+                                  _c(
+                                    "v-list-item-content",
+                                    [
+                                      _c(
+                                        "v-list-item-title",
+                                        [
+                                          _c(
+                                            "router-link",
+                                            {
+                                              staticClass: "mypage--link",
+                                              attrs: {
+                                                to: {
+                                                  name: "userDetail",
+                                                  params: {
+                                                    id: item.id.toString()
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  on: { click: _vm.userLoading }
+                                                },
+                                                [_vm._v(_vm._s(item.name))]
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      item.profile
+                                        ? _c(
+                                            "div",
+                                            [
+                                              item.profile.content
+                                                ? _c("v-list-item-subtitle", [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        item.profile.content
+                                                      )
+                                                    )
+                                                  ])
+                                                : _vm._e()
+                                            ],
+                                            1
+                                          )
+                                        : _vm._e()
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      false,
+                      4394727
+                    )
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    : _c(
+        "div",
+        [
+          _c(
+            "v-overlay",
+            { attrs: { value: _vm.overlay } },
+            [
+              _c("v-text-field", {
+                attrs: { color: "success", loading: "", disabled: "" }
               })
             ],
             1
@@ -5269,9 +5315,6 @@ var render = function() {
         ],
         1
       )
-    ],
-    1
-  )
 }
 var staticRenderFns = []
 render._withStripped = true
