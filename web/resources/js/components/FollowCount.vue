@@ -1,7 +1,7 @@
 <template>
   <div v-if="!loading">
     <div class="d-flex justify-start">
-      <div @click.stop="dialog = true">{{ this.followingCount }}</div>フォロー中
+      <div @click.stop="dialog = true" class="grey--text text--darken-1">{{ this.followingCount }}フォロー中</div>
       <v-divider
         class="mx-4"
         vertical
@@ -10,12 +10,12 @@
     </div>
     <v-dialog
       v-model="dialog"
-      max-width="290"
+      max-width="360"
     >
       <v-card>
         <v-virtual-scroll
           :items="this.user.followings"
-          :item-height="73"
+          :item-height="65"
           height="270"
         >
           <template v-slot="{ item }">
@@ -31,6 +31,7 @@
                 </div>
               </v-list-item-content>
             </v-list-item>
+            <v-divider></v-divider>
           </template>
         </v-virtual-scroll>
       </v-card>

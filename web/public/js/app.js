@@ -2098,6 +2098,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     user: {
@@ -5177,6 +5178,7 @@ var render = function() {
               _c(
                 "div",
                 {
+                  staticClass: "grey--text text--darken-1",
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
@@ -5184,9 +5186,9 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v(_vm._s(this.followingCount))]
+                [_vm._v(_vm._s(this.followingCount) + "フォロー中")]
               ),
-              _vm._v("フォロー中\n    "),
+              _vm._v(" "),
               _c("v-divider", { staticClass: "mx-4", attrs: { vertical: "" } }),
               _vm._v("\n    " + _vm._s(this.followersCount) + "フォロワー\n  ")
             ],
@@ -5196,7 +5198,7 @@ var render = function() {
           _c(
             "v-dialog",
             {
-              attrs: { "max-width": "290" },
+              attrs: { "max-width": "360" },
               model: {
                 value: _vm.dialog,
                 callback: function($$v) {
@@ -5212,7 +5214,7 @@ var render = function() {
                   _c("v-virtual-scroll", {
                     attrs: {
                       items: this.user.followings,
-                      "item-height": 73,
+                      "item-height": 65,
                       height: "270"
                     },
                     scopedSlots: _vm._u(
@@ -5280,14 +5282,16 @@ var render = function() {
                                   )
                                 ],
                                 1
-                              )
+                              ),
+                              _vm._v(" "),
+                              _c("v-divider")
                             ]
                           }
                         }
                       ],
                       null,
                       false,
-                      4394727
+                      1728767688
                     )
                   })
                 ],
