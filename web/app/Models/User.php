@@ -109,7 +109,7 @@ class User extends Authenticatable
      */
     public function getFollowingsAttribute()
     {
-        return $this->followings()->with(['profile'])->paginate(5);
+        return $this->followings()->with(['profile'])->get();
     }
 
     /**

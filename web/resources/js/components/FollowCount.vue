@@ -14,7 +14,7 @@
     >
       <v-card>
         <v-virtual-scroll
-          :items="this.user.followings.data"
+          :items="this.user.followings"
           :item-height="73"
           height="270"
         >

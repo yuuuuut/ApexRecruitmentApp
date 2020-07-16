@@ -5211,7 +5211,7 @@ var render = function() {
                 [
                   _c("v-virtual-scroll", {
                     attrs: {
-                      items: this.user.followings.data,
+                      items: this.user.followings,
                       "item-height": 73,
                       height: "270"
                     },

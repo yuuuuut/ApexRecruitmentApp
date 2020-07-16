@@ -11,7 +11,7 @@ $factory->define(Profile::class, function (Faker $faker) {
     return [
         'user_id' => fn() => factory(User::class)->create()->id,
         'psid' => 'test_user',
-        'content' => 'testContent',
+        'content' => 'あああああああああああああああああああああ',
         'platform' => 'ps4',
     ];
 });
