@@ -35,7 +35,8 @@
               </v-list-item-subtitle>
             </div>
           </div>
-          <FollowCount 
+          <FollowCount
+            :user="user"
             :followersCount="followersCount"
             :followingCount="followingCount"
           />

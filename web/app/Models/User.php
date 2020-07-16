@@ -15,12 +15,13 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $appends = [
-        'is_following', 'following_count',
-        'followers_count'
+        'is_following', 'followings',
+        'following_count', 'followers_count'
     ];
 
     protected $visible = [
         'id', 'name', 'profile',
+        'followings',
         'is_following', 'following_count',
         'followers_count'
     ];
@@ -100,6 +101,15 @@ class User extends Authenticatable
     public function getFollowingCountAttribute()
     {
         return $this->followings->count();
+    }
+
+    /**
+     * followings
+     * @return Array
+     */
+    public function getFollowingsAttribute()
+    {
+        return $this->followings()->with(['profile'])->paginate(5);
     }
 
     /**
