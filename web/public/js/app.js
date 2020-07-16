@@ -2080,9 +2080,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2101,7 +2098,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      dialog: false,
+      FollowingDialog: false,
+      FollowerDialog: false,
       loading: false,
       overlay: false
     };
@@ -2111,10 +2109,11 @@ __webpack_require__.r(__webpack_exports__);
       this.loading = true;
       this.overlay = true;
       setTimeout(function () {
-        this.dialog = false;
+        this.FollowingDialog = false;
+        this.FollowerDialog = false;
         this.loading = false;
         this.overlay = false;
-      }.bind(this), 3500);
+      }.bind(this), 2000);
     }
   }
 });
@@ -3142,8 +3141,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context.sent;
                 console.log(response);
                 _this.user = response.data;
-                _this.followingCount = response.data.following_count;
-                _this.followersCount = response.data.followers_count;
+                _this.followingCount = response.data.follow_count;
+                _this.followersCount = response.data.follower_count;
                 _this.dataReady = true;
 
               case 8:
@@ -5215,7 +5214,7 @@ var render = function() {
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
-                      _vm.dialog = true
+                      _vm.FollowingDialog = true
                     }
                   }
                 },
@@ -5223,7 +5222,20 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("v-divider", { staticClass: "mx-4", attrs: { vertical: "" } }),
-              _vm._v("\n    " + _vm._s(this.followersCount) + "フォロワー\n  ")
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "grey--text text--darken-1",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      _vm.FollowerDialog = true
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(this.followersCount) + "フォロワー")]
+              )
             ],
             1
           ),
@@ -5231,13 +5243,13 @@ var render = function() {
           _c(
             "v-dialog",
             {
-              attrs: { "max-width": "360" },
+              attrs: { "max-width": "350" },
               model: {
-                value: _vm.dialog,
+                value: _vm.FollowingDialog,
                 callback: function($$v) {
-                  _vm.dialog = $$v
+                  _vm.FollowingDialog = $$v
                 },
-                expression: "dialog"
+                expression: "FollowingDialog"
               }
             },
             [

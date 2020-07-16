@@ -90,8 +90,8 @@ export default {
       const response = await axios.get(`/api/users/${this.id}`)
       console.log(response)
       this.user = response.data
-      this.followingCount = response.data.following_count
-      this.followersCount = response.data.followers_count
+      this.followingCount = response.data.follow_count
+      this.followersCount = response.data.follower_count
       this.dataReady = true
     },
     addFollowerCount () {

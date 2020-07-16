@@ -15,15 +15,15 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $appends = [
-        'is_following', 'followings',
-        'following_count', 'followers_count'
+        'is_following',
+        'follow_count', 'follower_count',
     ];
 
     protected $visible = [
         'id', 'name', 'profile',
-        'followings',
-        'is_following', 'following_count',
-        'followers_count'
+        'followers', 'followings',
+        'is_following',
+        'follow_count', 'follower_count',
     ];
 
     protected $fillable = [
@@ -53,7 +53,7 @@ class User extends Authenticatable
      */
     public function followings()
     {
-        return $this->belongsToMany(self::class, 'follow_users', 'user_id', 'followed_user_id')
+        return $this->belongsToMany(User::class, 'follow_users', 'user_id', 'followed_user_id')
                     ->using(FollowUser::class);
     }
 
@@ -63,7 +63,7 @@ class User extends Authenticatable
      */
     public function followers()
     {
-        return $this->belongsToMany(self::class, 'follow_users', 'followed_user_id', 'user_id')
+        return $this->belongsToMany(User::class, 'follow_users', 'followed_user_id', 'user_id')
                     ->using(FollowUser::class);
     }
 
@@ -98,27 +98,18 @@ class User extends Authenticatable
      * following_count
      * @return Int
      */
-    public function getFollowingCountAttribute()
+    public function getFollowCountAttribute()
     {
-        return $this->followings->count();
-    }
-
-    /**
-     * followings
-     * @return Array
-     */
-    public function getFollowingsAttribute()
-    {
-        return $this->followings()->with(['profile'])->get();
+        return $this->followings()->count();
     }
 
     /**
      * followers_count
      * @return Int
      */
-    public function getFollowersCountAttribute()
+    public function getFollowerCountAttribute()
     {
-        return $this->followers->count();
+        return $this->followers()->count();
     }
 
     /**

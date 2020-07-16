@@ -4,7 +4,7 @@ services:
   apex_web:
     build: .
     volumes:
-        - ./web:/var/www
+        - ./web:/var/www:delegated
     ports:
         - 8081:8081
         - 3000:3000

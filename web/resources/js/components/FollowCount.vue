@@ -1,21 +1,18 @@
 <template>
   <div v-if="!loading">
     <div class="d-flex justify-start">
-      <div @click.stop="dialog = true" class="grey--text text--darken-1">{{ this.followingCount }}フォロー中</div>
+      <div @click.stop="FollowingDialog = true" class="grey--text text--darken-1">{{ this.followingCount }}フォロー中</div>
       <v-divider
         class="mx-4"
         vertical
       ></v-divider>
-      {{ this.followersCount }}フォロワー
+      <div @click.stop="FollowerDialog = true" class="grey--text text--darken-1">{{ this.followersCount }}フォロワー</div>
     </div>
-    <v-dialog
-      v-model="dialog"
-      max-width="360"
-    >
+    <v-dialog v-model="FollowingDialog" max-width="350">
       <v-card>
         <FollowList 
           :list="user.followings"
-          @loading="loadingUser"
+          @loading="loadingUser" 
         />
       </v-card>
     </v-dialog>
@@ -47,7 +44,8 @@ export default {
   },
   data () {
     return {
-      dialog: false,
+      FollowingDialog: false,
+      FollowerDialog: false,
       loading: false,
       overlay: false,
     }
@@ -58,10 +56,11 @@ export default {
       this.overlay = true
 
       setTimeout(function () {
-        this.dialog = false
+        this.FollowingDialog = false
+        this.FollowerDialog  = false
         this.loading = false
         this.overlay = false
-      }.bind(this), 3500);
+      }.bind(this), 2000);
     }
   }
 }

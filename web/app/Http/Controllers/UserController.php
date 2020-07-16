@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function show(string $id)
     {
-        $user = User::where('id', $id)->with(['profile'])->first();
+        $user = User::where('id', $id)->with(['profile', 'followers', 'followings'])->first();
 
         return $user ?? abort(404);
     }
