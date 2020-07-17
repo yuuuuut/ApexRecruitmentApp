@@ -8,6 +8,7 @@
       ></v-divider>
       <div @click.stop="FollowerDialog = true" class="grey--text text--darken-1">{{ this.followerCount }}フォロワー</div>
     </div>
+    <!-- FollowUser -->
     <v-dialog v-model="FollowingDialog" width="360">
       <v-card>
         <FollowList 
@@ -16,6 +17,7 @@
         />
       </v-card>
     </v-dialog>
+    <!-- FollowerUser -->
     <v-dialog v-model="FollowerDialog" width="360">
       <v-card>
         <FollowList 
@@ -38,16 +40,20 @@ import FollowList from '../components/FollowList.vue'
 export default {
   props: {
     followCount: {
-      type: Number
+      type: Number,
+      required: true,
     },
     followerCount: {
-      type: Number
+      type: Number,
+      required: true,
     },
     followings: {
-      type: Array
+      type: Array,
+      required: true,
     },
     followers: {
-      type: Array
+      type: Array,
+      required: true,
     }
   },
   components: {

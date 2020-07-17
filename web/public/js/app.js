@@ -2088,20 +2088,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     followCount: {
-      type: Number
+      type: Number,
+      required: true
     },
     followerCount: {
-      type: Number
+      type: Number,
+      required: true
     },
     followings: {
-      type: Array
+      type: Array,
+      required: true
     },
     followers: {
-      type: Array
+      type: Array,
+      required: true
     }
   },
   components: {
@@ -2410,7 +2416,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     user: {
-      type: Object
+      type: Object,
+      required: true
     }
   },
   data: function data() {
@@ -3153,24 +3160,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                _context.next = 5;
+                _this.user = response.data;
+                _context.next = 6;
                 return axios.get("/api/following/".concat(_this.id));
 
-              case 5:
+              case 6:
                 response2 = _context.sent;
-                _context.next = 8;
+                _this.followings = response2.data;
+                _this.followCount = response2.data.length;
+                _context.next = 11;
                 return axios.get("/api/follower/".concat(_this.id));
 
-              case 8:
+              case 11:
                 response3 = _context.sent;
+                _this.followers = response3.data;
+                _this.followerCount = response3.data.length;
                 console.log(response);
                 console.log(response2);
                 console.log(response3);
-                _this.user = response.data;
-                _this.followings = response2.data;
-                _this.followers = response3.data;
-                _this.followCount = response2.data.length;
-                _this.followerCount = response3.data.length;
                 _this.dataReady = true;
 
               case 18:

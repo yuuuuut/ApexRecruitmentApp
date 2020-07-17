@@ -91,17 +91,19 @@ export default {
   methods: {
     async userShow () {
       const response  = await axios.get(`/api/users/${this.id}`)
+      this.user = response.data
+
       const response2 = await axios.get(`/api/following/${this.id}`)
+      this.followings    = response2.data
+      this.followCount   = response2.data.length
+    
       const response3 = await axios.get(`/api/follower/${this.id}`)
+      this.followers     = response3.data
+      this.followerCount = response3.data.length
+
       console.log(response)
       console.log(response2)
       console.log(response3)
-      this.user = response.data
-      this.followings = response2.data
-      this.followers = response3.data
-
-      this.followCount = response2.data.length
-      this.followerCount = response3.data.length
 
       this.dataReady = true
     },
@@ -109,7 +111,7 @@ export default {
       this.followerCount += 1
     },
     removeFollowerCount () {
-      this.followerCount  -= 1
+      this.followerCount -= 1
     }
   },
   watch: {
