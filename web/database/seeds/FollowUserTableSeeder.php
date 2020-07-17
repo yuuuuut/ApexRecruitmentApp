@@ -11,6 +11,6 @@ class FollowUserTableSeeder extends Seeder
      */
     public function run()
     {
-        $users = factory(App\Models\FollowUser::class, 20)->create();
+        $users = factory(App\Models\FollowUser::class)->create();
     }
 }

@@ -32,6 +32,9 @@ export default {
       required: true
     }
   },
+  created: function () {
+    console.log(this.list)
+  },
   methods: {
     userLoading () {
       this.$emit('loading')

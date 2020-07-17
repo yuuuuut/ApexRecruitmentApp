@@ -9,8 +9,7 @@ use Illuminate\Support\Str;
 
 $factory->define(FollowUser::class, function (Faker $faker) {
     return [
-        //'user_id' => fn() => factory(User::class)->create()->id,
-        'user_id' => 1,
-        'followed_user_id' => 1,
+        'user_id' => fn() => factory(User::class)->create()->id,
+        'followed_user_id' => fn() => factory(User::class)->create()->id,
     ];
 });

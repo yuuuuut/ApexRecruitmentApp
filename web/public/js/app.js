@@ -2179,6 +2179,9 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     }
   },
+  created: function created() {
+    console.log(this.list);
+  },
   methods: {
     userLoading: function userLoading() {
       this.$emit('loading');
