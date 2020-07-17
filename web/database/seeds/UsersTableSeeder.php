@@ -11,15 +11,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => 'ゆと',
-            'email' => 'a@a.com',
-            'email_verified_at' => now(),
-            'password' => '12345678',
-            'remember_token' => Str::random(10),
-        ]);
-        factory(App\Models\User::class, 5)->create()->each(function ($user) {
-            factory(App\Models\FollowUser::class)->create(['followed_user_id' => $user->id]);
+        factory(App\Models\User::class, 10)->create();
+        /*
+        factory(App\Models\User::class, 4)->create()->each(function ($user) {
+            factory(App\Models\FollowUser::class)->create(['user_id' => 1, 'followed_user_id' => $user->id]);
+            factory(App\Models\FollowUser::class)->create(['user_id' => $user->id, 'followed_user_id' => 1]);
         });
+        */
     }
 }

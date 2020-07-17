@@ -6,8 +6,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-use App\Models\FollowUser;
-
 use Auth;
 
 class User extends Authenticatable
@@ -16,14 +14,11 @@ class User extends Authenticatable
 
     protected $appends = [
         'is_following',
-        'follow_count', 'follower_count',
     ];
 
     protected $visible = [
         'id', 'name', 'profile',
-        'followers', 'followings',
         'is_following',
-        'follow_count', 'follower_count',
     ];
 
     protected $fillable = [
@@ -92,24 +87,6 @@ class User extends Authenticatable
         if ($followedUser) {
             $this->followings()->detach($followedUser->id);
         }
-    }
-
-    /**
-     * following_count
-     * @return Int
-     */
-    public function getFollowCountAttribute()
-    {
-        return $this->followings()->count();
-    }
-
-    /**
-     * followers_count
-     * @return Int
-     */
-    public function getFollowerCountAttribute()
-    {
-        return $this->followers()->count();
     }
 
     /**

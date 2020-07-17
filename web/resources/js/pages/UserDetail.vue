@@ -36,9 +36,10 @@
             </div>
           </div>
           <FollowCount
-            :user="user"
-            :followersCount="followersCount"
-            :followingCount="followingCount"
+            :followCount="followCount"
+            :followerCount="followerCount"
+            :followings="followings"
+            :followers="followers"
           />
         </v-list-item-content>
       </v-list-item>
@@ -75,9 +76,11 @@ export default {
   data () {
     return {
       user: null,
+      followings: null,
+      followers: null,
+      followCount: 0,
+      followerCount: 0,
       dataReady: false,
-      followingCount: 0,
-      followersCount: 0,
     }
   },
   computed: {
@@ -87,18 +90,26 @@ export default {
   },
   methods: {
     async userShow () {
-      const response = await axios.get(`/api/users/${this.id}`)
+      const response  = await axios.get(`/api/users/${this.id}`)
+      const response2 = await axios.get(`/api/following/${this.id}`)
+      const response3 = await axios.get(`/api/follower/${this.id}`)
       console.log(response)
+      console.log(response2)
+      console.log(response3)
       this.user = response.data
-      this.followingCount = response.data.follow_count
-      this.followersCount = response.data.follower_count
+      this.followings = response2.data
+      this.followers = response3.data
+
+      this.followCount = response2.data.length
+      this.followerCount = response3.data.length
+
       this.dataReady = true
     },
     addFollowerCount () {
-      this.followersCount += 1
+      this.followerCount += 1
     },
     removeFollowerCount () {
-      this.followersCount -= 1
+      this.followerCount  -= 1
     }
   },
   watch: {

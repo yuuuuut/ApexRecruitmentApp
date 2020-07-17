@@ -23,4 +23,20 @@ class FollowUserController extends Controller
 
         return ["result" => 'OK'];
     }
+
+    public function followIndex($id)
+    {
+        $user = User::find($id);
+        $follow = $user->followings()->get();
+
+        return $follow;
+    }
+
+    public function followerIndex($id)
+    {
+        $user = User::find($id);
+        $follower = $user->followers()->get();
+
+        return $follower;
+    }
 }

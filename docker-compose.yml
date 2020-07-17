@@ -4,10 +4,12 @@ services:
   apex_web:
     build: .
     volumes:
-        - ./web:/var/www:delegated
+        - ./php.ini:/usr/local/etc/php/php.ini
+        - ./web:/var/www:cached
     ports:
         - 8081:8081
         - 3000:3000
+
   db:
     image: mysql:8.0
     environment:

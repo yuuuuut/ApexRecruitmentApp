@@ -30,10 +30,6 @@ class UserDetailApiTest extends TestCase
         $response->assertStatus(200)
                 ->assertJsonFragment([
                     'id'       => $user->id,
-                    'followings' => [],
-                    'followers' => [],
-                    'follow_count' => 0,
-                    'follower_count' => 0,
                     'is_following' => false,
                     'psid'     => $user->profile->psid,
                     'content'  => $user->profile->content,

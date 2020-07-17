@@ -2080,17 +2080,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    user: {
-      type: Object
-    },
-    followingCount: {
+    followCount: {
       type: Number
     },
-    followersCount: {
+    followerCount: {
       type: Number
+    },
+    followings: {
+      type: Array
+    },
+    followers: {
+      type: Array
     }
   },
   components: {
@@ -3094,6 +3105,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -3114,9 +3126,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       user: null,
-      dataReady: false,
-      followingCount: 0,
-      followersCount: 0
+      followings: null,
+      followers: null,
+      followCount: 0,
+      followerCount: 0,
+      dataReady: false
     };
   },
   computed: {
@@ -3129,7 +3143,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response;
+        var response, response2, response3;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -3139,13 +3153,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                console.log(response);
-                _this.user = response.data;
-                _this.followingCount = response.data.follow_count;
-                _this.followersCount = response.data.follower_count;
-                _this.dataReady = true;
+                _context.next = 5;
+                return axios.get("/api/following/".concat(_this.id));
+
+              case 5:
+                response2 = _context.sent;
+                _context.next = 8;
+                return axios.get("/api/follower/".concat(_this.id));
 
               case 8:
+                response3 = _context.sent;
+                console.log(response);
+                console.log(response2);
+                console.log(response3);
+                _this.user = response.data;
+                _this.followings = response2.data;
+                _this.followers = response3.data;
+                _this.followCount = response2.data.length;
+                _this.followerCount = response3.data.length;
+                _this.dataReady = true;
+
+              case 18:
               case "end":
                 return _context.stop();
             }
@@ -3154,10 +3182,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     addFollowerCount: function addFollowerCount() {
-      this.followersCount += 1;
+      this.followerCount += 1;
     },
     removeFollowerCount: function removeFollowerCount() {
-      this.followersCount -= 1;
+      this.followerCount -= 1;
     }
   },
   watch: {
@@ -5218,7 +5246,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v(_vm._s(this.followingCount) + "フォロー中")]
+                [_vm._v(_vm._s(this.followCount) + "フォロー中")]
               ),
               _vm._v(" "),
               _c("v-divider", { staticClass: "mx-4", attrs: { vertical: "" } }),
@@ -5234,7 +5262,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v(_vm._s(this.followersCount) + "フォロワー")]
+                [_vm._v(_vm._s(this.followerCount) + "フォロワー")]
               )
             ],
             1
@@ -5243,7 +5271,7 @@ var render = function() {
           _c(
             "v-dialog",
             {
-              attrs: { "max-width": "350" },
+              attrs: { width: "360" },
               model: {
                 value: _vm.FollowingDialog,
                 callback: function($$v) {
@@ -5257,7 +5285,34 @@ var render = function() {
                 "v-card",
                 [
                   _c("FollowList", {
-                    attrs: { list: _vm.user.followings },
+                    attrs: { list: _vm.followings },
+                    on: { loading: _vm.loadingUser }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-dialog",
+            {
+              attrs: { width: "360" },
+              model: {
+                value: _vm.FollowerDialog,
+                callback: function($$v) {
+                  _vm.FollowerDialog = $$v
+                },
+                expression: "FollowerDialog"
+              }
+            },
+            [
+              _c(
+                "v-card",
+                [
+                  _c("FollowList", {
+                    attrs: { list: _vm.followers },
                     on: { loading: _vm.loadingUser }
                   })
                 ],
@@ -6587,9 +6642,10 @@ var render = function() {
                       _vm._v(" "),
                       _c("FollowCount", {
                         attrs: {
-                          user: _vm.user,
-                          followersCount: _vm.followersCount,
-                          followingCount: _vm.followingCount
+                          followCount: _vm.followCount,
+                          followerCount: _vm.followerCount,
+                          followings: _vm.followings,
+                          followers: _vm.followers
                         }
                       })
                     ],
