@@ -14,7 +14,7 @@
               </router-link>
             </v-list-item-title>
             <div v-if="item.profile">
-              <v-list-item-subtitle v-if="item.profile.content">{{ item.profile.content }}</v-list-item-subtitle>
+              <v-list-item-subtitle v-if="item.profile.content">{{ item.profile.content | truncate }}</v-list-item-subtitle>
             </div>
           </v-list-item-content>
         </v-list-item>
@@ -32,8 +32,15 @@ export default {
       required: true
     }
   },
-  created: function () {
-    console.log(this.list)
+  filters: {
+    truncate: function (val) {
+      let length = 40
+      let ommision = "..."
+      if (val.length <= length) {
+        return val
+      }
+      return val.substring(0, length) + ommision
+    }
   },
   methods: {
     userLoading () {

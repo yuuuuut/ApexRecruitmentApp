@@ -2179,8 +2179,17 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     }
   },
-  created: function created() {
-    console.log(this.list);
+  filters: {
+    truncate: function truncate(val) {
+      var length = 40;
+      var ommision = "...";
+
+      if (val.length <= length) {
+        return val;
+      }
+
+      return val.substring(0, length) + ommision;
+    }
   },
   methods: {
     userLoading: function userLoading() {
@@ -5420,7 +5429,13 @@ var render = function() {
                               [
                                 item.profile.content
                                   ? _c("v-list-item-subtitle", [
-                                      _vm._v(_vm._s(item.profile.content))
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm._f("truncate")(
+                                            item.profile.content
+                                          )
+                                        )
+                                      )
                                     ])
                                   : _vm._e()
                               ],
