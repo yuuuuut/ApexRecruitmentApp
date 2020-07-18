@@ -98,6 +98,7 @@ export default {
       this.resetValue()
       this.sending = false
       this.dialog  = false
+      this.$emit('reloadUser')
     },
     resetValue () {
       this.profileForm.psid = ''

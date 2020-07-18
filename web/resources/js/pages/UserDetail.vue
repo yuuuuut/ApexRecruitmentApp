@@ -11,7 +11,9 @@
           <div class="d-flex justify-space-between">
             <v-list-item-title class="headline">{{ user.name }}</v-list-item-title>
             <div v-if="currentUser.id === user.id">
-              <ProfileForm />
+              <ProfileForm
+                @reloadUser="userShow"
+              />
             </div>
           </div>
           <div class="d-flex flex-row-reverse">

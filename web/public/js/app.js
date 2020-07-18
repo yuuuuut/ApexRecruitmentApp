@@ -2780,7 +2780,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.sending = false;
                 _this.dialog = false;
 
-              case 12:
+                _this.$emit('reloadUser');
+
+              case 13:
               case "end":
                 return _context.stop();
             }
@@ -3078,6 +3080,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
 //
 //
 //
@@ -6624,7 +6628,15 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _vm.currentUser.id === _vm.user.id
-                            ? _c("div", [_c("ProfileForm")], 1)
+                            ? _c(
+                                "div",
+                                [
+                                  _c("ProfileForm", {
+                                    on: { reloadUser: _vm.userShow }
+                                  })
+                                ],
+                                1
+                              )
                             : _vm._e()
                         ],
                         1
