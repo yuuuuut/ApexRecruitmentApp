@@ -9,11 +9,13 @@
       <v-list-item three-line>
         <v-list-item-content>
           <div class="d-flex justify-space-between">
-            <v-list-item-title class="headline mb-3">{{ user.name }}</v-list-item-title>
+            <v-list-item-title class="headline">{{ user.name }}</v-list-item-title>
             <div v-if="currentUser.id === user.id">
               <ProfileForm />
             </div>
-            <div v-else>
+          </div>
+          <div class="d-flex flex-row-reverse">
+            <div v-if="currentUser.id !== user.id">
               <FollowForm 
                 :user="user"
                 @addCount="addFollowerCount"
@@ -21,11 +23,12 @@
               />
             </div>
           </div>
+
           <div v-if="user.profile">
             <div class="blue-grey--text text--lighten-1" v-if="user.profile.content">{{ user.profile.content }}</div>
             <div class="pt-3">
               <v-list-item-subtitle v-if="user.profile.platform">
-                <v-icon>mdi-laptop-mac</v-icon>PlatForm {{ user.profile.platform }}
+                <v-icon>mdi-laptop-mac</v-icon>{{ user.profile.platform }}
               </v-list-item-subtitle>
               <v-list-item-subtitle v-if="user.profile.platform === 'PS4'">
                 <v-icon>mdi-video-input-antenna</v-icon>PSID: {{ user.profile.psid }}

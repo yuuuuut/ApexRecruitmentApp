@@ -3125,6 +3125,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
@@ -6569,30 +6572,34 @@ var render = function() {
                         "div",
                         { staticClass: "d-flex justify-space-between" },
                         [
-                          _c(
-                            "v-list-item-title",
-                            { staticClass: "headline mb-3" },
-                            [_vm._v(_vm._s(_vm.user.name))]
-                          ),
+                          _c("v-list-item-title", { staticClass: "headline" }, [
+                            _vm._v(_vm._s(_vm.user.name))
+                          ]),
                           _vm._v(" "),
                           _vm.currentUser.id === _vm.user.id
                             ? _c("div", [_c("ProfileForm")], 1)
-                            : _c(
-                                "div",
-                                [
-                                  _c("FollowForm", {
-                                    attrs: { user: _vm.user },
-                                    on: {
-                                      addCount: _vm.addFollowerCount,
-                                      removeCount: _vm.removeFollowerCount
-                                    }
-                                  })
-                                ],
-                                1
-                              )
+                            : _vm._e()
                         ],
                         1
                       ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "d-flex flex-row-reverse" }, [
+                        _vm.currentUser.id !== _vm.user.id
+                          ? _c(
+                              "div",
+                              [
+                                _c("FollowForm", {
+                                  attrs: { user: _vm.user },
+                                  on: {
+                                    addCount: _vm.addFollowerCount,
+                                    removeCount: _vm.removeFollowerCount
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          : _vm._e()
+                      ]),
                       _vm._v(" "),
                       _vm.user.profile
                         ? _c("div", [
@@ -6619,8 +6626,7 @@ var render = function() {
                                           _vm._v("mdi-laptop-mac")
                                         ]),
                                         _vm._v(
-                                          "PlatForm " +
-                                            _vm._s(_vm.user.profile.platform) +
+                                          _vm._s(_vm.user.profile.platform) +
                                             "\n            "
                                         )
                                       ],
