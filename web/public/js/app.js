@@ -2372,11 +2372,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     user: {
       type: Object
     }
+  },
+  data: function data() {
+    return {
+      snackbar: true
+    };
   },
   computed: {
     currentUser: function currentUser() {
@@ -5741,23 +5750,61 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "div",
-      { staticClass: "d-flex justify-center mt-2" },
-      [
-        _vm.user.id === _vm.currentUser.id && !_vm.user.profile
-          ? _c(
-              "v-chip",
+    _vm.user.id === _vm.currentUser.id && !_vm.user.profile
+      ? _c(
+          "div",
+          { staticClass: "ma-2 mx-auto" },
+          [
+            _c(
+              "v-snackbar",
               {
-                staticClass: "ma-2 mx-auto",
-                attrs: { color: "orange", label: "", outlined: "" }
+                attrs: { timeout: 8000 },
+                scopedSlots: _vm._u(
+                  [
+                    {
+                      key: "action",
+                      fn: function(ref) {
+                        var attrs = ref.attrs
+                        return [
+                          _c(
+                            "v-btn",
+                            _vm._b(
+                              {
+                                attrs: { color: "pink", text: "" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.snackbar = false
+                                  }
+                                }
+                              },
+                              "v-btn",
+                              attrs,
+                              false
+                            ),
+                            [_vm._v("\n          閉じる\n        ")]
+                          )
+                        ]
+                      }
+                    }
+                  ],
+                  null,
+                  false,
+                  3202541954
+                ),
+                model: {
+                  value: _vm.snackbar,
+                  callback: function($$v) {
+                    _vm.snackbar = $$v
+                  },
+                  expression: "snackbar"
+                }
               },
-              [_vm._v("\n      プロフィールを作成してみましょう!!\n    ")]
+              [_vm._v("\n      プロフィールを作成してみましょう!!\n      ")]
             )
-          : _vm._e()
-      ],
-      1
-    )
+          ],
+          1
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
