@@ -2130,7 +2130,7 @@ __webpack_require__.r(__webpack_exports__);
         this.FollowerDialog = false;
         this.loading = false;
         this.overlay = false;
-      }.bind(this), 2000);
+      }.bind(this), 3000);
     }
   }
 });
@@ -3178,37 +3178,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response, response2, response3;
+        var response, response2, response3, result;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return axios.get("/api/users/".concat(_this.id));
+                response = axios.get("/api/users/".concat(_this.id));
+                response2 = axios.get("/api/following/".concat(_this.id));
+                response3 = axios.get("/api/follower/".concat(_this.id));
+                _context.next = 5;
+                return Promise.all([response, response2, response3]);
 
-              case 2:
-                response = _context.sent;
-                _this.user = response.data;
-                _context.next = 6;
-                return axios.get("/api/following/".concat(_this.id));
-
-              case 6:
-                response2 = _context.sent;
-                _this.followings = response2.data;
-                _this.followCount = response2.data.length;
-                _context.next = 11;
-                return axios.get("/api/follower/".concat(_this.id));
-
-              case 11:
-                response3 = _context.sent;
-                _this.followers = response3.data;
-                _this.followerCount = response3.data.length;
+              case 5:
+                result = _context.sent;
+                _this.user = result[0].data;
+                _this.followings = result[1].data;
+                _this.followCount = _this.followings.length;
+                _this.followers = result[2].data;
+                _this.followerCount = _this.followers.length;
                 console.log(response);
                 console.log(response2);
                 console.log(response3);
                 _this.dataReady = true;
 
-              case 18:
+              case 15:
               case "end":
                 return _context.stop();
             }

@@ -77,7 +77,7 @@ export default {
         this.FollowerDialog  = false
         this.loading = false
         this.overlay = false
-      }.bind(this), 2000);
+      }.bind(this), 3000);
     }
   }
 }

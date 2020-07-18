@@ -95,16 +95,19 @@ export default {
   },
   methods: {
     async userShow () {
-      const response  = await axios.get(`/api/users/${this.id}`)
-      this.user = response.data
+      const response  = axios.get(`/api/users/${this.id}`)
+      const response2 = axios.get(`/api/following/${this.id}`)
+      const response3 = axios.get(`/api/follower/${this.id}`)
 
-      const response2 = await axios.get(`/api/following/${this.id}`)
-      this.followings    = response2.data
-      this.followCount   = response2.data.length
+      const result = await Promise.all([response, response2, response3])
+
+      this.user = result[0].data
+
+      this.followings    = result[1].data
+      this.followCount   = this.followings.length
     
-      const response3 = await axios.get(`/api/follower/${this.id}`)
-      this.followers     = response3.data
-      this.followerCount = response3.data.length
+      this.followers     = result[2].data
+      this.followerCount = this.followers.length
 
       console.log(response)
       console.log(response2)
