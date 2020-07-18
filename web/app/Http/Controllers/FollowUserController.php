@@ -27,7 +27,7 @@ class FollowUserController extends Controller
     public function followIndex($id)
     {
         $user = User::find($id);
-        $follow = $user->followings()->with(['profile'])->get();
+        $follow = $user->followings()->with(['profile:id,content,user_id'])->get();
 
         return $follow;
     }
@@ -35,7 +35,7 @@ class FollowUserController extends Controller
     public function followerIndex($id)
     {
         $user = User::find($id);
-        $follower = $user->followers()->with(['profile'])->get();
+        $follower = $user->followers()->with(['profile:id,content,user_id'])->get();
 
         return $follower;
     }

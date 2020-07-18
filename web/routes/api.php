@@ -27,5 +27,5 @@ Route::post('/profiles', 'ProfileController@create')->name('profile.create');
 Route::post('/follow/{id}', 'FollowUserController@store')->name('follow');
 Route::delete('/unfollow/{id}', 'FollowUserController@destroy')->name('unfollow');
 
-Route::get('/following/{id}', 'FollowUserController@followIndex');
-Route::get('/follower/{id}' , 'FollowUserController@followerIndex');
+Route::get('/following/{id}', 'FollowUserController@followIndex')->name('follow.index');
+Route::get('/follower/{id}' , 'FollowUserController@followerIndex')->name('follower.index');
