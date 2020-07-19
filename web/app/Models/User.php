@@ -13,12 +13,12 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $appends = [
-        'is_following',
+        'is_following', 'is_followed'
     ];
 
     protected $visible = [
         'id', 'name', 'profile',
-        'is_following',
+        'is_following', 'is_followed'
     ];
 
     protected $fillable = [
@@ -96,6 +96,17 @@ class User extends Authenticatable
     public function getIsFollowingAttribute()
     {
         return $this->followers->contains(function ($user) {
+            return $user->id === Auth::user()->id;
+        });
+    }
+
+    /**
+     * is_followed
+     * @return Boolean
+     */
+    public function getIsFollowedAttribute()
+    {
+        return $this->followings->contains(function ($user) {
             return $user->id === Auth::user()->id;
         });
     }

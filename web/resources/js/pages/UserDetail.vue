@@ -3,25 +3,30 @@
     <Todo :user="user" />
     <v-card
       class="mx-auto mt-4"
-      width="720px"
-      outlined
+      width="730px"
     >
       <v-list-item three-line>
         <v-list-item-content>
-          <div class="d-flex justify-space-between">
-            <v-list-item-title class="headline">{{ user.name }}</v-list-item-title>
-            <div v-if="currentUser.id === user.id">
-              <ProfileForm
-                @reloadUser="userShow"
-              />
-            </div>
-          </div>
           <div class="d-flex flex-row-reverse">
             <div v-if="currentUser.id !== user.id">
               <FollowForm 
                 :user="user"
                 @addCount="addFollowerCount"
                 @removeCount="removeFollowerCount"
+              />
+            </div>
+          </div>
+
+          <div class="d-flex justify-space-between">
+            <div class="d-flex justify-start">
+              <div class="text-h5">{{ user.name }}</div>
+              <div v-if="isFollowed">
+                <v-chip class="mt-1 ml-2" color="cyan" text-color="white" small>フォローされています</v-chip>
+              </div>
+            </div>
+            <div v-if="currentUser.id === user.id">
+              <ProfileForm
+                @reloadUser="userShow"
               />
             </div>
           </div>
@@ -85,6 +90,7 @@ export default {
       followers: null,
       followCount: 0,
       followerCount: 0,
+      isFollowed: false,
       dataReady: false,
     }
   },
@@ -102,6 +108,7 @@ export default {
       const result = await Promise.all([response, response2, response3])
 
       this.user = result[0].data
+      this.isFollowed = result[0].data.is_followed
 
       this.followings    = result[1].data
       this.followCount   = this.followings.length

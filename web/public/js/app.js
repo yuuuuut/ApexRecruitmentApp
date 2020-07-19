@@ -3141,6 +3141,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -3165,6 +3170,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       followers: null,
       followCount: 0,
       followerCount: 0,
+      isFollowed: false,
       dataReady: false
     };
   },
@@ -3192,6 +3198,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 5:
                 result = _context.sent;
                 _this.user = result[0].data;
+                _this.isFollowed = result[0].data.is_followed;
                 _this.followings = result[1].data;
                 _this.followCount = _this.followings.length;
                 _this.followers = result[2].data;
@@ -3201,7 +3208,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 console.log(response3);
                 _this.dataReady = true;
 
-              case 15:
+              case 16:
               case "end":
                 return _context.stop();
             }
@@ -6600,10 +6607,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-card",
-            {
-              staticClass: "mx-auto mt-4",
-              attrs: { width: "720px", outlined: "" }
-            },
+            { staticClass: "mx-auto mt-4", attrs: { width: "730px" } },
             [
               _c(
                 "v-list-item",
@@ -6612,29 +6616,6 @@ var render = function() {
                   _c(
                     "v-list-item-content",
                     [
-                      _c(
-                        "div",
-                        { staticClass: "d-flex justify-space-between" },
-                        [
-                          _c("v-list-item-title", { staticClass: "headline" }, [
-                            _vm._v(_vm._s(_vm.user.name))
-                          ]),
-                          _vm._v(" "),
-                          _vm.currentUser.id === _vm.user.id
-                            ? _c(
-                                "div",
-                                [
-                                  _c("ProfileForm", {
-                                    on: { reloadUser: _vm.userShow }
-                                  })
-                                ],
-                                1
-                              )
-                            : _vm._e()
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
                       _c("div", { staticClass: "d-flex flex-row-reverse" }, [
                         _vm.currentUser.id !== _vm.user.id
                           ? _c(
@@ -6652,6 +6633,51 @@ var render = function() {
                             )
                           : _vm._e()
                       ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "d-flex justify-space-between" },
+                        [
+                          _c("div", { staticClass: "d-flex justify-start" }, [
+                            _c("div", { staticClass: "text-h5" }, [
+                              _vm._v(_vm._s(_vm.user.name))
+                            ]),
+                            _vm._v(" "),
+                            _vm.isFollowed
+                              ? _c(
+                                  "div",
+                                  [
+                                    _c(
+                                      "v-chip",
+                                      {
+                                        staticClass: "mt-1 ml-2",
+                                        attrs: {
+                                          color: "cyan",
+                                          "text-color": "white",
+                                          small: ""
+                                        }
+                                      },
+                                      [_vm._v("フォローされています")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _vm._e()
+                          ]),
+                          _vm._v(" "),
+                          _vm.currentUser.id === _vm.user.id
+                            ? _c(
+                                "div",
+                                [
+                                  _c("ProfileForm", {
+                                    on: { reloadUser: _vm.userShow }
+                                  })
+                                ],
+                                1
+                              )
+                            : _vm._e()
+                        ]
+                      ),
                       _vm._v(" "),
                       _vm.user.profile
                         ? _c("div", [
