@@ -2464,8 +2464,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 response = _context.sent;
 
-                //console.log(response)
-                _this.$emit('addCount');
+                _this.$emit('addFollower', response.data);
 
                 _this.isFollowing = true;
                 _this.sending = false;
@@ -3166,8 +3165,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       user: null,
-      followings: null,
-      followers: null,
+      followings: [],
+      followers: [],
       followCount: 0,
       followerCount: 0,
       isFollowed: false,
@@ -3216,8 +3215,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    addFollowerCount: function addFollowerCount() {
+    addFollowerM: function addFollowerM(user) {
       this.followerCount += 1;
+      this.followers.push(user);
     },
     removeFollowerCount: function removeFollowerCount() {
       this.followerCount -= 1;
@@ -6624,7 +6624,7 @@ var render = function() {
                                 _c("FollowForm", {
                                   attrs: { user: _vm.user },
                                   on: {
-                                    addCount: _vm.addFollowerCount,
+                                    addFollower: _vm.addFollowerM,
                                     removeCount: _vm.removeFollowerCount
                                   }
                                 })

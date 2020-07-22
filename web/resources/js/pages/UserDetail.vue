@@ -11,7 +11,7 @@
             <div v-if="currentUser.id !== user.id">
               <FollowForm 
                 :user="user"
-                @addCount="addFollowerCount"
+                @addFollower="addFollowerM"
                 @removeCount="removeFollowerCount"
               />
             </div>
@@ -86,8 +86,8 @@ export default {
   data () {
     return {
       user: null,
-      followings: null,
-      followers: null,
+      followings: [],
+      followers: [],
       followCount: 0,
       followerCount: 0,
       isFollowed: false,
@@ -122,8 +122,9 @@ export default {
 
       this.dataReady = true
     },
-    addFollowerCount () {
+    addFollowerM (user) {
       this.followerCount += 1
+      this.followers.push(user)
     },
     removeFollowerCount () {
       this.followerCount -= 1

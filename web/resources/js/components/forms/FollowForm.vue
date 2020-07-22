@@ -38,8 +38,9 @@ export default {
       this.sending = true
 
       const response = await axios.post(`/api/follow/${this.user.id}`)
-      //console.log(response)
-      this.$emit('addCount')
+
+      this.$emit('addFollower', response.data)
+
       this.isFollowing = true
       this.sending = false
     },

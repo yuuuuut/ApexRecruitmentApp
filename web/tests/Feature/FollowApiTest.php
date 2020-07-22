@@ -31,9 +31,13 @@ class FollowApiTest extends TestCase
             'id' => $this->user2->id,
         ]));
 
-        $response->assertStatus(200)->assertJsonFragment([
-            'result' => 'OK',
-        ]);
+        $response->assertStatus(201)
+            ->assertJsonFragment([
+                'id' => $this->user->id,
+                'is_following' => false,
+                'name' => $this->user->name,
+                'profile' => null
+            ]);
 
         $this->assertEquals(1, $this->user->followings()->count());
     }
@@ -67,6 +71,7 @@ class FollowApiTest extends TestCase
         $this->actingAs($this->user)->json('POST', route('follow', [
             'id' => $this->user2->id,
         ]));
+
         $user = User::first();
 
         $data = [
@@ -74,8 +79,7 @@ class FollowApiTest extends TestCase
             'content'  => 'test',
         ];
 
-        $response = $this->actingAs($this->user2)
-                        ->json('POST', route('profile.create'), $data);
+        $this->actingAs($this->user2)->json('POST', route('profile.create'), $data);
         $profile = Profile::first();
 
         $response = $this->json('GET', route('follow.index', [
@@ -85,6 +89,7 @@ class FollowApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'id' => $this->user2->id,
+                "is_followed" => false,
                 'is_following' => false,
                 'name' => $this->user2->name,
                 'profile' => [
@@ -106,12 +111,11 @@ class FollowApiTest extends TestCase
         $user2 = User::find($this->user2->id);
 
         $data = [
-            'user_id'  => $this->user2->id,
+            'user_id'  => $this->user->id,
             'content'  => 'test',
         ];
 
-        $response = $this->actingAs($this->user)
-                        ->json('POST', route('profile.create'), $data);
+        $this->actingAs($this->user)->json('POST', route('profile.create'), $data);
         $profile = Profile::first();
 
         $response = $this->json('GET', route('follower.index', [
@@ -121,6 +125,7 @@ class FollowApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'id' => $this->user->id,
+                "is_followed" => false,
                 'is_following' => false,
                 'name' => $this->user->name,
                 'profile' => [
