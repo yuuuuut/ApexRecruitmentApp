@@ -77,6 +77,7 @@ const actions = {
     context.commit('setApiStatus', null)
     const response = await axios.get('/api/user')
     const user = response.data || null
+    console.log(user)
 
     if (response.status === 200) {
       context.commit('setApiStatus', true)

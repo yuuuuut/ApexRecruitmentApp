@@ -12,7 +12,7 @@
               <FollowForm 
                 :user="user"
                 @addFollower="addFollowerM"
-                @removeCount="removeFollowerCount"
+                @removeFollower="removeFollowerM"
               />
             </div>
           </div>
@@ -110,10 +110,10 @@ export default {
       this.user = result[0].data
       this.isFollowed = result[0].data.is_followed
 
-      this.followings    = result[1].data
+      this.followings    = result[1].data.reverse()
       this.followCount   = this.followings.length
     
-      this.followers     = result[2].data
+      this.followers     = result[2].data.reverse()
       this.followerCount = this.followers.length
 
       console.log(response)
@@ -122,12 +122,15 @@ export default {
 
       this.dataReady = true
     },
-    addFollowerM (user) {
+    addFollowerM () {
       this.followerCount += 1
-      this.followers.push(user)
+      this.followers.unshift(this.currentUser)
     },
-    removeFollowerCount () {
+    removeFollowerM () {
       this.followerCount -= 1
+      this.followers = this.followers.filter( function (el, index, array) {
+        return el.id !== this.id
+      }, this.currentUser)
     }
   },
   watch: {

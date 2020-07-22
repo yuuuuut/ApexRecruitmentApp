@@ -2464,7 +2464,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 response = _context.sent;
 
-                _this.$emit('addFollower', response.data);
+                _this.$emit('addFollower');
 
                 _this.isFollowing = true;
                 _this.sending = false;
@@ -2493,8 +2493,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 response = _context2.sent;
 
-                //console.log(response)
-                _this2.$emit('removeCount');
+                _this2.$emit('removeFollower');
 
                 _this2.isFollowing = false;
                 _this2.sending = false;
@@ -3198,9 +3197,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 result = _context.sent;
                 _this.user = result[0].data;
                 _this.isFollowed = result[0].data.is_followed;
-                _this.followings = result[1].data;
+                _this.followings = result[1].data.reverse();
                 _this.followCount = _this.followings.length;
-                _this.followers = result[2].data;
+                _this.followers = result[2].data.reverse();
                 _this.followerCount = _this.followers.length;
                 console.log(response);
                 console.log(response2);
@@ -3215,12 +3214,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    addFollowerM: function addFollowerM(user) {
+    addFollowerM: function addFollowerM() {
       this.followerCount += 1;
-      this.followers.push(user);
+      this.followers.unshift(this.currentUser);
     },
-    removeFollowerCount: function removeFollowerCount() {
+    removeFollowerM: function removeFollowerM() {
       this.followerCount -= 1;
+      this.followers = this.followers.filter(function (el, index, array) {
+        return el.id !== this.id;
+      }, this.currentUser);
     }
   },
   watch: {
@@ -6625,7 +6627,7 @@ var render = function() {
                                   attrs: { user: _vm.user },
                                   on: {
                                     addFollower: _vm.addFollowerM,
-                                    removeCount: _vm.removeFollowerCount
+                                    removeFollower: _vm.removeFollowerM
                                   }
                                 })
                               ],
@@ -68232,9 +68234,10 @@ var actions = {
             case 3:
               response = _context4.sent;
               user = response.data || null;
+              console.log(user);
 
               if (!(response.status === 200)) {
-                _context4.next = 9;
+                _context4.next = 10;
                 break;
               }
 
@@ -68242,13 +68245,13 @@ var actions = {
               context.commit('setUser', user);
               return _context4.abrupt("return", false);
 
-            case 9:
+            case 10:
               context.commit('setApiStatus', false);
               context.commit('error/setCode', response.status, {
                 root: true
               });
 
-            case 11:
+            case 12:
             case "end":
               return _context4.stop();
           }

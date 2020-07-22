@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 
+use Auth;
+
 class UserController extends Controller
 {
     public function show(string $id)

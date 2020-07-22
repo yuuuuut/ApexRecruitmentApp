@@ -39,8 +39,7 @@ export default {
 
       const response = await axios.post(`/api/follow/${this.user.id}`)
 
-      this.$emit('addFollower', response.data)
-
+      this.$emit('addFollower')
       this.isFollowing = true
       this.sending = false
     },
@@ -48,8 +47,8 @@ export default {
       this.sending = true
 
       const response = await axios.delete(`/api/unfollow/${this.user.id}`)
-      //console.log(response)
-      this.$emit('removeCount')
+
+      this.$emit('removeFollower')
       this.isFollowing = false
       this.sending = false
     }
