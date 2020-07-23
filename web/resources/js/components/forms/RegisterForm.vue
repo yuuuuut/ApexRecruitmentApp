@@ -49,12 +49,7 @@
     ></v-text-field>
     <div class="mt-3 mb-5 d-flex justify-center">
       <v-btn  v-if="!sending" @click="register" width="300px" class="mb-5" color="primary" dark>新規登録</v-btn>
-      <v-progress-circular
-        v-else
-        indeterminate
-        color="green"
-        class="mb-3"
-      ></v-progress-circular>
+      <v-btn v-else class="mb-5" width="300px" disabled>新規登録</v-btn>
     </div>
   </form>
 </template>

@@ -2571,11 +2571,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2832,11 +2827,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
 //
 //
 //
@@ -6036,10 +6026,14 @@ var render = function() {
                 },
                 [_vm._v("ログイン")]
               )
-            : _c("v-progress-circular", {
-                staticClass: "mb-3",
-                attrs: { indeterminate: "", color: "green" }
-              })
+            : _c(
+                "v-btn",
+                {
+                  staticClass: "mb-5",
+                  attrs: { width: "300px", disabled: "" }
+                },
+                [_vm._v("ログイン")]
+              )
         ],
         1
       )
@@ -6429,10 +6423,14 @@ var render = function() {
                 },
                 [_vm._v("新規登録")]
               )
-            : _c("v-progress-circular", {
-                staticClass: "mb-3",
-                attrs: { indeterminate: "", color: "green" }
-              })
+            : _c(
+                "v-btn",
+                {
+                  staticClass: "mb-5",
+                  attrs: { width: "300px", disabled: "" }
+                },
+                [_vm._v("新規登録")]
+              )
         ],
         1
       )

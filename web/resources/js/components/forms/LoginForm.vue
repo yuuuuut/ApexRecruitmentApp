@@ -29,12 +29,7 @@
     ></v-text-field>
     <div class="mt-3 d-flex justify-center">
       <v-btn v-if="!sending" @click="login" class="mb-5" width="300px" color="primary" dark>ログイン</v-btn>
-      <v-progress-circular
-        v-else
-        indeterminate
-        color="green"
-        class="mb-3"
-      ></v-progress-circular>
+      <v-btn v-else class="mb-5" width="300px" disabled>ログイン</v-btn>
     </div>
   </form>
 </template>
