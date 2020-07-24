@@ -11,7 +11,8 @@ class Post extends Model
     ];
 
     protected $visible = [
-        'id', 'user_id','user', 'content', 'myid', 'platform'
+        'id', 'user_id','user', 'content', 'myid', 'platform',
+        'created_at'
     ];
 
     /**

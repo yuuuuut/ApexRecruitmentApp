@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>PostIndex</h1>
     <Post 
       v-for="post in posts"
       :key="post.id"
