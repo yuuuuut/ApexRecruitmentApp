@@ -5,7 +5,9 @@
       :key="post.id"
       :item="post"
     />
-    <PostForm />
+    <div class="position--fixed">
+      <PostForm />
+    </div>
   </div>
 </template>
 
@@ -46,3 +48,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.position--fixed {
+  position: fixed;
+  bottom: 30px;
+  right: 35px;
+}
+</style>

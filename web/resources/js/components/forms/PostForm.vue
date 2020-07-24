@@ -2,7 +2,9 @@
   <div>
     <v-dialog v-model="dialog" max-width="600px">
       <template v-slot:activator="{ on, attrs }">
-        <v-icon v-bind="attrs" v-on="on">mdi-cog</v-icon>
+        <v-btn v-bind="attrs" v-on="on" class="mx-2" fab dark large color="cyan">
+          <v-icon dark>mdi-plus</v-icon>
+        </v-btn>
       </template>
       <v-card>
         <form @submit.prevent>
@@ -10,9 +12,12 @@
             <span class="headline">投稿</span>
           </v-card-title>
         <!-- Error -->
-          <div v-if="errors.length != 0">
+          <div v-if="errors.length != 0" class="error--message">
             <div v-if="errors.content">
               <div v-for="e in errors.content" :key="e">{{ e }}</div>
+            </div>
+            <div v-if="errors.platform">
+              <div v-for="e in errors.platform" :key="e">{{ e }}</div>
             </div>
           </div>
           <!-- postForm.content -->
@@ -69,7 +74,7 @@ export default {
       sending:  false,
       ps4Flag:  false,
       pcFlag:   false,
-      errors: '',
+      errors: {},
       postForm: {
         content: '',
         myid: '',
@@ -97,6 +102,7 @@ export default {
       this.postForm.content = ''
       this.postForm.myid = ''
       this.postForm.platform = ''
+      this.errors = {}
     },
     changePlatForm () {
       if (this.postForm.platform === 'PS4') {
@@ -110,3 +116,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.error--message {
+  color: red;
+  text-align: center;
+}
+</style>

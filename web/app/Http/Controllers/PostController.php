@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreatePostRequest;
 
 use App\Models\Post;
 
@@ -17,7 +18,7 @@ class PostController extends Controller
         return $posts;
     }
 
-    public function create(Request $request)
+    public function create(CreatePostRequest $request)
     {
         $post = Post::updateOrCreate([
             'user_id' => Auth::user()->id
