@@ -18,36 +18,12 @@
               <div v-for="e in errors.content" :key="e">{{ e }}</div>
             </div>
           </div>
-        <!-- / -->
           <v-textarea
             class="mt-1 ml-10 mr-10"
             counter
             label="自己紹介"
             v-model="profileForm.content"
           ></v-textarea>
-          <v-select
-            @change="changePlatForm"
-            class="mt-4 ml-10 mr-10"
-            :items="['PS4', 'PC']"
-            v-model="profileForm.platform"
-            label="プラットフォーム"
-          ></v-select>
-        <!-- PlatFormIDField -->
-          <v-text-field
-            v-show="ps4Flag"
-            class="mt-1 ml-10 mr-10"
-            v-model="profileForm.psid"
-            label="PSID"
-            hide-details="auto"
-          ></v-text-field>
-          <v-text-field
-            v-show="pcFlag"
-            class="mt-1 ml-10 mr-10"
-            v-model="profileForm.originid"
-            label="OriginID"
-            hide-details="auto"
-          ></v-text-field>
-        <!-- / -->
           <div class="mt-5 mb-5 d-flex justify-center">
             <v-btn v-if="!sending" @click="submit" width="255px" class="mb-5" color="primary" dark>完了</v-btn>
             <v-progress-circular
@@ -72,14 +48,9 @@ export default {
     return {
       dialog:   false,
       sending:  false,
-      ps4Flag:  false,
-      pcFlag:   false,
       errors: '',
       profileForm: {
         content: '',
-        platform: '',
-        psid: '',
-        originid: '',
       }
     }
   },
@@ -101,19 +72,7 @@ export default {
       this.$emit('reloadUser')
     },
     resetValue () {
-      this.profileForm.psid = ''
-      this.profileForm.originid = ''
       this.profileForm.content = ''
-      this.profileForm.platform = ''
-    },
-    changePlatForm () {
-      if (this.profileForm.platform === 'PS4') {
-        this.ps4Flag  = true
-        this.pcFlag   = false
-      } else if (this.profileForm.platform === 'PC') {
-        this.pcFlag   = true
-        this.ps4Flag  = false
-      }
     }
   }
 }

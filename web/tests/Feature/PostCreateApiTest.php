@@ -27,7 +27,9 @@ class PostCreateApiTest extends TestCase
     {
         $data = [
             'user_id' => $this->user->id,
-            'content' => 'TestContent'
+            'content' => 'TestContent',
+            'myid' => 'testid',
+            'platform' => 'PS4',
         ];
 
         $response = $this->actingAs($this->user)
@@ -47,7 +49,9 @@ class PostCreateApiTest extends TestCase
     {
         $data = [
             'user_id' => $this->user->id,
-            'content' => 'TestContent'
+            'content' => 'TestContent',
+            'myid' => 'testid',
+            'platform' => 'PS4',
         ];
         $response = $this->actingAs($this->user)->json('POST', route('post.create'), $data);
 
@@ -57,7 +61,9 @@ class PostCreateApiTest extends TestCase
 
         $data = [
             'user_id' => $this->user->id,
-            'content' => 'TestContent2'
+            'content' => 'TestContent2',
+            'myid' => 'testid',
+            'platform' => 'PS4',
         ];
         $response = $this->actingAs($this->user)->json('POST', route('post.create'), $data);
 

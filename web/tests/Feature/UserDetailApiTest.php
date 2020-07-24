@@ -31,9 +31,7 @@ class UserDetailApiTest extends TestCase
                 ->assertJsonFragment([
                     'id'       => $user->id,
                     'is_following' => false,
-                    'psid'     => $user->profile->psid,
                     'content'  => $user->profile->content,
-                    'platform' => $user->profile->platform,
                 ]);
     }
 }

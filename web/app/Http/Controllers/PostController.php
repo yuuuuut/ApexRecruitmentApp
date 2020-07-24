@@ -16,6 +16,8 @@ class PostController extends Controller
             'user_id' => Auth::user()->id
         ], [
             'content' => $request->content,
+            'myid' => $request->myid,
+            'platform' => $request->platform,
         ]);
 
         return response($post, 201);

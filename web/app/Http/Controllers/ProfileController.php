@@ -18,10 +18,7 @@ class ProfileController extends Controller
         $profile = Profile::updateOrCreate([
             'user_id' => Auth::user()->id
         ], [
-            'originid' => $request->input('originid'),
-            'psid'     => $request->input('psid'),
             'content'  => $request->input('content'),
-            'platform' => $request->input('platform'),
         ]);
 
         return response($profile, 201);

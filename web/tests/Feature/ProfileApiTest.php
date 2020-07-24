@@ -27,16 +27,14 @@ class ProfileApiTest extends TestCase
     {
         $data = [
             'user_id'  => $this->user->id,
-            'psid'     => '1234A_B-C',
             'content'  => 'test',
-            'platform' => 'PS4',
         ];
 
         $response = $this->actingAs($this->user)
                         ->json('POST', route('profile.create'), $data);
 
         $profile = Profile::first();
-        $this->assertEquals($data['psid'], $profile->psid);
+        $this->assertEquals($data['user_id'], $profile->user_id);
 
         $response->assertStatus(201)
                 ->assertJson(['user_id' => $profile->user_id]);

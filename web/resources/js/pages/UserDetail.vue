@@ -33,17 +33,6 @@
 
           <div v-if="user.profile">
             <div class="blue-grey--text text--lighten-1" v-if="user.profile.content">{{ user.profile.content }}</div>
-            <div class="pt-3">
-              <v-list-item-subtitle v-if="user.profile.platform">
-                <v-icon>mdi-laptop-mac</v-icon>{{ user.profile.platform }}
-              </v-list-item-subtitle>
-              <v-list-item-subtitle v-if="user.profile.platform === 'PS4'">
-                <v-icon>mdi-video-input-antenna</v-icon>PSID: {{ user.profile.psid }}
-              </v-list-item-subtitle>
-              <v-list-item-subtitle v-else-if="user.profile.platform === 'PC'">
-                <v-icon>mdi-video-input-antenna</v-icon>OriginID: {{ user.profile.originid }}
-              </v-list-item-subtitle>
-            </div>
           </div>
           <FollowCount
             :followCount="followCount"

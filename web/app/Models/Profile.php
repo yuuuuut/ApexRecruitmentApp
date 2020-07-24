@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     protected $fillable = [
-        'user_id', 'psid', 'originid', 'content', 'platform',
+        'user_id', 'content',
+    ];
+
+    protected $hidden = [
+        'created_at', 'updated_at',
     ];
 
     /**
