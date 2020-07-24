@@ -2571,6 +2571,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2648,6 +2649,61 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2664,8 +2720,73 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      dialog: false
+      dialog: false,
+      sending: false,
+      ps4Flag: false,
+      pcFlag: false,
+      errors: '',
+      postForm: {
+        content: '',
+        myid: '',
+        platform: ''
+      }
     };
+  },
+  methods: {
+    submit: function submit() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.sending = true;
+                _context.next = 3;
+                return axios.post('/api/posts', _this.postForm);
+
+              case 3:
+                response = _context.sent;
+                console.log(response.data);
+
+                if (!(response.status === 422)) {
+                  _context.next = 9;
+                  break;
+                }
+
+                _this.errors = response.data.errors;
+                _this.sending = false;
+                return _context.abrupt("return", false);
+
+              case 9:
+                _this.resetValue();
+
+                _this.sending = false;
+                _this.dialog = false;
+
+              case 12:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    resetValue: function resetValue() {
+      this.postForm.content = '';
+      this.postForm.myid = '';
+      this.postForm.platform = '';
+    },
+    changePlatForm: function changePlatForm() {
+      if (this.postForm.platform === 'PS4') {
+        this.ps4Flag = true;
+        this.pcFlag = false;
+      } else if (this.postForm.platform === 'PC') {
+        this.pcFlag = true;
+        this.ps4Flag = false;
+      }
+    }
   }
 });
 
@@ -2688,12 +2809,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2818,6 +2933,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
 //
 //
 //
@@ -6082,7 +6200,160 @@ var render = function() {
             expression: "dialog"
           }
         },
-        [_vm._v(" "), _c("v-card", [_vm._v("\n      form\n    ")])],
+        [
+          _vm._v(" "),
+          _c(
+            "v-card",
+            [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                    }
+                  }
+                },
+                [
+                  _vm.errors.length != 0
+                    ? _c("div", [
+                        _vm.errors.content
+                          ? _c(
+                              "div",
+                              _vm._l(_vm.errors.content, function(e) {
+                                return _c("div", { key: e }, [
+                                  _vm._v(_vm._s(e))
+                                ])
+                              }),
+                              0
+                            )
+                          : _vm._e()
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("v-textarea", {
+                    staticClass: "mt-1 ml-10 mr-10",
+                    attrs: { counter: "", label: "本文" },
+                    model: {
+                      value: _vm.postForm.content,
+                      callback: function($$v) {
+                        _vm.$set(_vm.postForm, "content", $$v)
+                      },
+                      expression: "postForm.content"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-select", {
+                    staticClass: "mt-4 ml-10 mr-10",
+                    attrs: { items: ["PS4", "PC"], label: "プラットフォーム" },
+                    on: { change: _vm.changePlatForm },
+                    model: {
+                      value: _vm.postForm.platform,
+                      callback: function($$v) {
+                        _vm.$set(_vm.postForm, "platform", $$v)
+                      },
+                      expression: "postForm.platform"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.ps4Flag,
+                        expression: "ps4Flag"
+                      }
+                    ],
+                    staticClass: "mt-1 ml-10 mr-10",
+                    attrs: { label: "PSID", "hide-details": "auto" },
+                    model: {
+                      value: _vm.postForm.myid,
+                      callback: function($$v) {
+                        _vm.$set(_vm.postForm, "myid", $$v)
+                      },
+                      expression: "postForm.myid"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.pcFlag,
+                        expression: "pcFlag"
+                      }
+                    ],
+                    staticClass: "mt-1 ml-10 mr-10",
+                    attrs: { label: "UID", "hide-details": "auto" },
+                    model: {
+                      value: _vm.postForm.myid,
+                      callback: function($$v) {
+                        _vm.$set(_vm.postForm, "myid", $$v)
+                      },
+                      expression: "postForm.myid"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "mt-5 mb-5 d-flex justify-center" },
+                    [
+                      !_vm.sending
+                        ? _c(
+                            "v-btn",
+                            {
+                              staticClass: "mb-5",
+                              attrs: {
+                                width: "255px",
+                                color: "primary",
+                                dark: ""
+                              },
+                              on: { click: _vm.submit }
+                            },
+                            [_vm._v("完了")]
+                          )
+                        : _c(
+                            "v-btn",
+                            {
+                              staticClass: "mb-5",
+                              attrs: { width: "255px", disabled: "" }
+                            },
+                            [_vm._v("完了")]
+                          )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "blue darken-1", text: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.dialog = false
+                          _vm.resetValue()
+                        }
+                      }
+                    },
+                    [_vm._v("閉じる")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
         1
       )
     ],
@@ -6163,18 +6434,6 @@ var render = function() {
                 [
                   _vm.errors.length != 0
                     ? _c("div", [
-                        _vm.errors.psid
-                          ? _c(
-                              "div",
-                              _vm._l(_vm.errors.psid, function(e) {
-                                return _c("div", { key: e }, [
-                                  _vm._v(_vm._s(e))
-                                ])
-                              }),
-                              0
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
                         _vm.errors.content
                           ? _c(
                               "div",
@@ -6219,9 +6478,14 @@ var render = function() {
                             },
                             [_vm._v("完了")]
                           )
-                        : _c("v-progress-circular", {
-                            attrs: { indeterminate: "", color: "green" }
-                          })
+                        : _c(
+                            "v-btn",
+                            {
+                              staticClass: "mb-5",
+                              attrs: { width: "255px", disabled: "" }
+                            },
+                            [_vm._v("完了")]
+                          )
                     ],
                     1
                   )

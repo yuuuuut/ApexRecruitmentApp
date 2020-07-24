@@ -9,7 +9,7 @@
         <li v-for="msg in loginErrors.password" :key="msg">{{ msg }}</li>
       </ul>
     </div>
-    <!-- / -->
+    <!-- loginForm.email -->
     <v-text-field
       class="mt-5 ml-10 mr-10"
       v-model="loginForm.email"
@@ -17,6 +17,7 @@
       label="メールアドレス"
       hide-details="auto"
     ></v-text-field>
+    <!-- loginForm.password -->
     <v-text-field
       class="mt-5 ml-10 mr-10"
       v-model="loginForm.password"

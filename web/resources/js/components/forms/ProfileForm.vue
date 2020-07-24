@@ -11,13 +11,11 @@
         <form @submit.prevent>
         <!-- Error -->
           <div v-if="errors.length != 0">
-            <div v-if="errors.psid">
-              <div v-for="e in errors.psid" :key="e">{{ e }}</div>
-            </div>
             <div v-if="errors.content">
               <div v-for="e in errors.content" :key="e">{{ e }}</div>
             </div>
           </div>
+          <!-- profileForm.content -->
           <v-textarea
             class="mt-1 ml-10 mr-10"
             counter
@@ -26,11 +24,7 @@
           ></v-textarea>
           <div class="mt-5 mb-5 d-flex justify-center">
             <v-btn v-if="!sending" @click="submit" width="255px" class="mb-5" color="primary" dark>完了</v-btn>
-            <v-progress-circular
-              v-else
-              indeterminate
-              color="green"
-            ></v-progress-circular>
+            <v-btn v-else class="mb-5" width="255px" disabled>完了</v-btn>
           </div>
         </form>
         <v-card-actions>

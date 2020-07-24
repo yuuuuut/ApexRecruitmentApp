@@ -12,7 +12,7 @@
         <li v-for="msg in registerErrors.password" :key="msg">{{ msg }}</li>
       </ul>
     </div>
-    <!-- / -->
+    <!-- registerForm.name -->
     <v-text-field
       class="mt-5 ml-10 mr-10"
       v-model="registerForm.name"
@@ -20,6 +20,7 @@
       :rules="nameRules"
       hide-details="auto"
     ></v-text-field>
+    <!-- registerForm.email -->
     <v-text-field
       class="mt-5 ml-10 mr-10"
       v-model="registerForm.email"
@@ -27,6 +28,7 @@
       :rules="emailRules"
       hide-details="auto"
     ></v-text-field>
+    <!-- registerForm.password -->
     <v-text-field
       class="mt-5 ml-10 mr-10"
       v-model="registerForm.password"
@@ -37,6 +39,7 @@
       counter
       @click:append="show1 = !show1"
     ></v-text-field>
+    <!-- registerForm.password_confirmation -->
     <v-text-field
       class="mt-2 ml-10 mr-10"
       v-model="registerForm.password_confirmation"
