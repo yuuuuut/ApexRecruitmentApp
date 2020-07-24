@@ -12,7 +12,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with(['user'])->orderBy(Post::CREATED_AT, 'desc')->paginate();
+        $posts = Post::with(['user'])->orderBy(Post::UPDATED_AT, 'desc')->paginate();
 
         return $posts;
     }

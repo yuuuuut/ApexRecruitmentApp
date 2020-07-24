@@ -18,17 +18,28 @@
         <h3 class="blue-grey--text text--lighten-2 mt-2">
           {{ item.content }}
         </h3>
+        <div class="d-flex flex-row-reverse mt-2">
+          {{ item.updated_at | moment }}
+        </div>
       </v-card-text>
     </v-card>
   </div>
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
   props: {
     item: {
       type: Object,
       required: true
+    }
+  },
+  filters: {
+    moment: function (date) {
+      moment.locale( 'ja' )
+      return moment(date).fromNow()
     }
   }
 }
