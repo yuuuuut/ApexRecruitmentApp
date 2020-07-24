@@ -17,6 +17,11 @@ Route::get('/user', fn() => Auth::user())->name('user');
 Route::get('/users/{id}', 'UserController@show')->name('user.show');
 
 /*-----
+|------Post
+-----*/
+Route::post('/posts', 'PostController@create')->name('post.create');
+
+/*-----
 |------Profile
 -----*/
 Route::post('/profiles', 'ProfileController@create')->name('profile.create');

@@ -10,6 +10,10 @@ class Profile extends Model
         'user_id', 'psid', 'originid', 'content', 'platform',
     ];
 
+    /**
+     * userテーブル
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
     public function user()
     {
         return $this->belongsTo('App\Models\User');

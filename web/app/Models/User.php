@@ -34,6 +34,15 @@ class User extends Authenticatable
     ];
 
     /**
+     * postテーブル
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function post()
+    {
+        return $this->hasOne('App\Models\Post');
+    }
+
+    /**
      * profileテーブル
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
