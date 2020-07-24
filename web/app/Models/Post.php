@@ -10,6 +10,10 @@ class Post extends Model
         'user_id', 'content', 'myid', 'platform'
     ];
 
+    protected $visible = [
+        'id', 'user_id','user', 'content', 'myid', 'platform'
+    ];
+
     /**
      * userテーブル
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo

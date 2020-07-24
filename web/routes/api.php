@@ -19,6 +19,7 @@ Route::get('/users/{id}', 'UserController@show')->name('user.show');
 /*-----
 |------Post
 -----*/
+Route::get('/posts', 'PostController@index')->name('post.index');
 Route::post('/posts', 'PostController@create')->name('post.create');
 
 /*-----
