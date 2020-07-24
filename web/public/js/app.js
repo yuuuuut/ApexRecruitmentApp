@@ -2717,6 +2717,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6215,6 +6218,10 @@ var render = function() {
                   }
                 },
                 [
+                  _c("v-card-title", [
+                    _c("span", { staticClass: "headline" }, [_vm._v("投稿")])
+                  ]),
+                  _vm._v(" "),
                   _vm.errors.length != 0
                     ? _c("div", [
                         _vm.errors.content
@@ -6232,7 +6239,7 @@ var render = function() {
                     : _vm._e(),
                   _vm._v(" "),
                   _c("v-textarea", {
-                    staticClass: "mt-1 ml-10 mr-10",
+                    staticClass: "mt-2 ml-10 mr-10",
                     attrs: { counter: "", label: "本文" },
                     model: {
                       value: _vm.postForm.content,
@@ -6936,7 +6943,7 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _vm.user.profile
-                        ? _c("div", [
+                        ? _c("div", { staticClass: "mt-2 mb-3" }, [
                             _vm.user.profile.content
                               ? _c(
                                   "div",

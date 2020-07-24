@@ -6,6 +6,9 @@
       </template>
       <v-card>
         <form @submit.prevent>
+          <v-card-title>
+            <span class="headline">投稿</span>
+          </v-card-title>
         <!-- Error -->
           <div v-if="errors.length != 0">
             <div v-if="errors.content">
@@ -14,7 +17,7 @@
           </div>
           <!-- postForm.content -->
           <v-textarea
-            class="mt-1 ml-10 mr-10"
+            class="mt-2 ml-10 mr-10"
             counter
             label="本文"
             v-model="postForm.content"
