@@ -104,6 +104,10 @@ class User extends Authenticatable
      */
     public function getIsFollowingAttribute()
     {
+        if (Auth::guest()) {
+            return false;
+        }
+
         return $this->followers->contains(function ($user) {
             return $user->id === Auth::user()->id;
         });
@@ -115,6 +119,10 @@ class User extends Authenticatable
      */
     public function getIsFollowedAttribute()
     {
+        if (Auth::guest()) {
+            return false;
+        }
+
         return $this->followings->contains(function ($user) {
             return $user->id === Auth::user()->id;
         });

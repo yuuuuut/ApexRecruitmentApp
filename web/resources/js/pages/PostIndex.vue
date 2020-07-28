@@ -5,13 +5,17 @@
       :key="post.id"
       :item="post"
     />
-    <div class="position--fixed">
-      <PostForm />
+    <div v-if="isLogin">
+      <div class="position--fixed">
+        <PostForm />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import PostForm from '../components/forms/PostForm.vue'
 import Post from '../components/Post.vue'
 
@@ -24,6 +28,11 @@ export default {
     return {
       posts: [],
     }
+  },
+  computed: {
+    ...mapGetters({
+      isLogin: 'auth/check'
+    })
   },
   methods: {
     async getPosts () {
