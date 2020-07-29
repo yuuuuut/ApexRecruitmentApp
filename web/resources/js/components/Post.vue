@@ -16,7 +16,9 @@
           </router-link>
         </h2>
         <h3 class="blue-grey--text text--lighten-2 mt-2">
-          {{ item.content }}
+          <RouterLink :to="`/posts/${item.id}`" style="text-decoration: none;">
+            {{ item.content }}
+          </RouterLink>
         </h3>
         <div class="d-flex flex-row-reverse mt-2">
           {{ item.updated_at | moment }}

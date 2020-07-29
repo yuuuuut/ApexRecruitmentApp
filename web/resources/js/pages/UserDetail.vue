@@ -121,14 +121,6 @@ export default {
         return el.id !== this.id
       }, this.currentUser)
     }
-  },
-  watch: {
-    $route: {
-      async handler () {
-        await this.userShow()
-      },
-      immediate: true
-    }
   }
 }
 </script>
