@@ -80,7 +80,7 @@ export default {
 <style scoped>
 .position--fixed {
   position: fixed;
-  bottom: 30px;
-  right: 35px;
+  bottom: 20px;
+  right: 10px;
 }
 </style>

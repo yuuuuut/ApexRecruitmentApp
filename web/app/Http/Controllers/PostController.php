@@ -18,6 +18,13 @@ class PostController extends Controller
         return $posts;
     }
 
+    public function show(string $id)
+    {
+        $post = Post::where('id', $id)->with(['user'])->first();
+
+        return $post ?? abort(404);
+    }
+
     public function create(CreatePostRequest $request)
     {
         $post = Post::updateOrCreate([

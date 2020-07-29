@@ -3653,7 +3653,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.position--fixed[data-v-732203d9] {\n  position: fixed;\n  bottom: 30px;\n  right: 35px;\n}\n", ""]);
+exports.push([module.i, "\n.position--fixed[data-v-732203d9] {\n  position: fixed;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
