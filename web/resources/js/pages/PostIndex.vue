@@ -2,9 +2,19 @@
   <div>
     <Post 
       v-for="post in posts"
-      :key="post.id"
       :item="post"
     />
+    <infinite-loading 
+      spinner="waveDots"
+      @infinite="infiniteHandler">
+      <v-btn
+        class="ma-2" 
+        outlined color="indigo"
+        slot="no-more"
+        @click="scrollTop">
+        Topへ戻る
+      </v-btn>
+    </infinite-loading>
     <div v-if="isLogin">
       <div class="position--fixed">
         <PostForm />
@@ -27,6 +37,7 @@ export default {
   data () {
     return {
       posts: [],
+      page: 1,
     }
   },
   computed: {
@@ -35,26 +46,34 @@ export default {
     })
   },
   methods: {
-    async getPosts () {
-      const response = await axios.get('/api/posts')
-      console.log(response)
-
-      if (response.status !== 200) {
-        this.$store.commit('error/setCode', response.status)
-        return false
-      }
-
-      this.posts = response.data.data
+    async infiniteHandler ($state) {
+      await axios.get('/api/posts', {
+        params: {
+          page: this.page,
+          per_page: 1
+        },
+      }).then(({ data }) => {
+        console.log(data)
+        setTimeout(() => {
+          if (data.data.length) {
+            this.page += 1
+            this.posts.push(...data.data)
+            $state.loaded()
+          } else {
+            $state.complete()
+          }
+        }, 700)
+      }).catch ((err) => {
+        $state.complete()
+      })
+    },
+    scrollTop () {
+      window.scrollTo({
+        top: 0,
+        behavior: "instant"
+      })
     }
   },
-  watch: {
-    $route: {
-      async handler () {
-        await this.getPosts()
-      },
-      immediate: true
-    }
-  }
 }
 </script>
 

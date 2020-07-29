@@ -9,9 +9,11 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
 
+import InfiniteLoading from 'vue-infinite-loading';
 import App from './App.vue'
 
 Vue.use(Vuetify);
+Vue.use(InfiniteLoading);
 
 const createApp = async () => {
   await store.dispatch('auth/currentUser')
