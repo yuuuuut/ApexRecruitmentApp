@@ -105,8 +105,6 @@ export default {
       this.followers     = result[2].data.reverse()
       this.followerCount = this.followers.length
 
-      console.log(result)
-
       this.dataReady = true
     },
     addFollowerM () {

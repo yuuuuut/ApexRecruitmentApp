@@ -6,7 +6,7 @@
     >
       <v-card-text>
         <div class="d-flex flex-row">
-          <div>
+          <div v-if="item.platform">
             {{ item.platform }}
           </div>
           <div v-if="item.myid" class="ml-4">
@@ -26,7 +26,7 @@
         </h2>
         <h3 class="blue-grey--text text--lighten-2 mt-2">
           <routerLink
-            :to="`/posts/${item.id}`" 
+            :to="{ name: 'postDetail', params: { id: item.id.toString() }}" 
             class="mypage--link blue-grey--text text--lighten-1"
           >
             {{ item.content }}

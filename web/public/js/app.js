@@ -3244,6 +3244,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_Post_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Post.vue */ "./resources/js/components/Post.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3257,7 +3258,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Post: _components_Post_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   props: {
     id: {
       type: String,
@@ -3266,7 +3281,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      post: null
+      post: null,
+      dataReady: false
     };
   },
   methods: {
@@ -3280,7 +3296,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get("api/posts/".concat(_this.id));
+                return axios.get("/api/posts/".concat(_this.id));
 
               case 2:
                 response = _context.sent;
@@ -3297,14 +3313,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 7:
                 _this.post = response.data;
+                _this.dataReady = true;
 
-              case 8:
+              case 9:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    }
+  },
+  watch: {
+    $route: {
+      handler: function handler() {
+        var _this2 = this;
+
+        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  _context2.next = 2;
+                  return _this2.getPost();
+
+                case 2:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2);
+        }))();
+      },
+      immediate: true
     }
   }
 });
@@ -3579,10 +3620,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.followCount = _this.followings.length;
                 _this.followers = result[2].data.reverse();
                 _this.followerCount = _this.followers.length;
-                console.log(result);
                 _this.dataReady = true;
 
-              case 14:
+              case 13:
               case "end":
                 return _context.stop();
             }
@@ -27495,11 +27535,13 @@ var render = function() {
         [
           _c("v-card-text", [
             _c("div", { staticClass: "d-flex flex-row" }, [
-              _c("div", [
-                _vm._v(
-                  "\n          " + _vm._s(_vm.item.platform) + "\n        "
-                )
-              ]),
+              _vm.item.platform
+                ? _c("div", [
+                    _vm._v(
+                      "\n          " + _vm._s(_vm.item.platform) + "\n        "
+                    )
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _vm.item.myid
                 ? _c("div", { staticClass: "ml-4" }, [
@@ -27545,7 +27587,12 @@ var render = function() {
                   "routerLink",
                   {
                     staticClass: "mypage--link blue-grey--text text--lighten-1",
-                    attrs: { to: "/posts/" + _vm.item.id }
+                    attrs: {
+                      to: {
+                        name: "postDetail",
+                        params: { id: _vm.item.id.toString() }
+                      }
+                    }
                   },
                   [
                     _vm._v(
@@ -28603,8 +28650,18 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("p", [_vm._v("aaa")]),
-    _vm._v("\n  " + _vm._s(this.id) + "\n")
+    _vm.dataReady
+      ? _c("div", [_c("Post", { attrs: { item: _vm.post } })], 1)
+      : _c(
+          "div",
+          [
+            _c("v-skeleton-loader", {
+              staticClass: "mx-auto mt-8",
+              attrs: { width: "650px", type: "card" }
+            })
+          ],
+          1
+        )
   ])
 }
 var staticRenderFns = []
