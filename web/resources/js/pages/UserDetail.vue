@@ -105,9 +105,7 @@ export default {
       this.followers     = result[2].data.reverse()
       this.followerCount = this.followers.length
 
-      console.log(response)
-      console.log(response2)
-      console.log(response3)
+      console.log(result)
 
       this.dataReady = true
     },
@@ -120,6 +118,14 @@ export default {
       this.followers = this.followers.filter( function (el, index, array) {
         return el.id !== this.id
       }, this.currentUser)
+    }
+  },
+  watch: {
+    $route: {
+      async handler () {
+        await this.userShow()
+      },
+      immediate: true
     }
   }
 }

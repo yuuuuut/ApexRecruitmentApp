@@ -1,9 +1,12 @@
 <template>
   <v-toolbar color="primary">
     <v-toolbar-title>
-      <RouterLink to="/" style="text-decoration: none; color: white;">
+      <routerLink
+        to="/"
+        style="text-decoration: none; color: white;"
+      >
         エペぼ!!
-      </RouterLink>
+      </routerLink>
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <div v-if="isLogin">
@@ -25,7 +28,12 @@
           >
             <div v-if="item.title === 'マイページ'">
               <button>
-                <router-link :to="{ name: 'userDetail', params: { id: user.id.toString() }}" class="mypage--link">マイページ<v-icon>mdi-account</v-icon></router-link>
+                <router-link
+                  :to="{ name: 'userDetail', params: { id: user.id.toString() }}"
+                  class="mypage--link"
+                >
+                  マイページ<v-icon>mdi-account</v-icon>
+                </router-link>
               </button>
             </div>
             <div v-if="item.title === 'ログアウト'">
@@ -48,7 +56,8 @@
                     <v-btn
                       color="green darken-1"
                       text
-                      @click="logout">
+                      @click="logout"
+                    >
                       はい
                     </v-btn>
                   </v-card-actions>
@@ -60,9 +69,12 @@
       </v-menu>
     </div>
     <div v-else>
-      <RouterLink to="/login" style="text-decoration: none;">
+      <routerLink
+        to="/login"
+        style="text-decoration: none;"
+      >
         <v-btn color="success" dark>ログイン / 新規登録</v-btn>
-      </RouterLink>
+      </routerLink>
     </div>
   </v-toolbar>
 </template>

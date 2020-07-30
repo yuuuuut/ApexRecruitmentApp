@@ -2293,6 +2293,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2358,6 +2370,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3555,12 +3579,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.followCount = _this.followings.length;
                 _this.followers = result[2].data.reverse();
                 _this.followerCount = _this.followers.length;
-                console.log(response);
-                console.log(response2);
-                console.log(response3);
+                console.log(result);
                 _this.dataReady = true;
 
-              case 16:
+              case 14:
               case "end":
                 return _context.stop();
             }
@@ -3577,6 +3599,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.followers = this.followers.filter(function (el, index, array) {
         return el.id !== this.id;
       }, this.currentUser);
+    }
+  },
+  watch: {
+    $route: {
+      handler: function handler() {
+        var _this2 = this;
+
+        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  _context2.next = 2;
+                  return _this2.userShow();
+
+                case 2:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2);
+        }))();
+      },
+      immediate: true
     }
   }
 });
@@ -3672,7 +3718,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.mypage--link[data-v-5e8280ea] {\n  color: black;\n  text-decoration: none;\n}\n", ""]);
+exports.push([module.i, "\n.mypage--link[data-v-5e8280ea] {\n  text-decoration: none;\n}\n", ""]);
 
 // exports
 
@@ -27192,7 +27238,7 @@ var render = function() {
         "v-toolbar-title",
         [
           _c(
-            "RouterLink",
+            "routerLink",
             {
               staticStyle: { "text-decoration": "none", color: "white" },
               attrs: { to: "/" }
@@ -27275,7 +27321,7 @@ var render = function() {
                                         }
                                       },
                                       [
-                                        _vm._v("マイページ"),
+                                        _vm._v("\n                マイページ"),
                                         _c("v-icon", [_vm._v("mdi-account")])
                                       ],
                                       1
@@ -27399,7 +27445,7 @@ var render = function() {
             "div",
             [
               _c(
-                "RouterLink",
+                "routerLink",
                 {
                   staticStyle: { "text-decoration": "none" },
                   attrs: { to: "/login" }
@@ -27449,13 +27495,21 @@ var render = function() {
         [
           _c("v-card-text", [
             _c("div", { staticClass: "d-flex flex-row" }, [
-              _c("div", [_vm._v(_vm._s(_vm.item.platform))]),
+              _c("div", [
+                _vm._v(
+                  "\n          " + _vm._s(_vm.item.platform) + "\n        "
+                )
+              ]),
               _vm._v(" "),
               _vm.item.myid
                 ? _c("div", { staticClass: "ml-4" }, [
-                    _vm._v("ID: " + _vm._s(_vm.item.myid))
+                    _vm._v(
+                      "\n          ID: " + _vm._s(_vm.item.myid) + "\n        "
+                    )
                   ])
-                : _c("div", { staticClass: "ml-4" }, [_vm._v("ID: 未設定")])
+                : _c("div", { staticClass: "ml-4" }, [
+                    _vm._v("\n          ID: 未設定\n        ")
+                  ])
             ]),
             _vm._v(" "),
             _c(
@@ -27465,7 +27519,7 @@ var render = function() {
                 _c(
                   "router-link",
                   {
-                    staticClass: "mypage--link",
+                    staticClass: "mypage--link grey--text text--darken-3",
                     attrs: {
                       to: {
                         name: "userDetail",
@@ -27488,9 +27542,9 @@ var render = function() {
               { staticClass: "blue-grey--text text--lighten-2 mt-2" },
               [
                 _c(
-                  "RouterLink",
+                  "routerLink",
                   {
-                    staticStyle: { "text-decoration": "none" },
+                    staticClass: "mypage--link blue-grey--text text--lighten-1",
                     attrs: { to: "/posts/" + _vm.item.id }
                   },
                   [
