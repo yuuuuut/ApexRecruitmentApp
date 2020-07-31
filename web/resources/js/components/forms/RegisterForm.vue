@@ -51,8 +51,19 @@
       @click:append="show2 = !show2"
     ></v-text-field>
     <div class="mt-3 mb-5 d-flex justify-center">
-      <v-btn  v-if="!sending" @click="register" width="300px" class="mb-5" color="primary" dark>新規登録</v-btn>
-      <v-btn v-else class="mb-5" width="300px" disabled>新規登録</v-btn>
+      <v-btn
+        v-if="!sending"
+        @click="register"
+        width="300px" class="mb-5" color="primary" dark
+      >
+        新規登録
+      </v-btn>
+      <v-btn
+        v-else
+        class="mb-5" width="300px" disabled
+      >
+        新規登録
+      </v-btn>
     </div>
   </form>
 </template>
@@ -98,11 +109,13 @@ export default {
   methods: {
     async register () {
       this.sending = true
+
       await this.$store.dispatch('auth/register', this.registerForm)
 
       if (this.apiStatus) {
         this.$router.push('/')
       }
+
       this.sending = false
     },
     clearError () {

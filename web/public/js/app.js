@@ -2518,6 +2518,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     user: {
@@ -2619,6 +2642,17 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2809,6 +2843,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2840,10 +2894,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 response = _context.sent;
-                console.log(response.data);
 
                 if (!(response.status === 422)) {
-                  _context.next = 9;
+                  _context.next = 8;
                   break;
                 }
 
@@ -2851,13 +2904,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.sending = false;
                 return _context.abrupt("return", false);
 
-              case 9:
+              case 8:
                 _this.resetValue();
 
                 _this.sending = false;
                 _this.dialog = false;
 
-              case 12:
+                if (!(response.status !== 201)) {
+                  _context.next = 14;
+                  break;
+                }
+
+                _this.$store.commit('error/setCode', response.status);
+
+                return _context.abrupt("return", false);
+
+              case 14:
               case "end":
                 return _context.stop();
             }
@@ -2940,6 +3002,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2967,10 +3049,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 response = _context.sent;
-                console.log(response.data);
 
                 if (!(response.status === 422)) {
-                  _context.next = 9;
+                  _context.next = 8;
                   break;
                 }
 
@@ -2978,15 +3059,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.sending = false;
                 return _context.abrupt("return", false);
 
-              case 9:
+              case 8:
                 _this.resetValue();
 
                 _this.sending = false;
                 _this.dialog = false;
 
+                if (!(response.status !== 201)) {
+                  _context.next = 14;
+                  break;
+                }
+
+                _this.$store.commit('error/setCode', response.status);
+
+                return _context.abrupt("return", false);
+
+              case 14:
                 _this.$emit('reloadUser');
 
-              case 13:
+              case 15:
               case "end":
                 return _context.stop();
             }
@@ -3026,6 +3117,17 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -27752,7 +27854,7 @@ var render = function() {
                           disabled: ""
                         }
                       },
-                      [_vm._v("フォロー中")]
+                      [_vm._v("\n        フォロー中\n      ")]
                     )
                   ],
                   1
@@ -27795,7 +27897,7 @@ var render = function() {
                         _c("v-icon", { attrs: { left: "" } }, [
                           _vm._v("mdi-plus")
                         ]),
-                        _vm._v("フォロー")
+                        _vm._v("フォロー\n      ")
                       ],
                       1
                     )
@@ -27927,7 +28029,7 @@ var render = function() {
                   attrs: { width: "300px", color: "primary", dark: "" },
                   on: { click: _vm.login }
                 },
-                [_vm._v("ログイン")]
+                [_vm._v("\n      ログイン\n    ")]
               )
             : _c(
                 "v-btn",
@@ -27935,7 +28037,7 @@ var render = function() {
                   staticClass: "mb-5",
                   attrs: { width: "300px", disabled: "" }
                 },
-                [_vm._v("ログイン")]
+                [_vm._v("\n      ログイン\n    ")]
               )
         ],
         1
@@ -28029,7 +28131,9 @@ var render = function() {
                 },
                 [
                   _c("v-card-title", [
-                    _c("span", { staticClass: "headline" }, [_vm._v("投稿")])
+                    _c("span", { staticClass: "headline" }, [
+                      _vm._v("\n            投稿\n          ")
+                    ])
                   ]),
                   _vm._v(" "),
                   _vm.errors.length != 0
@@ -28141,7 +28245,7 @@ var render = function() {
                               },
                               on: { click: _vm.submit }
                             },
-                            [_vm._v("完了")]
+                            [_vm._v("\n            完了\n          ")]
                           )
                         : _c(
                             "v-btn",
@@ -28149,7 +28253,7 @@ var render = function() {
                               staticClass: "mb-5",
                               attrs: { width: "255px", disabled: "" }
                             },
-                            [_vm._v("完了")]
+                            [_vm._v("\n            完了\n          ")]
                           )
                     ],
                     1
@@ -28174,7 +28278,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("閉じる")]
+                    [_vm._v("\n          閉じる\n        ")]
                   )
                 ],
                 1
@@ -28247,7 +28351,7 @@ var render = function() {
             [
               _c("v-card-title", [
                 _c("span", { staticClass: "headline" }, [
-                  _vm._v("マイプロフィール")
+                  _vm._v("\n          マイプロフィール\n        ")
                 ])
               ]),
               _vm._v(" "),
@@ -28305,7 +28409,7 @@ var render = function() {
                               },
                               on: { click: _vm.submit }
                             },
-                            [_vm._v("完了")]
+                            [_vm._v("\n            完了\n          ")]
                           )
                         : _c(
                             "v-btn",
@@ -28313,7 +28417,7 @@ var render = function() {
                               staticClass: "mb-5",
                               attrs: { width: "255px", disabled: "" }
                             },
-                            [_vm._v("完了")]
+                            [_vm._v("\n            完了\n          ")]
                           )
                     ],
                     1
@@ -28338,7 +28442,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("閉じる")]
+                    [_vm._v("\n          閉じる\n        ")]
                   )
                 ],
                 1
@@ -28509,7 +28613,7 @@ var render = function() {
                   attrs: { width: "300px", color: "primary", dark: "" },
                   on: { click: _vm.register }
                 },
-                [_vm._v("新規登録")]
+                [_vm._v("\n      新規登録\n    ")]
               )
             : _c(
                 "v-btn",
@@ -28517,7 +28621,7 @@ var render = function() {
                   staticClass: "mb-5",
                   attrs: { width: "300px", disabled: "" }
                 },
-                [_vm._v("新規登録")]
+                [_vm._v("\n      新規登録\n    ")]
               )
         ],
         1

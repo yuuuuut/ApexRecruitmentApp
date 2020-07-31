@@ -9,7 +9,9 @@
       <v-card>
         <form @submit.prevent>
           <v-card-title>
-            <span class="headline">投稿</span>
+            <span class="headline">
+              投稿
+            </span>
           </v-card-title>
         <!-- Error -->
           <div v-if="errors.length != 0" class="error--message">
@@ -53,13 +55,31 @@
           ></v-text-field>
 
           <div class="mt-5 mb-5 d-flex justify-center">
-            <v-btn v-if="!sending" @click="submit" width="255px" class="mb-5" color="primary" dark>完了</v-btn>
-            <v-btn v-else class="mb-5" width="255px" disabled>完了</v-btn>
+            <v-btn
+              v-if="!sending"
+              @click="submit"
+              width="255px" class="mb-5" color="primary" dark
+            >
+              完了
+            </v-btn>
+            <v-btn
+              v-else
+              class="mb-5" width="255px" disabled
+            >
+              完了
+            </v-btn>
           </div>
         </form>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false; resetValue()">閉じる</v-btn>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="dialog = false;
+            resetValue()"
+          >
+            閉じる
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -85,8 +105,8 @@ export default {
   methods: {
     async submit () {
       this.sending = true
+
       const response = await axios.post('/api/posts', this.postForm)
-      console.log(response.data)
 
       if (response.status === 422) {
         this.errors = response.data.errors;
@@ -97,6 +117,11 @@ export default {
       this.resetValue()
       this.sending = false
       this.dialog  = false
+
+      if (response.status !== 201) {
+        this.$store.commit('error/setCode', response.status)
+        return false
+      }
     },
     resetValue () {
       this.postForm.content = ''

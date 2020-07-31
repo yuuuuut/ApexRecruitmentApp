@@ -2,17 +2,40 @@
   <div>
     <div v-if="isFollowing">
       <div v-if="sending" class="spinner-border spinner-border-sm" role="status">
-        <v-btn class="ma-2" tile outlined color="success" disabled>フォロー中</v-btn>
+        <v-btn
+          class="ma-2"
+          tile outlined color="success" 
+          disabled
+        >
+          フォロー中
+        </v-btn>
       </div>
-      <v-btn v-else @click="unfollow" class="ma-2" tile color="success">
+      <v-btn
+        v-else
+        @click="unfollow"
+        class="ma-2" tile color="success"
+      >
         フォロー中
       </v-btn>
     </div>
     <div v-else>
-      <div v-if="sending" class="spinner-border spinner-border-sm" role="status">
-        <v-btn class="ma-2" tile outlined color="success" disabled><v-icon left>mdi-plus</v-icon>フォロー</v-btn>
+      <div
+        v-if="sending"
+        class="spinner-border spinner-border-sm" role="status"
+      >
+        <v-btn
+          class="ma-2"
+          tile outlined color="success"
+          disabled
+        >
+          <v-icon left>mdi-plus</v-icon>フォロー
+        </v-btn>
       </div>
-      <v-btn v-else @click="follow" class="ma-2" tile outlined color="success">
+      <v-btn
+        v-else
+        @click="follow"
+        class="ma-2" tile outlined color="success"
+      >
         <v-icon left>mdi-plus</v-icon>フォロー
       </v-btn>
     </div>

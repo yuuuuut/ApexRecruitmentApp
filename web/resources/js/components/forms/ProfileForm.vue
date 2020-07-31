@@ -6,7 +6,9 @@
       </template>
       <v-card>
         <v-card-title>
-          <span class="headline">マイプロフィール</span>
+          <span class="headline">
+            マイプロフィール
+          </span>
         </v-card-title>
         <form @submit.prevent>
         <!-- Error -->
@@ -23,13 +25,31 @@
             v-model="profileForm.content"
           ></v-textarea>
           <div class="mt-5 mb-5 d-flex justify-center">
-            <v-btn v-if="!sending" @click="submit" width="255px" class="mb-5" color="primary" dark>完了</v-btn>
-            <v-btn v-else class="mb-5" width="255px" disabled>完了</v-btn>
+            <v-btn
+              v-if="!sending"
+              @click="submit"
+              width="255px" class="mb-5" color="primary" dark
+            >
+              完了
+            </v-btn>
+            <v-btn
+              v-else
+              class="mb-5" width="255px" disabled
+            >
+              完了
+            </v-btn>
           </div>
         </form>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false; resetValue()">閉じる</v-btn>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="dialog = false;
+            resetValue()"
+          >
+            閉じる
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -51,8 +71,8 @@ export default {
   methods: {
     async submit () {
       this.sending = true
+
       const response = await axios.post('/api/profiles', this.profileForm)
-      console.log(response.data)
 
       if (response.status === 422) {
         this.errors = response.data.errors;
@@ -63,6 +83,12 @@ export default {
       this.resetValue()
       this.sending = false
       this.dialog  = false
+
+      if (response.status !== 201) {
+        this.$store.commit('error/setCode', response.status)
+        return false
+      }
+
       this.$emit('reloadUser')
     },
     resetValue () {

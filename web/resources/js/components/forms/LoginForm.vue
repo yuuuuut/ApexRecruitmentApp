@@ -29,8 +29,19 @@
       @click:append="show1 = !show1"
     ></v-text-field>
     <div class="mt-3 d-flex justify-center">
-      <v-btn v-if="!sending" @click="login" class="mb-5" width="300px" color="primary" dark>ログイン</v-btn>
-      <v-btn v-else class="mb-5" width="300px" disabled>ログイン</v-btn>
+      <v-btn
+        v-if="!sending"
+        @click="login"
+        class="mb-5" width="300px" color="primary" dark
+      >
+        ログイン
+      </v-btn>
+      <v-btn
+        v-else
+        class="mb-5" width="300px" disabled
+      >
+        ログイン
+      </v-btn>
     </div>
   </form>
 </template>
@@ -69,11 +80,13 @@ export default {
   methods: {
     async login () {
       this.sending = true
+
       await this.$store.dispatch('auth/login', this.loginForm)
 
       if (this.apiStatus) {
         this.$router.push('/')
       }
+
       this.sending = false
     },
     clearError () {
