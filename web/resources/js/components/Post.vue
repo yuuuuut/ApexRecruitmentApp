@@ -29,7 +29,7 @@
             :to="{ name: 'postDetail', params: { id: item.id.toString() }}" 
             class="mypage--link blue-grey--text text--lighten-1"
           >
-            {{ item.content }}
+            <div style="white-space: pre-wrap;">{{ item.content }}</div>
           </routerLink>
         </h3>
         <div class="d-flex flex-row-reverse mt-2">

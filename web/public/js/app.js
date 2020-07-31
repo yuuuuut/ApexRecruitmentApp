@@ -2956,6 +2956,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.abrupt("return", false);
 
               case 14:
+                _this.$router.push("/posts/".concat(response.data.id));
+
+              case 15:
               case "end":
                 return _context.stop();
             }
@@ -27768,9 +27771,9 @@ var render = function() {
                     }
                   },
                   [
-                    _vm._v(
-                      "\n          " + _vm._s(_vm.item.content) + "\n        "
-                    )
+                    _c("div", { staticStyle: { "white-space": "pre-wrap" } }, [
+                      _vm._v(_vm._s(_vm.item.content))
+                    ])
                   ]
                 )
               ],
