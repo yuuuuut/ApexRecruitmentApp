@@ -16,7 +16,6 @@
               />
             </div>
           </div>
-
           <div class="d-flex justify-space-between">
             <div class="d-flex justify-start">
               <div class="text-h5">{{ user.name }}</div>
@@ -30,7 +29,6 @@
               />
             </div>
           </div>
-
           <div v-if="user.profile" class="mt-2 mb-3">
             <div class="blue-grey--text text--lighten-1" v-if="user.profile.content">{{ user.profile.content }}</div>
           </div>
@@ -43,6 +41,9 @@
         </v-list-item-content>
       </v-list-item>
     </v-card>
+    <Post
+      :item="post"
+    />
   </div>
   <div v-else>
     <v-skeleton-loader
@@ -54,6 +55,7 @@
 </template>
 
 <script>
+import Post from '../components/Post.vue'
 import ProfileForm from '../components/forms/ProfileForm.vue'
 import FollowForm  from '../components/forms/FollowForm.vue'
 import FollowCount from '../components/FollowCount.vue'
@@ -67,6 +69,7 @@ export default {
     }
   },
   components: {
+    Post,
     ProfileForm,
     FollowForm,
     FollowCount,
@@ -75,6 +78,7 @@ export default {
   data () {
     return {
       user: null,
+      post: null,
       followings: [],
       followers: [],
       followCount: 0,
@@ -93,8 +97,11 @@ export default {
       const response  = axios.get(`/api/users/${this.id}`)
       const response2 = axios.get(`/api/following/${this.id}`)
       const response3 = axios.get(`/api/follower/${this.id}`)
+      const response4 = axios.get(`/api/current-posts/${this.id}`)
 
-      const result = await Promise.all([response, response2, response3])
+      const result = await Promise.all([
+        response, response2, response3, response4
+      ])
 
       this.user = result[0].data
       this.isFollowed = result[0].data.is_followed
@@ -104,6 +111,8 @@ export default {
     
       this.followers     = result[2].data.reverse()
       this.followerCount = this.followers.length
+
+      this.post = result[3].data
 
       this.dataReady = true
     },

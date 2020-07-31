@@ -3498,10 +3498,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_forms_ProfileForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/forms/ProfileForm.vue */ "./resources/js/components/forms/ProfileForm.vue");
-/* harmony import */ var _components_forms_FollowForm_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/forms/FollowForm.vue */ "./resources/js/components/forms/FollowForm.vue");
-/* harmony import */ var _components_FollowCount_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/FollowCount.vue */ "./resources/js/components/FollowCount.vue");
-/* harmony import */ var _components_Todo_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Todo.vue */ "./resources/js/components/Todo.vue");
+/* harmony import */ var _components_Post_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Post.vue */ "./resources/js/components/Post.vue");
+/* harmony import */ var _components_forms_ProfileForm_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/forms/ProfileForm.vue */ "./resources/js/components/forms/ProfileForm.vue");
+/* harmony import */ var _components_forms_FollowForm_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/forms/FollowForm.vue */ "./resources/js/components/forms/FollowForm.vue");
+/* harmony import */ var _components_FollowCount_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/FollowCount.vue */ "./resources/js/components/FollowCount.vue");
+/* harmony import */ var _components_Todo_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Todo.vue */ "./resources/js/components/Todo.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3563,6 +3564,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+
 
 
 
@@ -3575,14 +3578,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   components: {
-    ProfileForm: _components_forms_ProfileForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    FollowForm: _components_forms_FollowForm_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    FollowCount: _components_FollowCount_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Todo: _components_Todo_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    Post: _components_Post_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ProfileForm: _components_forms_ProfileForm_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    FollowForm: _components_forms_FollowForm_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    FollowCount: _components_FollowCount_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Todo: _components_Todo_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   data: function data() {
     return {
       user: null,
+      post: null,
       followings: [],
       followers: [],
       followCount: 0,
@@ -3601,7 +3606,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response, response2, response3, result;
+        var response, response2, response3, response4, result;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -3609,10 +3614,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = axios.get("/api/users/".concat(_this.id));
                 response2 = axios.get("/api/following/".concat(_this.id));
                 response3 = axios.get("/api/follower/".concat(_this.id));
-                _context.next = 5;
-                return Promise.all([response, response2, response3]);
+                response4 = axios.get("/api/current-posts/".concat(_this.id));
+                _context.next = 6;
+                return Promise.all([response, response2, response3, response4]);
 
-              case 5:
+              case 6:
                 result = _context.sent;
                 _this.user = result[0].data;
                 _this.isFollowed = result[0].data.is_followed;
@@ -3620,9 +3626,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.followCount = _this.followings.length;
                 _this.followers = result[2].data.reverse();
                 _this.followerCount = _this.followers.length;
+                _this.post = result[3].data;
                 _this.dataReady = true;
 
-              case 13:
+              case 15:
               case "end":
                 return _context.stop();
             }
@@ -28856,7 +28863,9 @@ var render = function() {
               )
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("Post", { attrs: { item: _vm.post } })
         ],
         1
       )

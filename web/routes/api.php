@@ -21,6 +21,7 @@ Route::get('/users/{id}', 'UserController@show')->name('user.show');
 -----*/
 Route::get('/posts', 'PostController@index')->name('post.index');
 Route::get('/posts/{id}', 'PostController@show')->name('post.show');
+Route::get('/current-posts/{id}', 'PostController@currentUserPost')->name('post.current');
 Route::post('/posts', 'PostController@create')->name('post.create');
 
 /*-----

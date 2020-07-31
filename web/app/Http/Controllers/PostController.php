@@ -25,6 +25,13 @@ class PostController extends Controller
         return $post ?? abort(404);
     }
 
+    public function currentUserPost(string $id)
+    {
+        $post = Post::where('user_id', $id)->with(['user'])->first();
+
+        return $post;
+    }
+
     public function create(CreatePostRequest $request)
     {
         $post = Post::updateOrCreate([

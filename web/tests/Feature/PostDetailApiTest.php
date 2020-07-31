@@ -39,4 +39,32 @@ class PostDetailApiTest extends TestCase
                 'user_id' => $post->user_id,
             ]);
     }
+
+    /**
+     * @test
+     */
+    public function currentUserの投稿を取得できる()
+    {
+        factory(Post::class)->create();
+        $post = Post::first();
+
+        $response = $this->json('GET', route('post.current', [
+            'id' => $post->user->id,
+        ]));
+
+        $response->assertStatus(200)
+            ->assertJsonFragment([
+                'id' => $post->id,
+                'content' => $post->content,
+                'myid' => $post->myid,
+                'platform' => $post->platform,
+                'user' => [
+                    'id' => $post->user->id,
+                    'name' => $post->user->name,
+                    'is_followed' => false,
+                    'is_following' => false,
+                ],
+                'user_id' => $post->user_id,
+            ]);
+    }
 }
