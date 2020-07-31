@@ -25,6 +25,7 @@
             </div>
             <div v-if="currentUser.id === user.id">
               <ProfileForm
+                :user="user"
                 @reloadUser="userShow"
               />
             </div>

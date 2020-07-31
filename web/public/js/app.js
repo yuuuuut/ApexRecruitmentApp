@@ -3060,15 +3060,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    user: {
+      type: Object,
+      required: true
+    }
+  },
   data: function data() {
     return {
       dialog: false,
       sending: false,
       errors: '',
       profileForm: {
-        content: ''
+        content: this.isProfile()
       }
     };
   },
@@ -3099,13 +3104,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.abrupt("return", false);
 
               case 8:
-                _this.resetValue();
-
                 _this.sending = false;
                 _this.dialog = false;
 
                 if (!(response.status !== 201)) {
-                  _context.next = 14;
+                  _context.next = 13;
                   break;
                 }
 
@@ -3113,10 +3116,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 return _context.abrupt("return", false);
 
-              case 14:
+              case 13:
                 _this.$emit('reloadUser');
 
-              case 15:
+              case 14:
               case "end":
                 return _context.stop();
             }
@@ -3124,8 +3127,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    resetValue: function resetValue() {
-      this.profileForm.content = '';
+    isProfile: function isProfile() {
+      if (this.user.profile) {
+        return this.user.profile.content;
+      } else {
+        return '';
+      }
     }
   }
 });
@@ -3651,6 +3658,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -28504,7 +28512,6 @@ var render = function() {
                       on: {
                         click: function($event) {
                           _vm.dialog = false
-                          _vm.resetValue()
                         }
                       }
                     },
@@ -28993,6 +29000,7 @@ var render = function() {
                                 "div",
                                 [
                                   _c("ProfileForm", {
+                                    attrs: { user: _vm.user },
                                     on: { reloadUser: _vm.userShow }
                                   })
                                 ],

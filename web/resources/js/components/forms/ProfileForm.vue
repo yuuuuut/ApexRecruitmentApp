@@ -45,8 +45,7 @@
           <v-btn
             color="blue darken-1"
             text
-            @click="dialog = false;
-            resetValue()"
+            @click="dialog = false;"
           >
             閉じる
           </v-btn>
@@ -58,13 +57,19 @@
 
 <script>
 export default {
+  props: {
+    user: {
+      type: Object,
+      required: true,
+    }
+  },
   data () {
     return {
       dialog:   false,
       sending:  false,
       errors: '',
       profileForm: {
-        content: '',
+        content: this.isProfile(),
       }
     }
   },
@@ -80,7 +85,6 @@ export default {
         return false
       }
 
-      this.resetValue()
       this.sending = false
       this.dialog  = false
 
@@ -91,9 +95,13 @@ export default {
 
       this.$emit('reloadUser')
     },
-    resetValue () {
-      this.profileForm.content = ''
-    }
+    isProfile () {
+      if (this.user.profile) {
+        return this.user.profile.content
+      } else {
+        return ''
+      }
+    },
   }
 }
 </script>
