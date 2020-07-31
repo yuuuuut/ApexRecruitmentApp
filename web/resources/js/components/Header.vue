@@ -37,7 +37,11 @@
               </button>
             </div>
             <div v-if="item.title === 'ログアウト'">
-              <button  @click.stop="dialog = true">ログアウト<v-icon>mdi-seat-individual-suite</v-icon></button>
+              <button
+                @click.stop="dialog = true"
+              >
+                ログアウト<v-icon>mdi-seat-individual-suite</v-icon>
+              </button>
               <v-dialog
                 v-model="dialog"
                 max-width="290"
@@ -73,7 +77,9 @@
         to="/login"
         style="text-decoration: none;"
       >
-        <v-btn color="success" dark>ログイン / 新規登録</v-btn>
+        <v-btn color="success" dark>
+          ログイン / 新規登録
+        </v-btn>
       </routerLink>
     </div>
   </v-toolbar>

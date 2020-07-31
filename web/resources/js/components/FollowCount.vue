@@ -1,12 +1,22 @@
 <template>
   <div v-if="!loading">
     <div class="d-flex justify-start">
-      <div @click.stop="FollowingDialog = true" class="grey--text text--darken-1">{{ this.followCount }}フォロー中</div>
+      <div
+        @click.stop="FollowingDialog = true"
+        class="grey--text text--darken-1"
+      >
+        {{ this.followCount }}フォロー中
+      </div>
       <v-divider
         class="mx-4"
         vertical
       ></v-divider>
-      <div @click.stop="FollowerDialog = true" class="grey--text text--darken-1">{{ this.followerCount }}フォロワー</div>
+      <div
+        @click.stop="FollowerDialog = true"
+        class="grey--text text--darken-1"
+      >
+        {{ this.followerCount }}フォロワー
+      </div>
     </div>
     <!-- FollowUser -->
     <v-dialog v-model="FollowingDialog" width="360">

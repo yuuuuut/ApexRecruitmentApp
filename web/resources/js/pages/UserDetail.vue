@@ -41,9 +41,11 @@
         </v-list-item-content>
       </v-list-item>
     </v-card>
-    <Post
-      :item="post"
-    />
+    <div v-if="post">
+      <Post
+        :item="post"
+      />
+    </div>
   </div>
   <div v-else>
     <v-skeleton-loader
@@ -103,12 +105,17 @@ export default {
         response, response2, response3, response4
       ])
 
+      if (result.length !== 4) {
+        this.$store.commit('error/setCode', response.status)
+        return false
+      }
+
       this.user = result[0].data
       this.isFollowed = result[0].data.is_followed
 
       this.followings    = result[1].data.reverse()
       this.followCount   = this.followings.length
-    
+
       this.followers     = result[2].data.reverse()
       this.followerCount = this.followers.length
 

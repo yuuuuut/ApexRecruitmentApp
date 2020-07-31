@@ -9,12 +9,21 @@
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title>
-              <router-link :to="{ name: 'userDetail', params: { id: item.id.toString() }}" class="mypage--link">
-                <div @click="userLoading">{{ item.name }}</div>
+              <router-link
+                :to="{ name: 'userDetail', params: { id: item.id.toString() }}" 
+                class="mypage--link"
+              >
+                <div @click="userLoading">
+                  {{ item.name }}
+                </div>
               </router-link>
             </v-list-item-title>
             <div v-if="item.profile">
-              <v-list-item-subtitle v-if="item.profile.content">{{ item.profile.content | truncate }}</v-list-item-subtitle>
+              <v-list-item-subtitle
+                v-if="item.profile.content"
+              >
+                {{ item.profile.content | truncate }}
+              </v-list-item-subtitle>
             </div>
           </v-list-item-content>
         </v-list-item>

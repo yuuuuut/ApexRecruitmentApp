@@ -1,7 +1,10 @@
 <template>
   <div>
-    <div v-if="user.id === currentUser.id && !user.profile" class="ma-2 mx-auto">
-      <v-snackbar :timeout="8000" v-model="snackbar">
+    <div v-if="isProfile()">
+      <v-snackbar
+        :timeout="8000"
+        v-model="snackbar"
+      >
         プロフィールを作成してみましょう!!
         <template v-slot:action="{ attrs }">
           <v-btn
@@ -24,6 +27,7 @@ export default {
   props: {
     user: {
       type: Object,
+      required: true,
     }
   },
   data () {
@@ -35,6 +39,13 @@ export default {
     currentUser () {
       return this.$store.getters['auth/currentUser']
     }
+  },
+  methods: {
+    isProfile () {
+      if (this.user.id === this.currentUser.id && !this.user.profile) {
+        return true
+      }
+    },
   }
 }
 </script>

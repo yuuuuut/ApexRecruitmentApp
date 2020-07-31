@@ -37,7 +37,6 @@ export default {
   methods: {
     async getPost () {
       const response = await axios.get(`/api/posts/${this.id}`)
-      console.log(response)
 
       if (response.status !== 200) {
         this.$store.commit('error/setCode', response.status)

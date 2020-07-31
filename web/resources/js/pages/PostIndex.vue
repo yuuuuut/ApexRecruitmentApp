@@ -5,14 +5,16 @@
       :key="post.id"
       :item="post"
     />
-    <infinite-loading 
+    <infinite-loading
       spinner="waveDots"
-      @infinite="infiniteHandler">
+      @infinite="infiniteHandler"
+    >
       <v-btn
         class="ma-2" 
         outlined color="indigo"
         slot="no-more"
-        @click="scrollTop">
+        @click="scrollTop"
+      >
         Topへ戻る
       </v-btn>
     </infinite-loading>

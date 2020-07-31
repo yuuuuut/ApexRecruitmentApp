@@ -2090,6 +2090,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2172,6 +2182,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     list: {
@@ -2224,6 +2243,12 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2460,10 +2485,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     user: {
-      type: Object
+      type: Object,
+      required: true
     }
   },
   data: function data() {
@@ -2474,6 +2503,13 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     currentUser: function currentUser() {
       return this.$store.getters['auth/currentUser'];
+    }
+  },
+  methods: {
+    isProfile: function isProfile() {
+      if (this.user.id === this.currentUser.id && !this.user.profile) {
+        return true;
+      }
     }
   }
 });
@@ -3402,10 +3438,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                console.log(response);
 
                 if (!(response.status !== 200)) {
-                  _context.next = 7;
+                  _context.next = 6;
                   break;
                 }
 
@@ -3413,11 +3448,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 return _context.abrupt("return", false);
 
-              case 7:
+              case 6:
                 _this.post = response.data;
                 _this.dataReady = true;
 
-              case 9:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -3492,6 +3527,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -3667,6 +3704,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 
@@ -3722,6 +3761,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
                 result = _context.sent;
+
+                if (!(result.length !== 4)) {
+                  _context.next = 10;
+                  break;
+                }
+
+                _this.$store.commit('error/setCode', response.status);
+
+                return _context.abrupt("return", false);
+
+              case 10:
                 _this.user = result[0].data;
                 _this.isFollowed = result[0].data.is_followed;
                 _this.followings = result[1].data.reverse();
@@ -3731,7 +3781,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.post = result[3].data;
                 _this.dataReady = true;
 
-              case 15:
+              case 18:
               case "end":
                 return _context.stop();
             }
@@ -27163,7 +27213,11 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v(_vm._s(this.followCount) + "フォロー中")]
+                [
+                  _vm._v(
+                    "\n      " + _vm._s(this.followCount) + "フォロー中\n    "
+                  )
+                ]
               ),
               _vm._v(" "),
               _c("v-divider", { staticClass: "mx-4", attrs: { vertical: "" } }),
@@ -27179,7 +27233,11 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v(_vm._s(this.followerCount) + "フォロワー")]
+                [
+                  _vm._v(
+                    "\n      " + _vm._s(this.followerCount) + "フォロワー\n    "
+                  )
+                ]
               )
             ],
             1
@@ -27313,7 +27371,11 @@ var render = function() {
                               },
                               [
                                 _c("div", { on: { click: _vm.userLoading } }, [
-                                  _vm._v(_vm._s(item.name))
+                                  _vm._v(
+                                    "\n                " +
+                                      _vm._s(item.name) +
+                                      "\n              "
+                                  )
                                 ])
                               ]
                             )
@@ -27328,11 +27390,13 @@ var render = function() {
                                 item.profile.content
                                   ? _c("v-list-item-subtitle", [
                                       _vm._v(
-                                        _vm._s(
-                                          _vm._f("truncate")(
-                                            item.profile.content
-                                          )
-                                        )
+                                        "\n              " +
+                                          _vm._s(
+                                            _vm._f("truncate")(
+                                              item.profile.content
+                                            )
+                                          ) +
+                                          "\n            "
                                       )
                                     ])
                                   : _vm._e()
@@ -27496,7 +27560,7 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _vm._v("ログアウト"),
+                                      _vm._v("\n              ログアウト"),
                                       _c("v-icon", [
                                         _vm._v("mdi-seat-individual-suite")
                                       ])
@@ -27601,7 +27665,7 @@ var render = function() {
                 },
                 [
                   _c("v-btn", { attrs: { color: "success", dark: "" } }, [
-                    _vm._v("ログイン / 新規登録")
+                    _vm._v("\n        ログイン / 新規登録\n      ")
                   ])
                 ],
                 1
@@ -27751,10 +27815,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.user.id === _vm.currentUser.id && !_vm.user.profile
+    _vm.isProfile()
       ? _c(
           "div",
-          { staticClass: "ma-2 mx-auto" },
           [
             _c(
               "v-snackbar",
@@ -28969,7 +29032,9 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("Post", { attrs: { item: _vm.post } })
+          _vm.post
+            ? _c("div", [_c("Post", { attrs: { item: _vm.post } })], 1)
+            : _vm._e()
         ],
         1
       )
