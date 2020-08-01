@@ -1,12 +1,21 @@
 <template>
   <div>
-    <Post 
-      v-for="post in posts"
-      :key="post.id"
-      :item="post"
-    />
+    <v-select
+      @change="changePlatform()"
+      :items="['PS4', 'PC']"
+      v-model="platform"
+      class="mt-4 ml-15 mr-15"
+    ></v-select>
+    <div>
+      <Post 
+        v-for="post in posts"
+        :key="post.id"
+        :item="post"
+      />
+    </div>
     <infinite-loading
       spinner="waveDots"
+      :identifier="infinited"
       @infinite="infiniteHandler"
     >
       <v-btn
@@ -39,8 +48,10 @@ export default {
   },
   data () {
     return {
+      platform: 'PS4',
       posts: [],
       page: 1,
+      infinited: 1,
     }
   },
   computed: {
@@ -52,8 +63,9 @@ export default {
     async infiniteHandler ($state) {
       await axios.get('/api/posts', {
         params: {
+          platform: this.platform,
           page: this.page,
-          per_page: 1
+          per_page: 1,
         },
       }).then(({ data }) => {
         console.log(data)
@@ -75,8 +87,13 @@ export default {
         top: 0,
         behavior: "instant"
       })
+    },
+    changePlatform () {
+      this.page = 1;
+      this.posts = [];
+      this.infinited += 1;
     }
-  },
+  }
 }
 </script>
 

@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        factory(App\Models\User::class, 20)->create()->each(function ($user) {
+        factory(App\Models\User::class, 25)->create()->each(function ($user) {
             factory(App\Models\Post::class)->create(['user_id' => $user->id ]);
             factory(App\Models\Profile::class)->create(['user_id' => $user->id ]);
             factory(App\Models\FollowUser::class)->create(['user_id' => 1, 'followed_user_id' => $user->id]);

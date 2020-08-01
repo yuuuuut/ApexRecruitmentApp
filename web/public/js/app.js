@@ -2437,6 +2437,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -3565,6 +3573,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3575,8 +3592,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
+      platform: 'PS4',
       posts: [],
-      page: 1
+      page: 1,
+      infinited: 1
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])({
@@ -3594,6 +3613,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _context.next = 2;
                 return axios.get('/api/posts', {
                   params: {
+                    platform: _this.platform,
                     page: _this.page,
                     per_page: 1
                   }
@@ -3630,6 +3650,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         top: 0,
         behavior: "instant"
       });
+    },
+    changePlatform: function changePlatform() {
+      this.page = 1;
+      this.posts = [];
+      this.infinited += 1;
     }
   }
 });
@@ -27720,11 +27745,31 @@ var render = function() {
           _c("v-card-text", [
             _c("div", { staticClass: "d-flex flex-row" }, [
               _vm.item.platform
-                ? _c("div", [
-                    _vm._v(
-                      "\n          " + _vm._s(_vm.item.platform) + "\n        "
-                    )
-                  ])
+                ? _c(
+                    "div",
+                    [
+                      _c(
+                        "v-chip",
+                        {
+                          staticClass: "mb-2",
+                          attrs: {
+                            color: "pink",
+                            label: "",
+                            "text-color": "white",
+                            small: ""
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n            " +
+                              _vm._s(_vm.item.platform) +
+                              "\n          "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
                 : _vm._e(),
               _vm._v(" "),
               _vm.item.myid
@@ -28873,14 +28918,35 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm._l(_vm.posts, function(post) {
-        return _c("Post", { key: post.id, attrs: { item: post } })
+      _c("v-select", {
+        staticClass: "mt-4 ml-15 mr-15",
+        attrs: { items: ["PS4", "PC"] },
+        on: {
+          change: function($event) {
+            return _vm.changePlatform()
+          }
+        },
+        model: {
+          value: _vm.platform,
+          callback: function($$v) {
+            _vm.platform = $$v
+          },
+          expression: "platform"
+        }
       }),
+      _vm._v(" "),
+      _c(
+        "div",
+        _vm._l(_vm.posts, function(post) {
+          return _c("Post", { key: post.id, attrs: { item: post } })
+        }),
+        1
+      ),
       _vm._v(" "),
       _c(
         "infinite-loading",
         {
-          attrs: { spinner: "waveDots" },
+          attrs: { spinner: "waveDots", identifier: _vm.infinited },
           on: { infinite: _vm.infiniteHandler }
         },
         [
@@ -28904,7 +28970,7 @@ var render = function() {
           ])
         : _vm._e()
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []

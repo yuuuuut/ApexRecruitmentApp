@@ -11,9 +11,13 @@ use Auth;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with(['user'])->orderBy(Post::UPDATED_AT, 'desc')->paginate(7);
+        $query = Post::query();
+        $search = $request->input('platform');
+
+        $query->where('platform', $search)->get();
+        $posts = $query->with(['user'])->orderBy(Post::UPDATED_AT, 'desc')->paginate(7);
 
         return $posts;
     }
