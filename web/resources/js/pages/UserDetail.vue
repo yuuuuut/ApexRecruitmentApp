@@ -100,27 +100,27 @@ export default {
       const response  = axios.get(`/api/users/${this.id}`)
       const response2 = axios.get(`/api/following/${this.id}`)
       const response3 = axios.get(`/api/follower/${this.id}`)
-      const response4 = axios.get(`/api/current-posts/${this.id}`)
 
       const result = await Promise.all([
-        response, response2, response3, response4
+        response, response2, response3
       ])
 
-      if (result.length !== 4) {
+      /*
+      if (result.length !== 3) {
         this.$store.commit('error/setCode', response.status)
         return false
       }
+      */
 
-      this.user = result[0].data
-      this.isFollowed = result[0].data.is_followed
+      this.user = result[0].data[0]
+      this.isFollowed = result[0].data[0].is_followed
+      this.post = result[0].data[1]
 
-      this.followings    = result[1].data.reverse()
-      this.followCount   = this.followings.length
+      this.followings = result[1].data.reverse()
+      this.followCount = this.followings.length
 
-      this.followers     = result[2].data.reverse()
+      this.followers = result[2].data.reverse()
       this.followerCount = this.followers.length
-
-      this.post = result[3].data
 
       this.dataReady = true
     },

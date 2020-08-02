@@ -3783,7 +3783,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response, response2, response3, response4, result;
+        var response, response2, response3, result;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -3791,33 +3791,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = axios.get("/api/users/".concat(_this.id));
                 response2 = axios.get("/api/following/".concat(_this.id));
                 response3 = axios.get("/api/follower/".concat(_this.id));
-                response4 = axios.get("/api/current-posts/".concat(_this.id));
-                _context.next = 6;
-                return Promise.all([response, response2, response3, response4]);
+                _context.next = 5;
+                return Promise.all([response, response2, response3]);
 
-              case 6:
+              case 5:
                 result = _context.sent;
 
-                if (!(result.length !== 4)) {
-                  _context.next = 10;
-                  break;
+                /*
+                if (result.length !== 3) {
+                  this.$store.commit('error/setCode', response.status)
+                  return false
                 }
-
-                _this.$store.commit('error/setCode', response.status);
-
-                return _context.abrupt("return", false);
-
-              case 10:
-                _this.user = result[0].data;
-                _this.isFollowed = result[0].data.is_followed;
+                */
+                _this.user = result[0].data[0];
+                _this.isFollowed = result[0].data[0].is_followed;
+                _this.post = result[0].data[1];
                 _this.followings = result[1].data.reverse();
                 _this.followCount = _this.followings.length;
                 _this.followers = result[2].data.reverse();
                 _this.followerCount = _this.followers.length;
-                _this.post = result[3].data;
                 _this.dataReady = true;
 
-              case 18:
+              case 14:
               case "end":
                 return _context.stop();
             }
