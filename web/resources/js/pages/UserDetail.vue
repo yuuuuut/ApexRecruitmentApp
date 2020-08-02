@@ -26,7 +26,7 @@
             <div v-if="currentUser.id === user.id">
               <ProfileForm
                 :user="user"
-                @reloadUser="userShow"
+                @reloadUser="getUser"
               />
             </div>
           </div>
@@ -96,7 +96,7 @@ export default {
     }
   },
   methods: {
-    async userShow () {
+    async getUser () {
       const response  = axios.get(`/api/users/${this.id}`)
       const response2 = axios.get(`/api/following/${this.id}`)
       const response3 = axios.get(`/api/follower/${this.id}`)
@@ -105,12 +105,7 @@ export default {
         response, response2, response3
       ])
 
-      /*
-      if (result.length !== 3) {
-        this.$store.commit('error/setCode', response.status)
-        return false
-      }
-      */
+      this.getUserResponseError(result[0], result[1], result[2])
 
       this.user = result[0].data[0]
       this.isFollowed = result[0].data[0].is_followed
@@ -123,6 +118,20 @@ export default {
       this.followerCount = this.followers.length
 
       this.dataReady = true
+    },
+    getUserResponseError(res1, res2, res3) {
+      if (res1.status !== 200) {
+        this.$store.commit('error/setCode', res1.status)
+        return false
+      }
+      if (res2.status !== 200) {
+        this.$store.commit('error/setCode', res2.status)
+        return false
+      }
+      if (res3.status !== 200) {
+        this.$store.commit('error/setCode', res3.status)
+        return false
+      }
     },
     addFollowerM () {
       this.followerCount += 1
@@ -138,7 +147,7 @@ export default {
   watch: {
     $route: {
       async handler () {
-        await this.userShow()
+        await this.getUser()
       },
       immediate: true
     }

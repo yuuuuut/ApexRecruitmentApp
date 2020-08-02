@@ -3779,7 +3779,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
-    userShow: function userShow() {
+    getUser: function getUser() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -3797,12 +3797,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 5:
                 result = _context.sent;
 
-                /*
-                if (result.length !== 3) {
-                  this.$store.commit('error/setCode', response.status)
-                  return false
-                }
-                */
+                _this.getUserResponseError(result[0], result[1], result[2]);
+
                 _this.user = result[0].data[0];
                 _this.isFollowed = result[0].data[0].is_followed;
                 _this.post = result[0].data[1];
@@ -3812,13 +3808,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.followerCount = _this.followers.length;
                 _this.dataReady = true;
 
-              case 14:
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    },
+    getUserResponseError: function getUserResponseError(res1, res2, res3) {
+      if (res1.status !== 200) {
+        this.$store.commit('error/setCode', res1.status);
+        return false;
+      }
+
+      if (res2.status !== 200) {
+        this.$store.commit('error/setCode', res2.status);
+        return false;
+      }
+
+      if (res3.status !== 200) {
+        this.$store.commit('error/setCode', res3.status);
+        return false;
+      }
     },
     addFollowerM: function addFollowerM() {
       this.followerCount += 1;
@@ -3842,7 +3854,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               switch (_context2.prev = _context2.next) {
                 case 0:
                   _context2.next = 2;
-                  return _this2.userShow();
+                  return _this2.getUser();
 
                 case 2:
                 case "end":
@@ -29062,7 +29074,7 @@ var render = function() {
                                 [
                                   _c("ProfileForm", {
                                     attrs: { user: _vm.user },
-                                    on: { reloadUser: _vm.userShow }
+                                    on: { reloadUser: _vm.getUser }
                                   })
                                 ],
                                 1
