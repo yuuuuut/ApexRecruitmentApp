@@ -24,7 +24,6 @@ class UserDetailApiTest extends TestCase
             $user->post()->save(factory(Post::class)->make());
         });
         $user = User::first();
-        $post = Post::first();
 
         $response = $this->json('GET', route('user.show', [
             'id' => $user->id,
@@ -36,22 +35,24 @@ class UserDetailApiTest extends TestCase
                     'name' => $user->name,
                     'is_following' => false,
                     'is_followed' => false,
+                    'post' => [
+                        'id' => $user->post->id,
+                        'content' => $user->post->content,
+                        'myid' => $user->post->myid,
+                        'platform' => $user->post->platform,
+                        'updated_at' => $user->post->updated_at,
+                        'user' => [
+                            'id' => $user->post->user->id,
+                            'name' => $user->post->user->name,
+                            'is_following' => false,
+                            'is_followed' => false,
+                        ],
+                        'user_id' => $user->post->user_id,
+                    ],
                     'profile' => [
                         'id' => $user->profile->id,
                         'content' => $user->profile->content,
                         'user_id' => $user->profile->user_id,
-                    ],
-                ], [
-                    'id' => '2',
-                    'content' => $post->content,
-                    'myid' => $post->myid,
-                    'platform' => $post->platform,
-                    'user_id' => $post->user_id,
-                    'user' => [
-                        'id' => $post->user->id,
-                        'name' => $post->user->name,
-                        'is_followed' => false,
-                        'is_following' => false,
                     ],
                 ]);
     }

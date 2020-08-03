@@ -3903,6 +3903,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      f: false,
       user: null,
       post: null,
       followings: [],
@@ -3936,19 +3937,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 5:
                 result = _context.sent;
+                console.log(result[0]);
 
                 _this.getUserResponseError(result[0], result[1], result[2]);
 
-                _this.user = result[0].data[0];
-                _this.isFollowed = result[0].data[0].is_followed;
-                _this.post = result[0].data[1];
+                _this.user = result[0].data;
+                _this.post = result[0].data.post;
+                _this.isFollowed = result[0].data.is_followed;
                 _this.followings = result[1].data.reverse();
                 _this.followCount = _this.followings.length;
                 _this.followers = result[2].data.reverse();
                 _this.followerCount = _this.followers.length;
                 _this.dataReady = true;
 
-              case 15:
+              case 16:
               case "end":
                 return _context.stop();
             }

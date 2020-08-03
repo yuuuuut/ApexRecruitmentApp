@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\FollowUser;
-use App\Models\Post;
 use App\Models\User;
 use Auth;
 
@@ -28,29 +26,27 @@ class FollowUserController extends Controller
 
     public function followIndex($id)
     {
-        $user = User::find($id);
-        $follow = $user->followings()->with(['profile'])->get();
-
+        $follow = User::find($id)->followings()
+                            ->with(['profile'])
+                            ->get();
         return $follow;
     }
 
     public function followerIndex($id)
     {
-        $user = User::find($id);
-        $follower = $user->followers()->with(['profile'])->get();
-
+        $follower = User::find($id)->followers()
+                            ->with(['profile'])
+                            ->get();
         return $follower;
     }
 
     public function timeLine()
     {
-        $user = Auth::user();
-        $posts = $user->followings()
+        $posts = Auth::user()->followings()
                         ->with(['post.user'])
                         ->join('posts', 'users.id', '=', 'posts.user_id')
                         ->orderBy('posts.updated_at', 'DESC')
                         ->paginate(7);
-
         return $posts;
     }
 }

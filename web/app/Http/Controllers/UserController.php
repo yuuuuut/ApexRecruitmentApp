@@ -13,9 +13,9 @@ class UserController extends Controller
 {
     public function show(string $id)
     {
-        $user = User::where('id', $id)->with(['profile'])->first();
-        $post = Post::where('user_id', $id)->with(['user'])->first();
-
-        return [$user, $post];
+        $user = User::where('id', $id)
+                    ->with(['profile', 'post.user'])
+                    ->first();
+        return $user;
     }
 }

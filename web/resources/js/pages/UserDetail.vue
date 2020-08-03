@@ -80,6 +80,7 @@ export default {
   },
   data () {
     return {
+      f: false,
       user: null,
       post: null,
       followings: [],
@@ -104,12 +105,13 @@ export default {
       const result = await Promise.all([
         response, response2, response3
       ])
+      console.log(result[0])
 
       this.getUserResponseError(result[0], result[1], result[2])
 
-      this.user = result[0].data[0]
-      this.isFollowed = result[0].data[0].is_followed
-      this.post = result[0].data[1]
+      this.user = result[0].data
+      this.post = result[0].data.post
+      this.isFollowed = result[0].data.is_followed
 
       this.followings = result[1].data.reverse()
       this.followCount = this.followings.length
