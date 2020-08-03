@@ -2330,11 +2330,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       items: [{
+        title: 'タイムライン'
+      }, {
         title: 'マイページ'
       }, {
         title: 'ログアウト'
@@ -3752,6 +3764,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 }).then(function (_ref) {
                   var data = _ref.data;
+                  console.log(data);
                   setTimeout(function () {
                     if (data.data.length) {
                       var _this$users;
@@ -27685,6 +27698,31 @@ var render = function() {
                         "v-list-item",
                         { key: index, on: { click: function($event) {} } },
                         [
+                          item.title === "タイムライン"
+                            ? _c("div", [
+                                _c(
+                                  "button",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass: "mypage--link",
+                                        attrs: { to: { name: "TimeLine" } }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                タイムライン"
+                                        ),
+                                        _c("v-icon", [_vm._v("mdi-clock")])
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
                           item.title === "マイページ"
                             ? _c("div", [
                                 _c(
@@ -90961,6 +90999,7 @@ var routes = [{
   }
 }, {
   path: '/timeline',
+  name: 'TimeLine',
   component: _pages_TimeLine_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
   beforeEnter: function beforeEnter(to, from, next) {
     if (_store__WEBPACK_IMPORTED_MODULE_8__["default"].getters['auth/check']) {

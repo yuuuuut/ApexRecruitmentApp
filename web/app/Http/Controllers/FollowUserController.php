@@ -45,7 +45,11 @@ class FollowUserController extends Controller
     public function timeLine()
     {
         $user = Auth::user();
-        $posts = $user->followings()->with(['post.user'])->paginate(7);
+        $posts = $user->followings()
+                        ->with(['post.user'])
+                        ->join('posts', 'users.id', '=', 'posts.user_id')
+                        ->orderBy('posts.updated_at', 'DESC')
+                        ->paginate(7);
 
         return $posts;
     }

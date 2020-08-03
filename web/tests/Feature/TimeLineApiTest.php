@@ -31,11 +31,11 @@ class TimeLineApiTest extends TestCase
         $this->user2 = User::find(2);
         $this->user3 = User::find(3);
 
-        $response = $this->actingAs($this->user)->json('POST', route('follow', [
+        $this->actingAs($this->user)->json('POST', route('follow', [
             'id' => $this->user2->id,
         ]));
 
-        $response = $this->actingAs($this->user)->json('POST', route('follow', [
+        $this->actingAs($this->user)->json('POST', route('follow', [
             'id' => $this->user3->id,
         ]));
     }
@@ -49,6 +49,7 @@ class TimeLineApiTest extends TestCase
                         ->json('GET', '/api/timeline');
 
         $users = Auth::user()->followings()->with(['post.user'])->get();
+        //dd($users);
 
         $users->map(function ($user) {
             return [
@@ -73,6 +74,6 @@ class TimeLineApiTest extends TestCase
         ->all();
 
         $response->assertStatus(200)
-                ->assertJsonCount(2, 'data');
+                ->assertJsonCount(3, 'data');
     }
 }

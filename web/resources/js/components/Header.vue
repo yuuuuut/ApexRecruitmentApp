@@ -26,6 +26,16 @@
             :key="index"
             @click=""
           >
+            <div v-if="item.title === 'タイムライン'">
+              <button>
+                <router-link
+                  :to="{ name: 'TimeLine' }"
+                  class="mypage--link"
+                >
+                  タイムライン<v-icon>mdi-clock</v-icon>
+                </router-link>
+              </button>
+            </div>
             <div v-if="item.title === 'マイページ'">
               <button>
                 <router-link
@@ -92,6 +102,7 @@ export default {
   data () {
     return {
       items: [
+        { title: 'タイムライン' },
         { title: 'マイページ' },
         { title: 'ログアウト' },
       ],

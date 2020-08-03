@@ -49,6 +49,7 @@ const routes = [
     },
     {
         path: '/timeline',
+        name: 'TimeLine',
         component: TimeLine,
         beforeEnter (to, from, next) {
             if (store.getters['auth/check']) {

@@ -52,6 +52,7 @@ export default {
           per_page: 1,
         },
       }).then(({ data }) => {
+        console.log(data)
         setTimeout(() => {
           if (data.data.length) {
             this.page += 1
