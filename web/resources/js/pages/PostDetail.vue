@@ -53,7 +53,7 @@ export default {
         await this.getPost()
       },
       immediate: true
-    }
-  }
+    },
+  },
 }
 </script>

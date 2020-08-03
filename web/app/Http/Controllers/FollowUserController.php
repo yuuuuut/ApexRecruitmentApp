@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\FollowUser;
+use App\Models\Post;
 use App\Models\User;
 use Auth;
 
@@ -39,5 +40,13 @@ class FollowUserController extends Controller
         $follower = $user->followers()->with(['profile'])->get();
 
         return $follower;
+    }
+
+    public function timeLine()
+    {
+        $user = Auth::user();
+        $posts = $user->followings()->with(['post.user'])->paginate(7);
+
+        return $posts;
     }
 }

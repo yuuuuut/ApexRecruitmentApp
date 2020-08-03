@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import PostIndex    from './pages/PostIndex.vue'
 import PostDetail   from './pages/PostDetail.vue'
 import UserDetail   from './pages/UserDetail.vue'
+import TimeLine     from './pages/TimeLine.vue'
 import Login        from './pages/Login.vue'
 import SystemError  from './pages/errors/System.vue'
 
@@ -36,6 +37,19 @@ const routes = [
         name: 'userDetail',
         component: UserDetail,
         props: true,
+        beforeEnter (to, from, next) {
+            if (store.getters['auth/check']) {
+                next()
+            } else {
+                next({
+                    name: 'Login'
+                })
+            }
+        }
+    },
+    {
+        path: '/timeline',
+        component: TimeLine,
         beforeEnter (to, from, next) {
             if (store.getters['auth/check']) {
                 next()

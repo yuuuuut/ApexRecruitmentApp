@@ -17,7 +17,7 @@ class User extends Authenticatable
     ];
 
     protected $visible = [
-        'id', 'name', 'profile',
+        'id', 'name', 'profile', 'post',
         'is_following', 'is_followed'
     ];
 
