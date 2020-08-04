@@ -80,7 +80,6 @@ export default {
   },
   data () {
     return {
-      f: false,
       user: null,
       post: null,
       followings: [],
@@ -98,6 +97,8 @@ export default {
   },
   methods: {
     async getUser () {
+      this.dataReady = false
+
       const response  = axios.get(`/api/users/${this.id}`)
       const response2 = axios.get(`/api/following/${this.id}`)
       const response3 = axios.get(`/api/follower/${this.id}`)

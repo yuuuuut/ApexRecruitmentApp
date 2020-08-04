@@ -13,9 +13,7 @@
                 :to="{ name: 'userDetail', params: { id: item.id.toString() }}" 
                 class="mypage--link"
               >
-                <div @click="userLoading">
-                  {{ item.name }}
-                </div>
+                {{ item.name }}
               </router-link>
             </v-list-item-title>
             <div v-if="item.profile">
@@ -51,11 +49,6 @@ export default {
       return val.substring(0, length) + ommision
     }
   },
-  methods: {
-    userLoading () {
-      this.$emit('loading')
-    }
-  }
 }
 </script>
 

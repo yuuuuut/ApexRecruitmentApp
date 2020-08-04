@@ -1,32 +1,23 @@
 <template>
   <div>
-    <div v-if="dataReady">
-      <Post 
-        v-for="user in users"
-        :key="user.post.id"
-        :item="user.post"
-      />
-      <infinite-loading
-        spinner="waveDots"
-        @infinite="infiniteHandler"
+    <Post 
+      v-for="user in users"
+      :key="user.post.id"
+      :item="user.post"
+    />
+    <infinite-loading
+      spinner="waveDots"
+      @infinite="infiniteHandler"
+    >
+      <v-btn
+        class="ma-2" 
+        outlined color="indigo"
+        slot="no-more"
+        @click="scrollTop"
       >
-        <v-btn
-          class="ma-2" 
-          outlined color="indigo"
-          slot="no-more"
-          @click="scrollTop"
-        >
-          Topへ戻る
-        </v-btn>
-      </infinite-loading>
-    </div>
-    <div v-else>
-      <v-skeleton-loader
-        class="mx-auto mt-8"
-        width="650px"
-        type="card"
-      ></v-skeleton-loader>
-    </div>
+        Topへ戻る
+      </v-btn>
+    </infinite-loading>
   </div>
 </template>
 
@@ -40,7 +31,6 @@ export default {
   data () {
     return {
       users: [],
-      dataReady: true,
       page: 1,
     }
   },

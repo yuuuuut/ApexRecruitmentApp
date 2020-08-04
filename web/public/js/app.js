@@ -2093,13 +2093,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2126,22 +2119,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       FollowingDialog: false,
-      FollowerDialog: false,
-      loading: false,
-      overlay: false
+      FollowerDialog: false
     };
-  },
-  methods: {
-    loadingUser: function loadingUser() {
-      this.loading = true;
-      this.overlay = true;
-      setTimeout(function () {
-        this.FollowingDialog = false;
-        this.FollowerDialog = false;
-        this.loading = false;
-        this.overlay = false;
-      }.bind(this), 3000);
-    }
   }
 });
 
@@ -2156,8 +2135,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -2208,11 +2185,6 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return val.substring(0, length) + ommision;
-    }
-  },
-  methods: {
-    userLoading: function userLoading() {
-      this.$emit('loading');
     }
   }
 });
@@ -3726,15 +3698,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3743,7 +3706,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       users: [],
-      dataReady: true,
       page: 1
     };
   },
@@ -3903,7 +3865,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      f: false,
       user: null,
       post: null,
       followings: [],
@@ -3929,13 +3890,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _this.dataReady = false;
                 response = axios.get("/api/users/".concat(_this.id));
                 response2 = axios.get("/api/following/".concat(_this.id));
                 response3 = axios.get("/api/follower/".concat(_this.id));
-                _context.next = 5;
+                _context.next = 6;
                 return Promise.all([response, response2, response3]);
 
-              case 5:
+              case 6:
                 result = _context.sent;
                 console.log(result[0]);
 
@@ -3950,7 +3912,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.followerCount = _this.followers.length;
                 _this.dataReady = true;
 
-              case 16:
+              case 17:
               case "end":
                 return _context.stop();
             }
@@ -27379,127 +27341,96 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return !_vm.loading
-    ? _c(
+  return _c(
+    "div",
+    [
+      _c(
         "div",
+        { staticClass: "d-flex justify-start" },
         [
           _c(
             "div",
-            { staticClass: "d-flex justify-start" },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "grey--text text--darken-1",
-                  on: {
-                    click: function($event) {
-                      $event.stopPropagation()
-                      _vm.FollowingDialog = true
-                    }
-                  }
-                },
-                [
-                  _vm._v(
-                    "\n      " + _vm._s(this.followCount) + "フォロー中\n    "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("v-divider", { staticClass: "mx-4", attrs: { vertical: "" } }),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "grey--text text--darken-1",
-                  on: {
-                    click: function($event) {
-                      $event.stopPropagation()
-                      _vm.FollowerDialog = true
-                    }
-                  }
-                },
-                [
-                  _vm._v(
-                    "\n      " + _vm._s(this.followerCount) + "フォロワー\n    "
-                  )
-                ]
-              )
-            ],
-            1
+            {
+              staticClass: "grey--text text--darken-1",
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                  _vm.FollowingDialog = true
+                }
+              }
+            },
+            [_vm._v("\n      " + _vm._s(this.followCount) + "フォロー中\n    ")]
           ),
           _vm._v(" "),
+          _c("v-divider", { staticClass: "mx-4", attrs: { vertical: "" } }),
+          _vm._v(" "),
           _c(
-            "v-dialog",
+            "div",
             {
-              attrs: { width: "360" },
-              model: {
-                value: _vm.FollowingDialog,
-                callback: function($$v) {
-                  _vm.FollowingDialog = $$v
-                },
-                expression: "FollowingDialog"
+              staticClass: "grey--text text--darken-1",
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                  _vm.FollowerDialog = true
+                }
               }
             },
             [
-              _c(
-                "v-card",
-                [
-                  _c("FollowList", {
-                    attrs: { list: _vm.followings },
-                    on: { loading: _vm.loadingUser }
-                  })
-                ],
-                1
+              _vm._v(
+                "\n      " + _vm._s(this.followerCount) + "フォロワー\n    "
               )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-dialog",
-            {
-              attrs: { width: "360" },
-              model: {
-                value: _vm.FollowerDialog,
-                callback: function($$v) {
-                  _vm.FollowerDialog = $$v
-                },
-                expression: "FollowerDialog"
-              }
-            },
-            [
-              _c(
-                "v-card",
-                [
-                  _c("FollowList", {
-                    attrs: { list: _vm.followers },
-                    on: { loading: _vm.loadingUser }
-                  })
-                ],
-                1
-              )
-            ],
-            1
+            ]
           )
         ],
         1
-      )
-    : _c(
-        "div",
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { width: "360" },
+          model: {
+            value: _vm.FollowingDialog,
+            callback: function($$v) {
+              _vm.FollowingDialog = $$v
+            },
+            expression: "FollowingDialog"
+          }
+        },
         [
           _c(
-            "v-overlay",
-            { attrs: { value: _vm.overlay } },
-            [
-              _c("v-text-field", {
-                attrs: { color: "success", loading: "", disabled: "" }
-              })
-            ],
+            "v-card",
+            [_c("FollowList", { attrs: { list: _vm.followings } })],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { width: "360" },
+          model: {
+            value: _vm.FollowerDialog,
+            callback: function($$v) {
+              _vm.FollowerDialog = $$v
+            },
+            expression: "FollowerDialog"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [_c("FollowList", { attrs: { list: _vm.followers } })],
             1
           )
         ],
         1
       )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -27555,13 +27486,11 @@ var render = function() {
                                 }
                               },
                               [
-                                _c("div", { on: { click: _vm.userLoading } }, [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.name) +
-                                      "\n              "
-                                  )
-                                ])
+                                _vm._v(
+                                  "\n              " +
+                                    _vm._s(item.name) +
+                                    "\n            "
+                                )
                               ]
                             )
                           ],
@@ -29169,52 +29098,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.dataReady
-      ? _c(
-          "div",
-          [
-            _vm._l(_vm.users, function(user) {
-              return _c("Post", {
-                key: user.post.id,
-                attrs: { item: user.post }
-              })
-            }),
-            _vm._v(" "),
-            _c(
-              "infinite-loading",
-              {
-                attrs: { spinner: "waveDots" },
-                on: { infinite: _vm.infiniteHandler }
-              },
-              [
-                _c(
-                  "v-btn",
-                  {
-                    staticClass: "ma-2",
-                    attrs: { slot: "no-more", outlined: "", color: "indigo" },
-                    on: { click: _vm.scrollTop },
-                    slot: "no-more"
-                  },
-                  [_vm._v("\n        Topへ戻る\n      ")]
-                )
-              ],
-              1
-            )
-          ],
-          2
-        )
-      : _c(
-          "div",
-          [
-            _c("v-skeleton-loader", {
-              staticClass: "mx-auto mt-8",
-              attrs: { width: "650px", type: "card" }
-            })
-          ],
-          1
-        )
-  ])
+  return _c(
+    "div",
+    [
+      _vm._l(_vm.users, function(user) {
+        return _c("Post", { key: user.post.id, attrs: { item: user.post } })
+      }),
+      _vm._v(" "),
+      _c(
+        "infinite-loading",
+        {
+          attrs: { spinner: "waveDots" },
+          on: { infinite: _vm.infiniteHandler }
+        },
+        [
+          _c(
+            "v-btn",
+            {
+              staticClass: "ma-2",
+              attrs: { slot: "no-more", outlined: "", color: "indigo" },
+              on: { click: _vm.scrollTop },
+              slot: "no-more"
+            },
+            [_vm._v("\n      Topへ戻る\n    ")]
+          )
+        ],
+        1
+      )
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
