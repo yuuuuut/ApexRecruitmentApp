@@ -129,6 +129,8 @@ export default {
       this.postForm.content = ''
       this.postForm.myid = ''
       this.postForm.platform = ''
+      this.ps4Flag = false
+      this.pcFlag = false
       this.errors = {}
     },
     changePlatForm () {

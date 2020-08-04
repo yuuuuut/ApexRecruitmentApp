@@ -2429,6 +2429,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2962,6 +2975,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.postForm.content = '';
       this.postForm.myid = '';
       this.postForm.platform = '';
+      this.ps4Flag = false;
+      this.pcFlag = false;
       this.errors = {};
     },
     changePlatForm: function changePlatForm() {
@@ -27501,19 +27516,30 @@ var render = function() {
                           ? _c(
                               "div",
                               [
-                                item.profile.content
-                                  ? _c("v-list-item-subtitle", [
-                                      _vm._v(
-                                        "\n              " +
-                                          _vm._s(
-                                            _vm._f("truncate")(
-                                              item.profile.content
-                                            )
-                                          ) +
-                                          "\n            "
-                                      )
-                                    ])
-                                  : _vm._e()
+                                _c(
+                                  "v-list-item-subtitle",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: item.profile.content,
+                                        expression: "item.profile.content"
+                                      }
+                                    ]
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n              " +
+                                        _vm._s(
+                                          _vm._f("truncate")(
+                                            item.profile.content
+                                          )
+                                        ) +
+                                        "\n            "
+                                    )
+                                  ]
+                                )
                               ],
                               1
                             )
@@ -27848,31 +27874,79 @@ var render = function() {
           _c("v-card-text", [
             _c("div", { staticClass: "d-flex flex-row" }, [
               _vm.item.platform
-                ? _c(
-                    "div",
-                    [
-                      _c(
-                        "v-chip",
-                        {
-                          staticClass: "mb-2",
-                          attrs: {
-                            color: "pink",
-                            label: "",
-                            "text-color": "white",
-                            small: ""
+                ? _c("div", [
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.item.platform === "PS4",
+                            expression: "item.platform === 'PS4'"
                           }
-                        },
-                        [
-                          _vm._v(
-                            "\n            " +
-                              _vm._s(_vm.item.platform) +
-                              "\n          "
-                          )
                         ]
-                      )
-                    ],
-                    1
-                  )
+                      },
+                      [
+                        _c(
+                          "v-chip",
+                          {
+                            staticClass: "mb-2",
+                            attrs: {
+                              color: "pink",
+                              label: "",
+                              "text-color": "white",
+                              small: ""
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n              " +
+                                _vm._s(_vm.item.platform) +
+                                "\n            "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.item.platform === "PC",
+                            expression: "item.platform === 'PC'"
+                          }
+                        ]
+                      },
+                      [
+                        _c(
+                          "v-chip",
+                          {
+                            staticClass: "mb-2",
+                            attrs: {
+                              color: "blue",
+                              label: "",
+                              "text-color": "white",
+                              small: ""
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n              " +
+                                _vm._s(_vm.item.platform) +
+                                "\n            "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
                 : _vm._e(),
               _vm._v(" "),
               _vm.item.myid
@@ -29195,26 +29269,34 @@ var render = function() {
                               _vm._v(_vm._s(_vm.user.name))
                             ]),
                             _vm._v(" "),
-                            _vm.isFollowed
-                              ? _c(
-                                  "div",
-                                  [
-                                    _c(
-                                      "v-chip",
-                                      {
-                                        staticClass: "mt-1 ml-2",
-                                        attrs: {
-                                          color: "cyan",
-                                          "text-color": "white",
-                                          small: ""
-                                        }
-                                      },
-                                      [_vm._v("フォローされています")]
-                                    )
-                                  ],
-                                  1
+                            _c(
+                              "div",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.isFollowed,
+                                    expression: "isFollowed"
+                                  }
+                                ]
+                              },
+                              [
+                                _c(
+                                  "v-chip",
+                                  {
+                                    staticClass: "mt-1 ml-2",
+                                    attrs: {
+                                      color: "cyan",
+                                      "text-color": "white",
+                                      small: ""
+                                    }
+                                  },
+                                  [_vm._v("フォローされています")]
                                 )
-                              : _vm._e()
+                              ],
+                              1
+                            )
                           ]),
                           _vm._v(" "),
                           _vm.currentUser.id === _vm.user.id
@@ -29232,20 +29314,31 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _vm.user.profile
-                        ? _c("div", { staticClass: "mt-2 mb-3" }, [
-                            _vm.user.profile.content
-                              ? _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "blue-grey--text text--lighten-1"
-                                  },
-                                  [_vm._v(_vm._s(_vm.user.profile.content))]
-                                )
-                              : _vm._e()
-                          ])
-                        : _vm._e(),
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.user.profile,
+                              expression: "user.profile"
+                            }
+                          ],
+                          staticClass: "mt-2 mb-3"
+                        },
+                        [
+                          _vm.user.profile.content
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "blue-grey--text text--lighten-1"
+                                },
+                                [_vm._v(_vm._s(_vm.user.profile.content))]
+                              )
+                            : _vm._e()
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("FollowCount", {
                         attrs: {

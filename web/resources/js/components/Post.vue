@@ -7,15 +7,28 @@
       <v-card-text>
         <div class="d-flex flex-row">
           <div v-if="item.platform">
-            <v-chip
-              class="mb-2"
-              color="pink"
-              label
-              text-color="white"
-              small
-            >
-              {{ item.platform }}
-            </v-chip>
+            <div v-show="item.platform === 'PS4'">
+              <v-chip
+                class="mb-2"
+                color="pink"
+                label
+                text-color="white"
+                small
+              >
+                {{ item.platform }}
+              </v-chip>
+            </div>
+            <div v-show="item.platform === 'PC'">
+              <v-chip
+                class="mb-2"
+                color="blue"
+                label
+                text-color="white"
+                small
+              >
+                {{ item.platform }}
+              </v-chip>
+            </div>
           </div>
           <div v-if="item.myid" class="ml-4">
             ID: {{ item.myid }}

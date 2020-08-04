@@ -19,7 +19,7 @@
           <div class="d-flex justify-space-between">
             <div class="d-flex justify-start">
               <div class="text-h5">{{ user.name }}</div>
-              <div v-if="isFollowed">
+              <div v-show="isFollowed">
                 <v-chip class="mt-1 ml-2" color="cyan" text-color="white" small>フォローされています</v-chip>
               </div>
             </div>
@@ -30,7 +30,7 @@
               />
             </div>
           </div>
-          <div v-if="user.profile" class="mt-2 mb-3">
+          <div v-show="user.profile" class="mt-2 mb-3">
             <div class="blue-grey--text text--lighten-1" v-if="user.profile.content">{{ user.profile.content }}</div>
           </div>
           <FollowCount

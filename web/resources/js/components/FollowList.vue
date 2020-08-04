@@ -18,7 +18,7 @@
             </v-list-item-title>
             <div v-if="item.profile">
               <v-list-item-subtitle
-                v-if="item.profile.content"
+                v-show="item.profile.content"
               >
                 {{ item.profile.content | truncate }}
               </v-list-item-subtitle>
