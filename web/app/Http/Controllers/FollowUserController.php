@@ -24,22 +24,6 @@ class FollowUserController extends Controller
         return ["result" => 'OK'];
     }
 
-    public function followIndex($id)
-    {
-        $follow = User::find($id)->followings()
-                        ->with(['profile'])
-                        ->get();
-        return $follow;
-    }
-
-    public function followerIndex($id)
-    {
-        $follower = User::find($id)->followers()
-                        ->with(['profile'])
-                        ->get();
-        return $follower;
-    }
-
     public function timeLine()
     {
         $posts = Auth::user()->followings()

@@ -24,6 +24,20 @@ class UserDetailApiTest extends TestCase
             $user->post()->save(factory(Post::class)->make());
         });
         $user = User::first();
+        
+        factory(User::class)->create()->each(function ($user) {
+            $user->profile()->save(factory(Profile::class)->make());
+            $user->post()->save(factory(Post::class)->make());
+        });
+        $user2 = User::find(2);
+
+        $this->actingAs($user2)->json('POST', route('follow', [
+            'id' => $user->id,
+        ]));
+
+        $this->actingAs($user)->json('POST', route('follow', [
+            'id' => $user2->id,
+        ]));
 
         $response = $this->json('GET', route('user.show', [
             'id' => $user->id,
@@ -35,6 +49,11 @@ class UserDetailApiTest extends TestCase
                     'name' => $user->name,
                     'is_following' => false,
                     'is_followed' => false,
+                    'profile' => [
+                        'id' => $user->profile->id,
+                        'content' => $user->profile->content,
+                        'user_id' => $user->profile->user_id,
+                    ],
                     'post' => [
                         'id' => $user->post->id,
                         'content' => $user->post->content,
@@ -49,10 +68,25 @@ class UserDetailApiTest extends TestCase
                         ],
                         'user_id' => $user->post->user_id,
                     ],
+                ], [
+                    'id' => $user2->id,
+                    "is_followed" => true,
+                    'is_following' => true,
+                    'name' => $user2->name,
                     'profile' => [
-                        'id' => $user->profile->id,
-                        'content' => $user->profile->content,
-                        'user_id' => $user->profile->user_id,
+                        'id' => $user2->profile->id,
+                        'content' => $user2->profile->content,
+                        'user_id' => $user2->profile->user_id,
+                    ],
+                ], [
+                    'id' => $user2->id,
+                    "is_followed" => true,
+                    'is_following' => true,
+                    'name' => $user2->name,
+                    'profile' => [
+                        'id' => $user2->profile->id,
+                        'content' => $user2->profile->content,
+                        'user_id' => $user2->profile->user_id,
                     ],
                 ]);
     }

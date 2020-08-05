@@ -16,6 +16,15 @@ class UserController extends Controller
         $user = User::where('id', $id)
                     ->with(['profile', 'post.user'])
                     ->first();
-        return $user;
+
+        $follow = User::find($id)->followings()
+                    ->with(['profile'])
+                    ->get();
+
+        $follower = User::find($id)->followers()
+                    ->with(['profile'])
+                    ->get();
+
+        return [$user, $follow, $follower];
     }
 }

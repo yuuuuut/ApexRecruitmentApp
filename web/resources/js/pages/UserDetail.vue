@@ -99,42 +99,25 @@ export default {
     async getUser () {
       this.dataReady = false
 
-      const response  = axios.get(`/api/users/${this.id}`)
-      const response2 = axios.get(`/api/following/${this.id}`)
-      const response3 = axios.get(`/api/follower/${this.id}`)
+      const response  = await axios.get(`/api/users/${this.id}`)
+      console.log(response)
 
-      const result = await Promise.all([
-        response, response2, response3
-      ])
-      console.log(result[0])
+      if (response.status !== 200) {
+        this.$store.commit('error/setCode', response.status)
+        return false
+      }
 
-      this.getUserResponseError(result[0], result[1], result[2])
+      this.user = response.data[0]
+      this.post = response.data[0].post
+      this.isFollowed = response.data[0].is_followed
 
-      this.user = result[0].data
-      this.post = result[0].data.post
-      this.isFollowed = result[0].data.is_followed
-
-      this.followings = result[1].data.reverse()
+      this.followings = response.data[1].reverse()
       this.followCount = this.followings.length
 
-      this.followers = result[2].data.reverse()
+      this.followers = response.data[2].reverse()
       this.followerCount = this.followers.length
 
       this.dataReady = true
-    },
-    getUserResponseError(res1, res2, res3) {
-      if (res1.status !== 200) {
-        this.$store.commit('error/setCode', res1.status)
-        return false
-      }
-      if (res2.status !== 200) {
-        this.$store.commit('error/setCode', res2.status)
-        return false
-      }
-      if (res3.status !== 200) {
-        this.$store.commit('error/setCode', res3.status)
-        return false
-      }
     },
     addFollowerM () {
       this.followerCount += 1

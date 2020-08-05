@@ -3900,56 +3900,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response, response2, response3, result;
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _this.dataReady = false;
-                response = axios.get("/api/users/".concat(_this.id));
-                response2 = axios.get("/api/following/".concat(_this.id));
-                response3 = axios.get("/api/follower/".concat(_this.id));
-                _context.next = 6;
-                return Promise.all([response, response2, response3]);
+                _context.next = 3;
+                return axios.get("/api/users/".concat(_this.id));
 
-              case 6:
-                result = _context.sent;
-                console.log(result[0]);
+              case 3:
+                response = _context.sent;
+                console.log(response);
 
-                _this.getUserResponseError(result[0], result[1], result[2]);
+                if (!(response.status !== 200)) {
+                  _context.next = 8;
+                  break;
+                }
 
-                _this.user = result[0].data;
-                _this.post = result[0].data.post;
-                _this.isFollowed = result[0].data.is_followed;
-                _this.followings = result[1].data.reverse();
+                _this.$store.commit('error/setCode', response.status);
+
+                return _context.abrupt("return", false);
+
+              case 8:
+                _this.user = response.data[0];
+                _this.post = response.data[0].post;
+                _this.isFollowed = response.data[0].is_followed;
+                _this.followings = response.data[1].reverse();
                 _this.followCount = _this.followings.length;
-                _this.followers = result[2].data.reverse();
+                _this.followers = response.data[2].reverse();
                 _this.followerCount = _this.followers.length;
                 _this.dataReady = true;
 
-              case 17:
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
-    },
-    getUserResponseError: function getUserResponseError(res1, res2, res3) {
-      if (res1.status !== 200) {
-        this.$store.commit('error/setCode', res1.status);
-        return false;
-      }
-
-      if (res2.status !== 200) {
-        this.$store.commit('error/setCode', res2.status);
-        return false;
-      }
-
-      if (res3.status !== 200) {
-        this.$store.commit('error/setCode', res3.status);
-        return false;
-      }
     },
     addFollowerM: function addFollowerM() {
       this.followerCount += 1;
