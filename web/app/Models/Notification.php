@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Notification extends Model
 {
     protected $fillable = [
-        'visiter_id', 'visited_id', 'action'
+        'visiter_id', 'visited_id', 'action',
+        'checked'
     ];
 
     protected $visible = [
@@ -31,5 +32,19 @@ class Notification extends Model
     public function visited()
     {
         return $this->belongsTo('App\Models\User', 'visited_id', 'id');
+    }
+
+    /**
+     * 通知を既読済みにする
+     */
+    public static function verifiedNotification($notification)
+    {
+        if ($notification) {
+            foreach ($notification as $n) {
+                if (!$n->checked)
+                    $n->checked = true;
+                    $n->save();
+            }
+        }
     }
 }

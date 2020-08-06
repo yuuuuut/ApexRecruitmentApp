@@ -152,23 +152,10 @@ class User extends Authenticatable
      */
     public function createNotificationFollow($id)
     {
-        /*
-        $notification = Notification::where('visiter_id', Auth::user()->id)
-                                        ->where('visited_id', $id)
-                                        ->where('action', 'follow')
-                                        ->exists();
-        */
-        $noti = new Notification();
-        $noti->visiter_id = Auth::user()->id;
-        $noti->visited_id = $id;
-        $noti->action = 'follow';
-        $noti->save();
-        /*
-            Notification::firstOrCreate([
-                'visiter_id', Auth::user()->id,
-                'visited_id' => $id,
-                'action' => 'follow',
-            ]);
-            */
+        Notification::firstOrCreate([
+            'visiter_id' => Auth::user()->id,
+            'visited_id' => $id,
+            'action' => 'follow'
+        ]);
     }
 }

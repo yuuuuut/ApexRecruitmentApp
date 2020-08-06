@@ -38,7 +38,7 @@ class NotificationApiTest extends TestCase
                     'visiter_id' => "1",
                     'visited_id' => "2",
                     'action' => 'follow',
-                    'checked' => '0',
+                    'checked' => true,
                     'visiter' => [
                         'id' => $this->user->id,
                         'is_followed' => true,
@@ -61,6 +61,22 @@ class NotificationApiTest extends TestCase
             'visited_id' => "2",
             'action' => 'follow',
             'checked' => false,
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function 通知を既読にできること()
+    {
+        $response = $this->actingAs($this->user2)
+                        ->json('GET', '/api/notification');
+
+        $this->assertDatabaseHas('notifications', [
+            'visiter_id' => "1",
+            'visited_id' => "2",
+            'action' => 'follow',
+            'checked' => true,
         ]);
     }
 }
