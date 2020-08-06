@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Models\Notification;
 use Auth;
 
 class User extends Authenticatable
@@ -52,7 +53,7 @@ class User extends Authenticatable
     }
 
     /**
-     * followingsテーブル
+     * follow_usersテーブル
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function followings()
@@ -62,13 +63,31 @@ class User extends Authenticatable
     }
 
     /**
-     * followersテーブル
+     * follow_usersテーブル
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function followers()
     {
         return $this->belongsToMany(User::class, 'follow_users', 'followed_user_id', 'user_id')
                     ->using(FollowUser::class);
+    }
+
+    /**
+     * notificationテーブル
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function active_notifications()
+    {
+        return $this->hasMany('App\Models\Notification', 'visiter_id');
+    }
+
+    /**
+     * notificationテーブル
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function passive_notifications()
+    {
+        return $this->hasMany('App\Models\Notification', 'visited_id');
     }
 
     /**
@@ -126,5 +145,30 @@ class User extends Authenticatable
         return $this->followings->contains(function ($user) {
             return $user->id === Auth::user()->id;
         });
+    }
+
+    /**
+     * Follow通知作成
+     */
+    public function createNotificationFollow($id)
+    {
+        /*
+        $notification = Notification::where('visiter_id', Auth::user()->id)
+                                        ->where('visited_id', $id)
+                                        ->where('action', 'follow')
+                                        ->exists();
+        */
+        $noti = new Notification();
+        $noti->visiter_id = Auth::user()->id;
+        $noti->visited_id = $id;
+        $noti->action = 'follow';
+        $noti->save();
+        /*
+            Notification::firstOrCreate([
+                'visiter_id', Auth::user()->id,
+                'visited_id' => $id,
+                'action' => 'follow',
+            ]);
+            */
     }
 }

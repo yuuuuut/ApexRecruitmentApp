@@ -5,6 +5,7 @@ import PostIndex    from './pages/PostIndex.vue'
 import PostDetail   from './pages/PostDetail.vue'
 import UserDetail   from './pages/UserDetail.vue'
 import TimeLine     from './pages/TimeLine.vue'
+import Notification from './pages/Notification.vue'
 import Login        from './pages/Login.vue'
 import SystemError  from './pages/errors/System.vue'
 
@@ -51,6 +52,20 @@ const routes = [
         path: '/timeline',
         name: 'TimeLine',
         component: TimeLine,
+        beforeEnter (to, from, next) {
+            if (store.getters['auth/check']) {
+                next()
+            } else {
+                next({
+                    name: 'Login'
+                })
+            }
+        }
+    },
+    {
+        path: '/notification',
+        name: 'Notification',
+        component: Notification,
         beforeEnter (to, from, next) {
             if (store.getters['auth/check']) {
                 next()

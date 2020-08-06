@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\User;
 use Auth;
 
 class FollowUserController extends Controller
@@ -12,9 +11,9 @@ class FollowUserController extends Controller
     public function store($id)
     {
         Auth::user()->follow($id);
-        $user = User::find($id)->with(['profile'])->first();
+        Auth::user()->createNotificationFollow($id);
 
-        return response($user, 201);
+        return ["result" => 'OK'];
     }
 
     public function destroy($id)

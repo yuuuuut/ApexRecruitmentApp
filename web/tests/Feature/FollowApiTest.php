@@ -31,13 +31,9 @@ class FollowApiTest extends TestCase
             'id' => $this->user2->id,
         ]));
 
-        $response->assertStatus(201)
-            ->assertJsonFragment([
-                'id' => $this->user->id,
-                'is_following' => false,
-                'name' => $this->user->name,
-                'profile' => null
-            ]);
+        $response->assertStatus(200)->assertJsonFragment([
+            'result' => 'OK',
+        ]);
 
         $this->assertEquals(1, $this->user->followings()->count());
     }

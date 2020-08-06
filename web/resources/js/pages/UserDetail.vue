@@ -99,8 +99,7 @@ export default {
     async getUser () {
       this.dataReady = false
 
-      const response  = await axios.get(`/api/users/${this.id}`)
-      console.log(response)
+      const response = await axios.get(`/api/users/${this.id}`)
 
       if (response.status !== 200) {
         this.$store.commit('error/setCode', response.status)
