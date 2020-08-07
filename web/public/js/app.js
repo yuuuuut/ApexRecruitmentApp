@@ -2287,6 +2287,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2294,7 +2304,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     HeaderMenu: _components_HeaderMenu_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
-    return {};
+    return {
+      badegFlag: false
+    };
+  },
+  created: function created() {
+    if (this.user) {
+      this.addBadegBool();
+    }
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
     user: function user(state) {
@@ -2302,7 +2319,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   })), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     isLogin: 'auth/check'
-  }))
+  })),
+  methods: {
+    addBadegBool: function addBadegBool() {
+      this.badegFlag = this.user.is_false_notification;
+    }
+  }
 });
 
 /***/ }),
@@ -27764,17 +27786,50 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "mt-2 mr-8" },
+                  { staticClass: "mt-3 mr-7" },
                   [
                     _c(
                       "router-link",
                       { attrs: { to: { name: "Notification" } } },
                       [
-                        _c("v-icon", { staticStyle: { color: "white" } }, [
-                          _vm._v("mdi-bell")
-                        ])
-                      ],
-                      1
+                        _vm.badegFlag
+                          ? _c(
+                              "div",
+                              [
+                                _c(
+                                  "v-badge",
+                                  { attrs: { color: "pink", dot: "" } },
+                                  [
+                                    _c(
+                                      "v-icon",
+                                      {
+                                        staticStyle: { color: "white" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.badegFlag = false
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("mdi-bell")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          : _c(
+                              "div",
+                              [
+                                _c(
+                                  "v-icon",
+                                  { staticStyle: { color: "white" } },
+                                  [_vm._v("mdi-bell")]
+                                )
+                              ],
+                              1
+                            )
+                      ]
                     )
                   ],
                   1

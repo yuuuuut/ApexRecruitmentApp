@@ -32,6 +32,7 @@ class PostDetailApiTest extends TestCase
                 'platform' => $post->platform,
                 'user' => [
                     'id' => $post->user->id,
+                    'is_false_notification' => false,
                     'name' => $post->user->name,
                     'is_followed' => false,
                     'is_following' => false,

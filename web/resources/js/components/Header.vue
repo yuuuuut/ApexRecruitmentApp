@@ -12,11 +12,21 @@
     <div v-if="isLogin">
       <div class="d-flex flex-row-reverse">
         <HeaderMenu />
-        <div class="mt-2 mr-8">
+        <div class="mt-3 mr-7">
           <router-link
             :to="{ name: 'Notification' }"
           >
-            <v-icon style="color: white;">mdi-bell</v-icon>
+            <div v-if="badegFlag">
+              <v-badge
+                color="pink"
+                dot
+              >
+                <v-icon @click="badegFlag = false" style="color: white;">mdi-bell</v-icon>
+              </v-badge>
+            </div>
+            <div v-else>
+              <v-icon style="color: white;">mdi-bell</v-icon>
+            </div>
           </router-link>
         </div>
       </div>
@@ -45,6 +55,12 @@ export default {
   },
   data () {
     return {
+      badegFlag: false
+    }
+  },
+  created: function () {
+    if (this.user) {
+      this.addBadegBool()
     }
   },
   computed: {
@@ -54,6 +70,11 @@ export default {
     ...mapGetters({
       isLogin: 'auth/check'
     })
+  },
+  methods: {
+    addBadegBool () {
+      this.badegFlag = this.user.is_false_notification
+    }
   }
 }
 </script>

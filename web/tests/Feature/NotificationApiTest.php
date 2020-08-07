@@ -41,6 +41,7 @@ class NotificationApiTest extends TestCase
                     'checked' => true,
                     'visiter' => [
                         'id' => $this->user->id,
+                        'is_false_notification' => false,
                         'is_followed' => true,
                         'is_following' => false,
                         'name' => $this->user->name,

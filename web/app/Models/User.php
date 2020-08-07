@@ -14,12 +14,14 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $appends = [
-        'is_following', 'is_followed'
+        'is_following', 'is_followed',
+        'is_false_notification'
     ];
 
     protected $visible = [
         'id', 'name', 'profile', 'post',
-        'is_following', 'is_followed'
+        'is_following', 'is_followed',
+        'is_false_notification'
     ];
 
     protected $fillable = [
@@ -145,6 +147,23 @@ class User extends Authenticatable
         return $this->followings->contains(function ($user) {
             return $user->id === Auth::user()->id;
         });
+    }
+
+
+    /**
+     * is_false_notification
+     * @return Boolean
+     */
+    public function getIsFalseNotificationAttribute()
+    {
+        if (Auth::guest()) {
+            return false;
+        }
+
+        $notification = Auth::user()->passive_notifications()
+                                    ->where('checked', false)
+                                    ->exists();
+        return $notification;
     }
 
     /**
