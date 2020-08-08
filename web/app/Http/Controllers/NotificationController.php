@@ -18,6 +18,7 @@ class NotificationController extends Controller
             ->get();
         
         Notification::verifiedNotification($notifications);
+        Notification::deleteNotification($notifications);
 
         return $notifications;
     }

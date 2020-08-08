@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Carbon\Carbon;
 use Auth;
 
 class Notification extends Model
@@ -49,4 +50,19 @@ class Notification extends Model
             }
         }
     }
+
+    /**
+     * 既読から2日済みの通知を削除する
+     */
+    public static function deleteNotification($notification)
+    {
+        if ($notification) {
+            foreach ($notification as $n) {
+                if ($n->checked && Carbon::now() > $n->updated_at->addDays(2)) {
+                    $n->delete();
+                }
+            }
+        }
+    }
+
 }
