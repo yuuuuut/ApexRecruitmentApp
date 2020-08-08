@@ -30,7 +30,7 @@
               />
             </div>
           </div>
-          <div v-show="user.profile" class="mt-2 mb-3">
+          <div v-if="user.profile" class="mt-2 mb-3">
             <div class="blue-grey--text text--lighten-1" v-if="user.profile.content">{{ user.profile.content }}</div>
           </div>
           <FollowCount
