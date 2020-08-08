@@ -14,6 +14,7 @@ class NotificationController extends Controller
         $notifications =
             Notification::where('visited_id', Auth::user()->id)
             ->with(['visiter:id,name'])
+            ->orderBy(Notification::CREATED_AT, 'desc')
             ->get();
         
         Notification::verifiedNotification($notifications);
