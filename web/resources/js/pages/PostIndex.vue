@@ -28,7 +28,7 @@
       </v-btn>
     </infinite-loading>
     <div v-if="isLogin">
-      <div class="position--fixed">
+      <div class="position-fixed-right">
         <PostForm />
       </div>
     </div>
@@ -98,7 +98,7 @@ export default {
 </script>
 
 <style scoped>
-.position--fixed {
+.position-fixed-right {
   position: fixed;
   bottom: 20px;
   right: 10px;

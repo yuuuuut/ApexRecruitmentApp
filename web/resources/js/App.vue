@@ -6,15 +6,20 @@
     <main>
       <RouterView />
     </main>
+    <div class="position-fixed-left">
+      <NotificationButton />
+    </div>
   </v-app>
 </template>
 
 <script>
 import Header from './components/Header.vue'
+import NotificationButton from './components/NotificationButton.vue'
 
 export default {
   components: {
     Header,
+    NotificationButton,
   },
   computed: {
     errorCode () {
@@ -41,3 +46,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.position-fixed-left {
+  position: fixed;
+  bottom: 20px;
+  left: 10px;
+}
+</style>

@@ -84,7 +84,8 @@ export default {
       await this.$store.dispatch('auth/login', this.loginForm)
 
       if (this.apiStatus) {
-        this.$router.push('/')
+        this.$emit('load')
+        this.$router.go({path: '/', force: true})
       }
 
       this.sending = false

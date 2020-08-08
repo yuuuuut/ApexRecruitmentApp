@@ -46,7 +46,9 @@ class UserDetailApiTest extends TestCase
         $response->assertStatus(200)
                 ->assertJsonFragment([
                     'id' => $user->id,
-                    'is_false_notification' => true,
+                    'is_false_notification' => [
+                        true, 1
+                    ],
                     'name' => $user->name,
                     'is_following' => false,
                     'is_followed' => false,
@@ -63,7 +65,9 @@ class UserDetailApiTest extends TestCase
                         'updated_at' => $user->post->updated_at,
                         'user' => [
                             'id' => $user->post->user->id,
-                            'is_false_notification' => true,
+                            'is_false_notification' => [
+                                true, 1
+                            ],
                             'name' => $user->post->user->name,
                             'is_following' => false,
                             'is_followed' => false,
@@ -72,7 +76,9 @@ class UserDetailApiTest extends TestCase
                     ],
                 ], [
                     'id' => $user2->id,
-                    'is_false_notification' => true,
+                    'is_false_notification' => [
+                        true, 1
+                    ],
                     "is_followed" => true,
                     'is_following' => true,
                     'name' => $user2->name,
@@ -83,7 +89,9 @@ class UserDetailApiTest extends TestCase
                     ],
                 ], [
                     'id' => $user2->id,
-                    'is_false_notification' => true,
+                    'is_false_notification' => [
+                        true, 1
+                    ],
                     "is_followed" => true,
                     'is_following' => true,
                     'name' => $user2->name,

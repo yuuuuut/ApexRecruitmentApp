@@ -160,10 +160,13 @@ class User extends Authenticatable
             return false;
         }
 
-        $notification = Auth::user()->passive_notifications()
-                                    ->where('checked', false)
-                                    ->exists();
-        return $notification;
+        $query = Auth::user()->passive_notifications()
+                            ->where('checked', false);
+
+        $notification = $query->exists();
+        $notifi_count = $query->count();
+
+        return [$notification, $notifi_count];
     }
 
     /**
