@@ -16,7 +16,7 @@ class Notification extends Model
 
     protected $visible = [
         'visiter_id', 'visited_id', 'action',
-        'checked', 'visiter'
+        'checked', 'visiter', 'created_at'
     ];
 
     /**

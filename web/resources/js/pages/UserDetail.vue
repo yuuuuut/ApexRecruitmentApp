@@ -17,7 +17,7 @@
             </div>
           </div>
           <div class="d-flex justify-space-between">
-            <div class="d-flex justify-start">
+            <div class="d-flex justify-start mb-3">
               <div class="text-h5">{{ user.name }}</div>
               <div v-show="isFollowed">
                 <v-chip class="mt-1 ml-2" color="cyan" text-color="white" small>フォローされています</v-chip>

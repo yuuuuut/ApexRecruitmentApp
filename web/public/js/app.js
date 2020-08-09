@@ -3574,6 +3574,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3607,11 +3609,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       notifications: []
     };
+  },
+  filters: {
+    moment: function moment(date) {
+      moment__WEBPACK_IMPORTED_MODULE_1___default.a.locale('ja');
+
+      return moment__WEBPACK_IMPORTED_MODULE_1___default()(date).fromNow();
+    }
   },
   methods: {
     getNotification: function getNotification() {
@@ -29581,7 +29594,15 @@ var render = function() {
                       ],
                       1
                     )
-                  : _vm._e()
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-flex flex-row-reverse" }, [
+                  _vm._v(
+                    "\n          " +
+                      _vm._s(_vm._f("moment")(n.created_at)) +
+                      "\n        "
+                  )
+                ])
               ])
             ],
             1
@@ -29829,40 +29850,44 @@ var render = function() {
                         "div",
                         { staticClass: "d-flex justify-space-between" },
                         [
-                          _c("div", { staticClass: "d-flex justify-start" }, [
-                            _c("div", { staticClass: "text-h5" }, [
-                              _vm._v(_vm._s(_vm.user.name))
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: _vm.isFollowed,
-                                    expression: "isFollowed"
-                                  }
-                                ]
-                              },
-                              [
-                                _c(
-                                  "v-chip",
-                                  {
-                                    staticClass: "mt-1 ml-2",
-                                    attrs: {
-                                      color: "cyan",
-                                      "text-color": "white",
-                                      small: ""
+                          _c(
+                            "div",
+                            { staticClass: "d-flex justify-start mb-3" },
+                            [
+                              _c("div", { staticClass: "text-h5" }, [
+                                _vm._v(_vm._s(_vm.user.name))
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: _vm.isFollowed,
+                                      expression: "isFollowed"
                                     }
-                                  },
-                                  [_vm._v("フォローされています")]
-                                )
-                              ],
-                              1
-                            )
-                          ]),
+                                  ]
+                                },
+                                [
+                                  _c(
+                                    "v-chip",
+                                    {
+                                      staticClass: "mt-1 ml-2",
+                                      attrs: {
+                                        color: "cyan",
+                                        "text-color": "white",
+                                        small: ""
+                                      }
+                                    },
+                                    [_vm._v("フォローされています")]
+                                  )
+                                ],
+                                1
+                              )
+                            ]
+                          ),
                           _vm._v(" "),
                           _vm.currentUser.id === _vm.user.id
                             ? _c(

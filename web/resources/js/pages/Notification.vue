@@ -19,6 +19,9 @@
               {{ n.visiter.name }}さんにフォローされました
             </router-link>
           </div>
+          <div class="d-flex flex-row-reverse">
+            {{ n.created_at | moment }}
+          </div>
         </v-card-text>
       </v-card>
     </div>
@@ -26,10 +29,18 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
   data () {
     return {
       notifications: []
+    }
+  },
+  filters: {
+    moment: function (date) {
+      moment.locale( 'ja' )
+      return moment(date).fromNow()
     }
   },
   methods: {
