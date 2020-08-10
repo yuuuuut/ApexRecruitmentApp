@@ -49,20 +49,22 @@
               <v-card-title class="headline">ログアウトしますか?</v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn
-                  color="green darken-1"
-                  text
-                  @click="dialog = false"
-                >
-                  いいえ
-                </v-btn>
-                <v-btn
-                  color="green darken-1"
-                  text
-                  @click="logout"
-                >
-                  はい
-                </v-btn>
+                <div v-if="!sending">
+                  <v-btn
+                    color="green darken-1"
+                    text
+                    @click="dialog = false"
+                  >
+                    いいえ
+                  </v-btn>
+                  <v-btn
+                    color="green darken-1"
+                    text
+                    @click="logout"
+                  >
+                    はい
+                  </v-btn>
+                </div>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -84,6 +86,7 @@ export default {
         { title: 'ログアウト' },
       ],
       dialog: false,
+      sending: false
     }
   },
   computed: {
@@ -97,12 +100,14 @@ export default {
   },
   methods: {
     async logout () {
+      this.sending = true
       await this.$store.dispatch('auth/logout')
       
       if (this.apiStatus) {
         this.dialog = false
         this.$router.push('/login')
       }
+      this.sending = false
     }
   }
 }

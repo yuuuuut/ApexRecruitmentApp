@@ -2397,6 +2397,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2408,7 +2410,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         title: 'ログアウト'
       }],
-      dialog: false
+      dialog: false,
+      sending: false
     };
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
@@ -2430,17 +2433,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                _this.sending = true;
+                _context.next = 3;
                 return _this.$store.dispatch('auth/logout');
 
-              case 2:
+              case 3:
                 if (_this.apiStatus) {
                   _this.dialog = false;
 
                   _this.$router.push('/login');
                 }
 
-              case 3:
+                _this.sending = false;
+
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -28232,41 +28238,49 @@ var render = function() {
                                 [
                                   _c("v-spacer"),
                                   _vm._v(" "),
-                                  _c(
-                                    "v-btn",
-                                    {
-                                      attrs: {
-                                        color: "green darken-1",
-                                        text: ""
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.dialog = false
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                いいえ\n              "
+                                  !_vm.sending
+                                    ? _c(
+                                        "div",
+                                        [
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                color: "green darken-1",
+                                                text: ""
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.dialog = false
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                  いいえ\n                "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                color: "green darken-1",
+                                                text: ""
+                                              },
+                                              on: { click: _vm.logout }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                  はい\n                "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
                                       )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-btn",
-                                    {
-                                      attrs: {
-                                        color: "green darken-1",
-                                        text: ""
-                                      },
-                                      on: { click: _vm.logout }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                はい\n              "
-                                      )
-                                    ]
-                                  )
+                                    : _vm._e()
                                 ],
                                 1
                               )
