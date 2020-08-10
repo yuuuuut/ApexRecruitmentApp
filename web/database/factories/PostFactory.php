@@ -10,6 +10,7 @@ $factory->define(App\Models\Post::class, function (Faker $faker) {
         'user_id' => fn() => factory(App\Models\User::class)->create()->id,
         'content' => $faker->text(),
         'myid' => 'TestID',
-        'platform' => 'PC'
+        'platform' => 'PC',
+        'private' => false,
     ];
 });

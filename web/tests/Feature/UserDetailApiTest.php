@@ -62,6 +62,7 @@ class UserDetailApiTest extends TestCase
                         'content' => $user->post->content,
                         'myid' => $user->post->myid,
                         'platform' => $user->post->platform,
+                        'private' => $user->post->private,
                         'updated_at' => $user->post->updated_at,
                         'user' => [
                             'id' => $user->post->user->id,

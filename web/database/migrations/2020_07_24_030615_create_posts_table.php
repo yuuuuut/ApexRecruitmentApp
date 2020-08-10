@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->text('content');
             $table->string('myid')->nullable();
             $table->string('platform');
+            $table->boolean('private')->default(false);
             $table->timestamps();
         });
     }

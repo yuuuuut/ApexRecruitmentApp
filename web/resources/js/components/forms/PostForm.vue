@@ -53,6 +53,12 @@
             label="UID"
             hide-details="auto"
           ></v-text-field>
+          <!-- postForm.private -->
+          <v-switch
+            v-model="postForm.private"
+            class="mt-1 ml-10 mr-10"
+            label="ログインユーザーにのみID表示"
+          ></v-switch>
 
           <div class="mt-5 mb-5 d-flex justify-center">
             <v-btn
@@ -99,6 +105,7 @@ export default {
         content: '',
         myid: '',
         platform: '',
+        private: false,
       }
     }
   },

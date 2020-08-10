@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $fillable = [
-        'user_id', 'content', 'myid', 'platform'
+        'user_id', 'content', 'myid', 'platform',
+        'private'
     ];
 
     protected $visible = [
         'id', 'user_id','user', 'content', 'myid', 'platform',
-        'updated_at'
+        'private', 'updated_at'
     ];
 
     /**

@@ -2539,6 +2539,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2603,6 +2619,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: {
@@ -2610,6 +2627,9 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     }
   },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])({
+    isLogin: 'auth/check'
+  })),
   filters: {
     moment: function moment(date) {
       moment__WEBPACK_IMPORTED_MODULE_0___default.a.locale('ja');
@@ -3069,6 +3089,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3080,7 +3106,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       postForm: {
         content: '',
         myid: '',
-        platform: ''
+        platform: '',
+        "private": false
       }
     };
   },
@@ -28439,13 +28466,39 @@ var render = function() {
               _vm._v(" "),
               _vm.item.myid
                 ? _c("div", { staticClass: "ml-4" }, [
-                    _vm._v(
-                      "\n          ID: " + _vm._s(_vm.item.myid) + "\n        "
-                    )
+                    _vm.item.private === 1
+                      ? _c("div", [
+                          !_vm.isLogin
+                            ? _c("div", [
+                                _vm._v(
+                                  "\n              ID: ログインユーザーにのみ表示\n            "
+                                )
+                              ])
+                            : _vm._e()
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.item.private === 0
+                      ? _c("div", [
+                          _vm._v(
+                            "\n            ID: " +
+                              _vm._s(_vm.item.myid) +
+                              "\n          "
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isLogin
+                      ? _c("div", [
+                          _vm._v(
+                            "\n            ID: " +
+                              _vm._s(_vm.item.myid) +
+                              "\n          "
+                          )
+                        ])
+                      : _vm._e()
                   ])
-                : _c("div", { staticClass: "ml-4" }, [
-                    _vm._v("\n          ID: 未設定\n        ")
-                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c(
@@ -29010,6 +29063,18 @@ var render = function() {
                         _vm.$set(_vm.postForm, "myid", $$v)
                       },
                       expression: "postForm.myid"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-switch", {
+                    staticClass: "mt-1 ml-10 mr-10",
+                    attrs: { label: "ログインユーザーにのみID表示" },
+                    model: {
+                      value: _vm.postForm.private,
+                      callback: function($$v) {
+                        _vm.$set(_vm.postForm, "private", $$v)
+                      },
+                      expression: "postForm.private"
                     }
                   }),
                   _vm._v(" "),

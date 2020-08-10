@@ -37,6 +37,7 @@ class PostController extends Controller
             'content' => $request->content,
             'myid' => $request->myid,
             'platform' => $request->platform,
+            'private' => $request->private,
         ]);
 
         return response($post, 201);

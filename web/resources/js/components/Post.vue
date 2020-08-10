@@ -30,12 +30,21 @@
               </v-chip>
             </div>
           </div>
+
           <div v-if="item.myid" class="ml-4">
-            ID: {{ item.myid }}
+            <div v-if="item.private === 1">
+              <div v-if="!isLogin">
+                ID: ログインユーザーにのみ表示
+              </div>
+            </div>
+            <div v-if="item.private === 0">
+              ID: {{ item.myid }}
+            </div>
+            <div v-if="isLogin">
+              ID: {{ item.myid }}
+            </div>
           </div>
-          <div v-else class="ml-4">
-            ID: 未設定
-          </div>
+
         </div>
         <h2 class="text--primary">
           <router-link
@@ -63,6 +72,7 @@
 
 <script>
 import moment from "moment";
+import { mapGetters } from 'vuex'
 
 export default {
   props: {
@@ -70,6 +80,11 @@ export default {
       type: Object,
       required: true
     }
+  },
+  computed: {
+    ...mapGetters({
+      isLogin: 'auth/check'
+    })
   },
   filters: {
     moment: function (date) {
