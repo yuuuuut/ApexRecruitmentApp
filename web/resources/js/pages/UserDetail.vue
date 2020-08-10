@@ -47,6 +47,11 @@
         :item="post"
       />
     </div>
+    <div v-else>
+      <div class="mt-6 text-h5 blue-grey--text text--lighten-1" style="text-align: center;">
+        募集はまだありません
+      </div>
+    </div>
   </div>
   <div v-else>
     <v-skeleton-loader

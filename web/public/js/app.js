@@ -2618,6 +2618,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3639,6 +3640,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3901,6 +3909,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3912,6 +3928,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       platform: 'PS4',
+      loading: false,
       posts: [],
       page: 1,
       infinited: 1
@@ -3929,7 +3946,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                _this.loading = true;
+                _context.next = 3;
                 return axios.get('/api/posts', {
                   params: {
                     platform: _this.platform,
@@ -3938,7 +3956,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   }
                 }).then(function (_ref) {
                   var data = _ref.data;
-                  console.log(data);
                   setTimeout(function () {
                     if (data.data.length) {
                       var _this$posts;
@@ -3956,7 +3973,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   $state.complete();
                 });
 
-              case 2:
+              case 3:
+                _this.loading = false;
+
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -4120,6 +4140,11 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -28464,32 +28489,10 @@ var render = function() {
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              _vm.item.myid
-                ? _c("div", { staticClass: "ml-4" }, [
-                    _vm.item.private === 1
-                      ? _c("div", [
-                          !_vm.isLogin
-                            ? _c("div", [
-                                _vm._v(
-                                  "\n              ID: ログインユーザーにのみ表示\n            "
-                                )
-                              ])
-                            : _vm._e()
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.item.private === 0
-                      ? _c("div", [
-                          _vm._v(
-                            "\n            ID: " +
-                              _vm._s(_vm.item.myid) +
-                              "\n          "
-                          )
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.isLogin
-                      ? _c("div", [
+              _vm.isLogin
+                ? _c("div", [
+                    _vm.item.myid
+                      ? _c("div", { staticClass: "ml-4" }, [
                           _vm._v(
                             "\n            ID: " +
                               _vm._s(_vm.item.myid) +
@@ -28498,7 +28501,27 @@ var render = function() {
                         ])
                       : _vm._e()
                   ])
-                : _vm._e()
+                : _c("div", [
+                    _vm.item.myid
+                      ? _c("div", { staticClass: "ml-4" }, [
+                          _vm.item.private === 1
+                            ? _c("div", [
+                                _vm._v(
+                                  "\n              ID: ログインユーザーにのみ表示\n            "
+                                )
+                              ])
+                            : _vm.item.private === 0
+                            ? _c("div", [
+                                _vm._v(
+                                  "\n              ID: " +
+                                    _vm._s(_vm.item.myid) +
+                                    "\n            "
+                                )
+                              ])
+                            : _vm._e()
+                        ])
+                      : _vm._e()
+                  ])
             ]),
             _vm._v(" "),
             _c(
@@ -29619,64 +29642,77 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "mt-5" },
-    _vm._l(_vm.notifications, function(n) {
-      return _c(
-        "div",
-        { key: n.id },
-        [
-          _c(
-            "v-card",
-            {
-              staticClass: "mx-auto mb-3",
-              attrs: { width: "600px", outlined: "" }
-            },
-            [
-              _c("v-card-text", [
-                n.action === "follow"
-                  ? _c(
-                      "div",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "grey--text text--darken-3",
-                            staticStyle: { "text-decoration": "none" },
-                            attrs: {
-                              to: {
-                                name: "userDetail",
-                                params: { id: n.visiter.id.toString() }
+    [
+      _vm._l(_vm.notifications, function(n) {
+        return _c(
+          "div",
+          { key: n.id },
+          [
+            _c(
+              "v-card",
+              {
+                staticClass: "mx-auto mb-3",
+                attrs: { width: "600px", outlined: "" }
+              },
+              [
+                _c("v-card-text", [
+                  n.action === "follow"
+                    ? _c(
+                        "div",
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "grey--text text--darken-3",
+                              staticStyle: { "text-decoration": "none" },
+                              attrs: {
+                                to: {
+                                  name: "userDetail",
+                                  params: { id: n.visiter.id.toString() }
+                                }
                               }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n            " +
-                                _vm._s(n.visiter.name) +
-                                "さんにフォローされました\n          "
-                            )
-                          ]
-                        )
-                      ],
-                      1
+                            },
+                            [
+                              _vm._v(
+                                "\n            " +
+                                  _vm._s(n.visiter.name) +
+                                  "さんにフォローされました\n          "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "d-flex flex-row-reverse" }, [
+                    _vm._v(
+                      "\n          " +
+                        _vm._s(_vm._f("moment")(n.created_at)) +
+                        "\n        "
                     )
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("div", { staticClass: "d-flex flex-row-reverse" }, [
-                  _vm._v(
-                    "\n          " +
-                      _vm._s(_vm._f("moment")(n.created_at)) +
-                      "\n        "
-                  )
+                  ])
                 ])
-              ])
-            ],
-            1
+              ],
+              1
+            )
+          ],
+          1
+        )
+      }),
+      _vm._v(" "),
+      _vm.notifications.length === 0
+        ? _c(
+            "div",
+            {
+              staticClass: "text-h5 blue-grey--text text--lighten-1",
+              staticStyle: { "text-align": "center" }
+            },
+            [_vm._v("\n    通知はありません\n  ")]
           )
-        ],
-        1
-      )
-    }),
-    0
+        : _vm._e()
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -29741,22 +29777,38 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("v-select", {
-        staticClass: "mt-4 ml-15 mr-15",
-        attrs: { items: ["PS4", "PC"] },
-        on: {
-          change: function($event) {
-            return _vm.changePlatform()
-          }
-        },
-        model: {
-          value: _vm.platform,
-          callback: function($$v) {
-            _vm.platform = $$v
-          },
-          expression: "platform"
-        }
-      }),
+      !_vm.loading
+        ? _c("v-select", {
+            staticClass: "mt-4 ml-15 mr-15",
+            attrs: { items: ["PS4", "PC"] },
+            on: {
+              change: function($event) {
+                return _vm.changePlatform()
+              }
+            },
+            model: {
+              value: _vm.platform,
+              callback: function($$v) {
+                _vm.platform = $$v
+              },
+              expression: "platform"
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.loading
+        ? _c("v-select", {
+            staticClass: "mt-4 ml-15 mr-15",
+            attrs: { items: ["PS4", "PC"], disabled: "" },
+            model: {
+              value: _vm.platform,
+              callback: function($$v) {
+                _vm.platform = $$v
+              },
+              expression: "platform"
+            }
+          })
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "div",
@@ -30004,7 +30056,16 @@ var render = function() {
           _vm._v(" "),
           _vm.post
             ? _c("div", [_c("Post", { attrs: { item: _vm.post } })], 1)
-            : _vm._e()
+            : _c("div", [
+                _c(
+                  "div",
+                  {
+                    staticClass: "mt-6 text-h5 blue-grey--text text--lighten-1",
+                    staticStyle: { "text-align": "center" }
+                  },
+                  [_vm._v("\n      募集はまだありません\n    ")]
+                )
+              ])
         ],
         1
       )

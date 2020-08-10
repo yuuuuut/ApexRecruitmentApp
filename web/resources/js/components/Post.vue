@@ -31,20 +31,21 @@
             </div>
           </div>
 
-          <div v-if="item.myid" class="ml-4">
-            <div v-if="item.private === 1">
-              <div v-if="!isLogin">
-                ID: ログインユーザーにのみ表示
-              </div>
-            </div>
-            <div v-if="item.private === 0">
-              ID: {{ item.myid }}
-            </div>
-            <div v-if="isLogin">
+          <div v-if="isLogin">
+            <div v-if="item.myid" class="ml-4">
               ID: {{ item.myid }}
             </div>
           </div>
-
+          <div v-else>
+            <div v-if="item.myid" class="ml-4">
+              <div v-if="item.private === 1">
+                ID: ログインユーザーにのみ表示
+              </div>
+              <div v-else-if="item.private === 0">
+                ID: {{ item.myid }}
+              </div>
+            </div>
+          </div>
         </div>
         <h2 class="text--primary">
           <router-link

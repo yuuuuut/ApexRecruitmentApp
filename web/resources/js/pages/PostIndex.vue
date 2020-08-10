@@ -2,9 +2,17 @@
   <div>
     <v-select
       @change="changePlatform()"
+      v-if="!loading"
       :items="['PS4', 'PC']"
       v-model="platform"
       class="mt-4 ml-15 mr-15"
+    ></v-select>
+    <v-select
+      v-if="loading"
+      :items="['PS4', 'PC']"
+      v-model="platform"
+      class="mt-4 ml-15 mr-15"
+      disabled
     ></v-select>
     <div>
       <Post 
@@ -49,6 +57,7 @@ export default {
   data () {
     return {
       platform: 'PS4',
+      loading: false,
       posts: [],
       page: 1,
       infinited: 1,
@@ -61,6 +70,7 @@ export default {
   },
   methods: {
     async infiniteHandler ($state) {
+      this.loading= true
       await axios.get('/api/posts', {
         params: {
           platform: this.platform,
@@ -68,7 +78,6 @@ export default {
           per_page: 1,
         },
       }).then(({ data }) => {
-        console.log(data)
         setTimeout(() => {
           if (data.data.length) {
             this.page += 1
@@ -81,6 +90,7 @@ export default {
       }).catch ((err) => {
         $state.complete()
       })
+      this.loading = false
     },
     scrollTop () {
       window.scrollTo({

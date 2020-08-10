@@ -25,6 +25,13 @@
         </v-card-text>
       </v-card>
     </div>
+    <div
+      v-if="notifications.length === 0"
+      class="text-h5 blue-grey--text text--lighten-1"
+      style="text-align: center;"
+    >
+      通知はありません
+    </div>
   </div>
 </template>
 
