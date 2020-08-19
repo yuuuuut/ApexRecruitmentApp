@@ -21,7 +21,7 @@ class PostController extends Controller
         $query->where('platform', $platform)->get();
 
         if (!empty($legend)) {
-            $query->where('legend', $legend)->get();
+            $query->whereIn('legend', $legend)->get();
         }
 
         $posts = $query->with(['user'])->orderBy(Post::UPDATED_AT, 'desc')->paginate(7);

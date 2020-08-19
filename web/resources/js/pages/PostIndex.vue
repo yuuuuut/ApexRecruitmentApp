@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ total }}
     <v-select
       @change="changePlatform()"
       v-if="!loading"
@@ -13,18 +14,42 @@
       disabled
     ></v-select>
 
-    <v-select
-      @change="changePlatform()"
-      v-if="!loading"
-      :items="legends"
-      v-model="legend"
-      class="mt-4 ml-15 mr-15"
-    ></v-select>
-    <v-select
-      v-if="loading"
-      class="mt-1 ml-15 mr-15"
-      disabled
-    ></v-select>
+    <v-dialog v-model="dialog" scrollable max-width="300px">
+      <template v-slot:activator="{ on, attrs }">
+        <div class="center-btn">
+          <v-btn 
+            outlined
+            color="indigo"
+            v-bind="attrs"
+            v-on="on"
+          >
+            レジェンドで絞り込み
+          </v-btn>
+        </div>
+      </template>
+      <v-card>
+        <v-card-text style="height: 300px;">
+          <div v-for="(v, i) in legends" :key="i">
+            <v-checkbox
+              v-model="legend"
+              :label="v"
+              :value="v"
+            ></v-checkbox>
+          </div>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-btn
+            color="blue darken-1" text
+            @click="changePlatform(); dialog = false;"
+          >
+            絞り込み
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    {{ legend }}
 
     <div>
       <Post 
@@ -69,12 +94,14 @@ export default {
   data () {
     return {
       platform: 'PS4',
-      legend: '',
-      legends: [' ', 'ブラッドハウンド', 'ジブラルタル', 'ライフライン', 'パスファインダー', 'レイス', 
+      legend: [],
+      legends: ['ブラッドハウンド', 'ジブラルタル', 'ライフライン', 'パスファインダー', 'レイス', 
                 'バンガロール', 'ミラージュ', 'コースティック', 'ワットソン', 'クリプト',
                 'レヴナント', 'ローバ', 'ランパート'],
+      dialog: false,
       loading: false,
       posts: [],
+      total: 0,
       page: 1,
       infinited: 1,
     }
@@ -97,6 +124,7 @@ export default {
       }).then(({ data }) => {
         setTimeout(() => {
           console.log(data)
+          this.total = data.total
           if (data.data.length) {
             this.page += 1
             this.posts.push(...data.data)
@@ -126,6 +154,10 @@ export default {
 </script>
 
 <style scoped>
+.center-btn {
+  text-align:center;
+}
+
 .position-fixed-right {
   position: fixed;
   bottom: 20px;

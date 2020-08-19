@@ -3935,6 +3935,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3946,10 +3971,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       platform: 'PS4',
-      legend: '',
-      legends: [' ', 'ブラッドハウンド', 'ジブラルタル', 'ライフライン', 'パスファインダー', 'レイス', 'バンガロール', 'ミラージュ', 'コースティック', 'ワットソン', 'クリプト', 'レヴナント', 'ローバ', 'ランパート'],
+      legend: [],
+      legends: ['ブラッドハウンド', 'ジブラルタル', 'ライフライン', 'パスファインダー', 'レイス', 'バンガロール', 'ミラージュ', 'コースティック', 'ワットソン', 'クリプト', 'レヴナント', 'ローバ', 'ランパート'],
+      dialog: false,
       loading: false,
       posts: [],
+      total: 0,
       page: 1,
       infinited: 1
     };
@@ -3979,6 +4006,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   var data = _ref.data;
                   setTimeout(function () {
                     console.log(data);
+                    _this.total = data.total;
 
                     if (data.data.length) {
                       var _this$posts;
@@ -4511,7 +4539,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.position-fixed-right[data-v-732203d9] {\n  position: fixed;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.center-btn[data-v-732203d9] {\n  text-align:center;\n}\n.position-fixed-right[data-v-732203d9] {\n  position: fixed;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -29808,6 +29836,7 @@ var render = function() {
   return _c(
     "div",
     [
+      _vm._v("\n  " + _vm._s(_vm.total) + "\n  "),
       !_vm.loading
         ? _c("v-select", {
             staticClass: "mt-4 ml-15 mr-15",
@@ -29834,32 +29863,107 @@ var render = function() {
           })
         : _vm._e(),
       _vm._v(" "),
-      !_vm.loading
-        ? _c("v-select", {
-            staticClass: "mt-4 ml-15 mr-15",
-            attrs: { items: _vm.legends },
-            on: {
-              change: function($event) {
-                return _vm.changePlatform()
+      _c(
+        "v-dialog",
+        {
+          attrs: { scrollable: "", "max-width": "300px" },
+          scopedSlots: _vm._u([
+            {
+              key: "activator",
+              fn: function(ref) {
+                var on = ref.on
+                var attrs = ref.attrs
+                return [
+                  _c(
+                    "div",
+                    { staticClass: "center-btn" },
+                    [
+                      _c(
+                        "v-btn",
+                        _vm._g(
+                          _vm._b(
+                            { attrs: { outlined: "", color: "indigo" } },
+                            "v-btn",
+                            attrs,
+                            false
+                          ),
+                          on
+                        ),
+                        [_vm._v("\n          レジェンドで絞り込み\n        ")]
+                      )
+                    ],
+                    1
+                  )
+                ]
               }
-            },
-            model: {
-              value: _vm.legend,
-              callback: function($$v) {
-                _vm.legend = $$v
-              },
-              expression: "legend"
             }
-          })
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.loading
-        ? _c("v-select", {
-            staticClass: "mt-1 ml-15 mr-15",
-            attrs: { disabled: "" }
-          })
-        : _vm._e(),
-      _vm._v(" "),
+          ]),
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
+          }
+        },
+        [
+          _vm._v(" "),
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-card-text",
+                { staticStyle: { height: "300px" } },
+                _vm._l(_vm.legends, function(v, i) {
+                  return _c(
+                    "div",
+                    { key: i },
+                    [
+                      _c("v-checkbox", {
+                        attrs: { label: v, value: v },
+                        model: {
+                          value: _vm.legend,
+                          callback: function($$v) {
+                            _vm.legend = $$v
+                          },
+                          expression: "legend"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "blue darken-1", text: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.changePlatform()
+                          _vm.dialog = false
+                        }
+                      }
+                    },
+                    [_vm._v("\n          絞り込み\n        ")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v("\n\n  " + _vm._s(_vm.legend) + "\n\n  "),
       _c(
         "div",
         _vm._l(_vm.posts, function(post) {
