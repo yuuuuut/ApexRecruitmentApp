@@ -53,6 +53,13 @@
             label="UID"
             hide-details="auto"
           ></v-text-field>
+          <!-- postForm.legend -->
+          <v-select
+            class="mt-4 ml-10 mr-10"
+            :items="legends"
+            v-model="postForm.legend"
+            label="使用するレジェンド"
+          ></v-select>
           <!-- postForm.private -->
           <v-switch
             v-model="postForm.private"
@@ -94,6 +101,11 @@
 
 <script>
 export default {
+  props: {
+    legends: {
+      type: Array,
+    }
+  },
   data () {
     return {
       dialog: false,
@@ -105,6 +117,7 @@ export default {
         content: '',
         myid: '',
         platform: '',
+        legend: '',
         private: false,
       }
     }
@@ -136,6 +149,7 @@ export default {
       this.postForm.content = ''
       this.postForm.myid = ''
       this.postForm.platform = ''
+      this.postForm.legend = ''
       this.ps4Flag = false
       this.pcFlag = false
       this.errors = {}

@@ -87,7 +87,9 @@
     </infinite-loading>
     <div v-if="isLogin">
       <div class="position-fixed-right">
-        <PostForm />
+        <PostForm
+          :legends="legends"
+        />
       </div>
     </div>
   </div>

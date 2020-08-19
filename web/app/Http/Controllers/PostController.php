@@ -44,6 +44,7 @@ class PostController extends Controller
             'content' => $request->content,
             'myid' => $request->myid,
             'platform' => $request->platform,
+            'legend' => $request->legend,
             'private' => $request->private,
         ]);
 

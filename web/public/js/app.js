@@ -3102,7 +3102,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    legends: {
+      type: Array
+    }
+  },
   data: function data() {
     return {
       dialog: false,
@@ -3114,6 +3126,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         content: '',
         myid: '',
         platform: '',
+        legend: '',
         "private": false
       }
     };
@@ -3174,6 +3187,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.postForm.content = '';
       this.postForm.myid = '';
       this.postForm.platform = '';
+      this.postForm.legend = '';
       this.ps4Flag = false;
       this.pcFlag = false;
       this.errors = {};
@@ -3878,6 +3892,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -29161,6 +29177,18 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
+                  _c("v-select", {
+                    staticClass: "mt-4 ml-10 mr-10",
+                    attrs: { items: _vm.legends, label: "使用するレジェンド" },
+                    model: {
+                      value: _vm.postForm.legend,
+                      callback: function($$v) {
+                        _vm.$set(_vm.postForm, "legend", $$v)
+                      },
+                      expression: "postForm.legend"
+                    }
+                  }),
+                  _vm._v(" "),
                   _c("v-switch", {
                     staticClass: "mt-1 ml-10 mr-10",
                     attrs: { label: "ログインユーザーにのみID表示" },
@@ -30048,7 +30076,7 @@ var render = function() {
             _c(
               "div",
               { staticClass: "position-fixed-right" },
-              [_c("PostForm")],
+              [_c("PostForm", { attrs: { legends: _vm.legends } })],
               1
             )
           ])
