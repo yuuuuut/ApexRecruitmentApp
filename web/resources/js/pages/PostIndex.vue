@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ total }}
     <v-select
       @change="changePlatform()"
       v-if="!loading"
@@ -17,7 +16,8 @@
     <v-dialog v-model="dialog" scrollable max-width="300px">
       <template v-slot:activator="{ on, attrs }">
         <div class="center-btn">
-          <v-btn 
+          <v-btn
+            v-if="!loading"
             outlined
             color="indigo"
             v-bind="attrs"
@@ -49,10 +49,23 @@
       </v-card>
     </v-dialog>
 
-    {{ legend }}
-
     <div>
-      <Post 
+      <div v-if="!loading" class="mt-3 center-btn">
+        <v-chip
+          class="ma-2"
+          color="green"
+          text-color="white"
+        >
+          <v-avatar
+            left
+            class="green darken-4"
+          >
+            {{ total }}
+          </v-avatar>
+          件の募集が見つかりました。
+        </v-chip>
+      </div>
+      <Post
         v-for="post in posts"
         :key="post.id"
         :item="post"
