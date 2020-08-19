@@ -8,12 +8,12 @@ class Post extends Model
 {
     protected $fillable = [
         'user_id', 'content', 'myid', 'platform',
-        'private'
+        'legend', 'private'
     ];
 
     protected $visible = [
         'id', 'user_id','user', 'content', 'myid', 'platform',
-        'private', 'updated_at'
+        'legend', 'private', 'updated_at'
     ];
 
     /**

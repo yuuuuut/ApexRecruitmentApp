@@ -3923,6 +3923,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3934,6 +3946,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       platform: 'PS4',
+      legend: '',
+      legends: [' ', 'ブラッドハウンド', 'ジブラルタル', 'ライフライン', 'パスファインダー', 'レイス', 'バンガロール', 'ミラージュ', 'コースティック', 'ワットソン', 'クリプト', 'レヴナント', 'ローバ', 'ランパート'],
       loading: false,
       posts: [],
       page: 1,
@@ -3957,12 +3971,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return axios.get('/api/posts', {
                   params: {
                     platform: _this.platform,
+                    legend: _this.legend,
                     page: _this.page,
                     per_page: 1
                   }
                 }).then(function (_ref) {
                   var data = _ref.data;
                   setTimeout(function () {
+                    console.log(data);
+
                     if (data.data.length) {
                       var _this$posts;
 
@@ -29813,14 +29830,33 @@ var render = function() {
       _vm.loading
         ? _c("v-select", {
             staticClass: "mt-4 ml-15 mr-15",
-            attrs: { items: ["PS4", "PC"], disabled: "" },
+            attrs: { disabled: "" }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.loading
+        ? _c("v-select", {
+            staticClass: "mt-4 ml-15 mr-15",
+            attrs: { items: _vm.legends },
+            on: {
+              change: function($event) {
+                return _vm.changePlatform()
+              }
+            },
             model: {
-              value: _vm.platform,
+              value: _vm.legend,
               callback: function($$v) {
-                _vm.platform = $$v
+                _vm.legend = $$v
               },
-              expression: "platform"
+              expression: "legend"
             }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.loading
+        ? _c("v-select", {
+            staticClass: "mt-1 ml-15 mr-15",
+            attrs: { disabled: "" }
           })
         : _vm._e(),
       _vm._v(" "),

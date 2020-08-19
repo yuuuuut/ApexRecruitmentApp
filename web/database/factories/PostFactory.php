@@ -11,6 +11,7 @@ $factory->define(App\Models\Post::class, function (Faker $faker) {
         'content' => $faker->text(),
         'myid' => 'TestID',
         'platform' => 'PC',
+        'legend' => 'ジブラルタル',
         'private' => false,
     ];
 });

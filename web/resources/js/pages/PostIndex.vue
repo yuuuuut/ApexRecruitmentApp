@@ -9,11 +9,23 @@
     ></v-select>
     <v-select
       v-if="loading"
-      :items="['PS4', 'PC']"
-      v-model="platform"
       class="mt-4 ml-15 mr-15"
       disabled
     ></v-select>
+
+    <v-select
+      @change="changePlatform()"
+      v-if="!loading"
+      :items="legends"
+      v-model="legend"
+      class="mt-4 ml-15 mr-15"
+    ></v-select>
+    <v-select
+      v-if="loading"
+      class="mt-1 ml-15 mr-15"
+      disabled
+    ></v-select>
+
     <div>
       <Post 
         v-for="post in posts"
@@ -57,6 +69,10 @@ export default {
   data () {
     return {
       platform: 'PS4',
+      legend: '',
+      legends: [' ', 'ブラッドハウンド', 'ジブラルタル', 'ライフライン', 'パスファインダー', 'レイス', 
+                'バンガロール', 'ミラージュ', 'コースティック', 'ワットソン', 'クリプト',
+                'レヴナント', 'ローバ', 'ランパート'],
       loading: false,
       posts: [],
       page: 1,
@@ -74,11 +90,13 @@ export default {
       await axios.get('/api/posts', {
         params: {
           platform: this.platform,
+          legend: this.legend,
           page: this.page,
           per_page: 1,
         },
       }).then(({ data }) => {
         setTimeout(() => {
+          console.log(data)
           if (data.data.length) {
             this.page += 1
             this.posts.push(...data.data)

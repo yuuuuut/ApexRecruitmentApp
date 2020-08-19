@@ -14,9 +14,16 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $query = Post::query();
-        $search = $request->input('platform');
 
-        $query->where('platform', $search)->get();
+        $platform = $request->input('platform');
+        $legend   = $request->input('legend');
+
+        $query->where('platform', $platform)->get();
+
+        if (!empty($legend)) {
+            $query->where('legend', $legend)->get();
+        }
+
         $posts = $query->with(['user'])->orderBy(Post::UPDATED_AT, 'desc')->paginate(7);
 
         return $posts;
