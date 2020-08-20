@@ -3,7 +3,7 @@
     <v-select
       @change="changePlatform()"
       v-if="!loading"
-      :items="['PS4', 'PC']"
+      :items="['PC', 'PS4']"
       v-model="platform"
       class="mt-4 ml-15 mr-15"
     ></v-select>
@@ -110,7 +110,7 @@ export default {
     return {
       platform: 'PS4',
       legend: [],
-      legends: ['ブラッドハウンド', 'ジブラルタル', 'ライフライン', 'パスファインダー', 'レイス', 
+      legends: ['なんでも', 'ブラッドハウンド', 'ジブラルタル', 'ライフライン', 'パスファインダー', 'レイス', 
                 'バンガロール', 'ミラージュ', 'コースティック', 'ワットソン', 'クリプト',
                 'レヴナント', 'ローバ', 'ランパート'],
       dialog: false,

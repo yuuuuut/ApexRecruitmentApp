@@ -2625,6 +2625,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4001,7 +4006,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       platform: 'PS4',
       legend: [],
-      legends: ['ブラッドハウンド', 'ジブラルタル', 'ライフライン', 'パスファインダー', 'レイス', 'バンガロール', 'ミラージュ', 'コースティック', 'ワットソン', 'クリプト', 'レヴナント', 'ローバ', 'ランパート'],
+      legends: ['なんでも', 'ブラッドハウンド', 'ジブラルタル', 'ライフライン', 'パスファインダー', 'レイス', 'バンガロール', 'ミラージュ', 'コースティック', 'ワットソン', 'クリプト', 'レヴナント', 'ローバ', 'ランパート'],
       dialog: false,
       loading: false,
       posts: [],
@@ -28500,116 +28505,128 @@ var render = function() {
         { staticClass: "mx-auto mt-4", attrs: { width: "600px" } },
         [
           _c("v-card-text", [
-            _c("div", { staticClass: "d-flex flex-row" }, [
-              _vm.item.platform
+            _c("div", { staticClass: "d-flex justify-space-between" }, [
+              _c("div", { staticClass: "d-flex flex-row" }, [
+                _vm.item.platform
+                  ? _c("div", [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.item.platform === "PS4",
+                              expression: "item.platform === 'PS4'"
+                            }
+                          ]
+                        },
+                        [
+                          _c(
+                            "v-chip",
+                            {
+                              staticClass: "mb-2",
+                              attrs: {
+                                color: "pink",
+                                label: "",
+                                "text-color": "white",
+                                small: ""
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                " +
+                                  _vm._s(_vm.item.platform) +
+                                  "\n              "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.item.platform === "PC",
+                              expression: "item.platform === 'PC'"
+                            }
+                          ]
+                        },
+                        [
+                          _c(
+                            "v-chip",
+                            {
+                              staticClass: "mb-2",
+                              attrs: {
+                                color: "blue",
+                                label: "",
+                                "text-color": "white",
+                                small: ""
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                " +
+                                  _vm._s(_vm.item.platform) +
+                                  "\n              "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isLogin
+                  ? _c("div", [
+                      _vm.item.myid
+                        ? _c("div", { staticClass: "ml-4" }, [
+                            _vm._v(
+                              "\n              ID: " +
+                                _vm._s(_vm.item.myid) +
+                                "\n            "
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  : _c("div", [
+                      _vm.item.myid
+                        ? _c("div", { staticClass: "ml-4" }, [
+                            _vm.item.private === 1
+                              ? _c("div", [
+                                  _vm._v(
+                                    "\n                ID: ログインユーザーにのみ表示\n              "
+                                  )
+                                ])
+                              : _vm.item.private === 0
+                              ? _c("div", [
+                                  _vm._v(
+                                    "\n                ID: " +
+                                      _vm._s(_vm.item.myid) +
+                                      "\n              "
+                                  )
+                                ])
+                              : _vm._e()
+                          ])
+                        : _vm._e()
+                    ])
+              ]),
+              _vm._v(" "),
+              _vm.item.legend
                 ? _c("div", [
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.item.platform === "PS4",
-                            expression: "item.platform === 'PS4'"
-                          }
-                        ]
-                      },
-                      [
-                        _c(
-                          "v-chip",
-                          {
-                            staticClass: "mb-2",
-                            attrs: {
-                              color: "pink",
-                              label: "",
-                              "text-color": "white",
-                              small: ""
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n              " +
-                                _vm._s(_vm.item.platform) +
-                                "\n            "
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.item.platform === "PC",
-                            expression: "item.platform === 'PC'"
-                          }
-                        ]
-                      },
-                      [
-                        _c(
-                          "v-chip",
-                          {
-                            staticClass: "mb-2",
-                            attrs: {
-                              color: "blue",
-                              label: "",
-                              "text-color": "white",
-                              small: ""
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n              " +
-                                _vm._s(_vm.item.platform) +
-                                "\n            "
-                            )
-                          ]
-                        )
-                      ],
-                      1
+                    _vm._v(
+                      "\n          使うレジェンド: " +
+                        _vm._s(_vm.item.legend) +
+                        "\n        "
                     )
                   ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.isLogin
-                ? _c("div", [
-                    _vm.item.myid
-                      ? _c("div", { staticClass: "ml-4" }, [
-                          _vm._v(
-                            "\n            ID: " +
-                              _vm._s(_vm.item.myid) +
-                              "\n          "
-                          )
-                        ])
-                      : _vm._e()
-                  ])
-                : _c("div", [
-                    _vm.item.myid
-                      ? _c("div", { staticClass: "ml-4" }, [
-                          _vm.item.private === 1
-                            ? _c("div", [
-                                _vm._v(
-                                  "\n              ID: ログインユーザーにのみ表示\n            "
-                                )
-                              ])
-                            : _vm.item.private === 0
-                            ? _c("div", [
-                                _vm._v(
-                                  "\n              ID: " +
-                                    _vm._s(_vm.item.myid) +
-                                    "\n            "
-                                )
-                              ])
-                            : _vm._e()
-                        ])
-                      : _vm._e()
-                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c(
@@ -29880,7 +29897,7 @@ var render = function() {
       !_vm.loading
         ? _c("v-select", {
             staticClass: "mt-4 ml-15 mr-15",
-            attrs: { items: ["PS4", "PC"] },
+            attrs: { items: ["PC", "PS4"] },
             on: {
               change: function($event) {
                 return _vm.changePlatform()
