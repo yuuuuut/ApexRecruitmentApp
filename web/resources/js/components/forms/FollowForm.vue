@@ -39,6 +39,12 @@
         <v-icon left>mdi-plus</v-icon>フォロー
       </v-btn>
     </div>
+    <v-snackbar
+      v-model="snackbar"
+      :timeout="4000"
+    >
+      {{ snackbarText }}
+    </v-snackbar>
   </div>
 </template>
 
@@ -54,6 +60,8 @@ export default {
     return {
       sending: false,
       isFollowing: this.user.is_following,
+      snackbar: false,
+      snackbarText: '',
     }
   },
   methods: {
@@ -64,6 +72,8 @@ export default {
 
       this.$emit('addFollower')
       this.isFollowing = true
+      this.snackbar = true
+      this.snackbarText = 'フォローしました'
       this.sending = false
     },
     async unfollow () {
@@ -73,6 +83,8 @@ export default {
 
       this.$emit('removeFollower')
       this.isFollowing = false
+      this.snackbar = true
+      this.snackbarText = 'フォローを解除しました'
       this.sending = false
     }
   }

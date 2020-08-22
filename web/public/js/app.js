@@ -2774,6 +2774,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     user: {
@@ -2784,7 +2790,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       sending: false,
-      isFollowing: this.user.is_following
+      isFollowing: this.user.is_following,
+      snackbar: false,
+      snackbarText: ''
     };
   },
   methods: {
@@ -2807,9 +2815,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.$emit('addFollower');
 
                 _this.isFollowing = true;
+                _this.snackbar = true;
+                _this.snackbarText = 'フォローしました';
                 _this.sending = false;
 
-              case 7:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -2836,9 +2846,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this2.$emit('removeFollower');
 
                 _this2.isFollowing = false;
+                _this2.snackbar = true;
+                _this2.snackbarText = 'フォローを解除しました';
                 _this2.sending = false;
 
-              case 7:
+              case 9:
               case "end":
                 return _context2.stop();
             }
@@ -28795,97 +28807,118 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.isFollowing
-      ? _c(
-          "div",
-          [
-            _vm.sending
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "spinner-border spinner-border-sm",
-                    attrs: { role: "status" }
-                  },
-                  [
-                    _c(
-                      "v-btn",
-                      {
-                        staticClass: "ma-2",
-                        attrs: {
-                          tile: "",
-                          outlined: "",
-                          color: "success",
-                          disabled: ""
-                        }
-                      },
-                      [_vm._v("\n        フォロー中\n      ")]
-                    )
-                  ],
-                  1
-                )
-              : _c(
-                  "v-btn",
-                  {
-                    staticClass: "ma-2",
-                    attrs: { tile: "", color: "success" },
-                    on: { click: _vm.unfollow }
-                  },
-                  [_vm._v("\n      フォロー中\n    ")]
-                )
-          ],
-          1
-        )
-      : _c(
-          "div",
-          [
-            _vm.sending
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "spinner-border spinner-border-sm",
-                    attrs: { role: "status" }
-                  },
-                  [
-                    _c(
-                      "v-btn",
-                      {
-                        staticClass: "ma-2",
-                        attrs: {
-                          tile: "",
-                          outlined: "",
-                          color: "success",
-                          disabled: ""
-                        }
-                      },
-                      [
-                        _c("v-icon", { attrs: { left: "" } }, [
-                          _vm._v("mdi-plus")
-                        ]),
-                        _vm._v("フォロー\n      ")
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              : _c(
-                  "v-btn",
-                  {
-                    staticClass: "ma-2",
-                    attrs: { tile: "", outlined: "", color: "success" },
-                    on: { click: _vm.follow }
-                  },
-                  [
-                    _c("v-icon", { attrs: { left: "" } }, [_vm._v("mdi-plus")]),
-                    _vm._v("フォロー\n    ")
-                  ],
-                  1
-                )
-          ],
-          1
-        )
-  ])
+  return _c(
+    "div",
+    [
+      _vm.isFollowing
+        ? _c(
+            "div",
+            [
+              _vm.sending
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "spinner-border spinner-border-sm",
+                      attrs: { role: "status" }
+                    },
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          staticClass: "ma-2",
+                          attrs: {
+                            tile: "",
+                            outlined: "",
+                            color: "success",
+                            disabled: ""
+                          }
+                        },
+                        [_vm._v("\n        フォロー中\n      ")]
+                      )
+                    ],
+                    1
+                  )
+                : _c(
+                    "v-btn",
+                    {
+                      staticClass: "ma-2",
+                      attrs: { tile: "", color: "success" },
+                      on: { click: _vm.unfollow }
+                    },
+                    [_vm._v("\n      フォロー中\n    ")]
+                  )
+            ],
+            1
+          )
+        : _c(
+            "div",
+            [
+              _vm.sending
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "spinner-border spinner-border-sm",
+                      attrs: { role: "status" }
+                    },
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          staticClass: "ma-2",
+                          attrs: {
+                            tile: "",
+                            outlined: "",
+                            color: "success",
+                            disabled: ""
+                          }
+                        },
+                        [
+                          _c("v-icon", { attrs: { left: "" } }, [
+                            _vm._v("mdi-plus")
+                          ]),
+                          _vm._v("フォロー\n      ")
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                : _c(
+                    "v-btn",
+                    {
+                      staticClass: "ma-2",
+                      attrs: { tile: "", outlined: "", color: "success" },
+                      on: { click: _vm.follow }
+                    },
+                    [
+                      _c("v-icon", { attrs: { left: "" } }, [
+                        _vm._v("mdi-plus")
+                      ]),
+                      _vm._v("フォロー\n    ")
+                    ],
+                    1
+                  )
+            ],
+            1
+          ),
+      _vm._v(" "),
+      _c(
+        "v-snackbar",
+        {
+          attrs: { timeout: 4000 },
+          model: {
+            value: _vm.snackbar,
+            callback: function($$v) {
+              _vm.snackbar = $$v
+            },
+            expression: "snackbar"
+          }
+        },
+        [_vm._v("\n    " + _vm._s(_vm.snackbarText) + "\n  ")]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
