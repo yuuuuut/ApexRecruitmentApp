@@ -3693,11 +3693,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      notifications: []
+      notifications: [],
+      loading: false
     };
   },
   filters: {
@@ -3723,9 +3732,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context.sent;
                 _this.notifications = response.data;
+                _this.loading = true;
                 console.log(_this.notifications);
 
-              case 5:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -29798,110 +29808,123 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "mt-5" },
-    [
-      _vm._l(_vm.notifications, function(n) {
-        return _c(
-          "div",
-          { key: n.id },
-          [
-            _c(
-              "v-card",
-              {
-                staticClass: "mx-auto mb-3",
-                attrs: { width: "600px", outlined: "" }
-              },
+  return _vm.loading
+    ? _c(
+        "div",
+        { staticClass: "mt-5" },
+        [
+          _vm._l(_vm.notifications, function(n) {
+            return _c(
+              "div",
+              { key: n.id },
               [
-                _c("v-card-text", [
-                  n.action === "follow"
-                    ? _c(
-                        "div",
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "grey--text text--darken-3",
-                              staticStyle: { "text-decoration": "none" },
-                              attrs: {
-                                to: {
-                                  name: "userDetail",
-                                  params: { id: n.visiter.id.toString() }
-                                }
-                              }
-                            },
+                _c(
+                  "v-card",
+                  {
+                    staticClass: "mx-auto mb-3",
+                    attrs: { width: "600px", outlined: "" }
+                  },
+                  [
+                    _c("v-card-text", [
+                      n.action === "follow"
+                        ? _c(
+                            "div",
                             [
-                              _vm._v(
-                                "\n            " +
-                                  _vm._s(n.visiter.name) +
-                                  "さんにフォローされました\n          "
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "grey--text text--darken-3",
+                                  staticStyle: { "text-decoration": "none" },
+                                  attrs: {
+                                    to: {
+                                      name: "userDetail",
+                                      params: { id: n.visiter.id.toString() }
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n            " +
+                                      _vm._s(n.visiter.name) +
+                                      "さんにフォローされました\n          "
+                                  )
+                                ]
                               )
-                            ]
+                            ],
+                            1
                           )
-                        ],
-                        1
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  n.action === "post"
-                    ? _c(
-                        "div",
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "grey--text text--darken-3",
-                              staticStyle: { "text-decoration": "none" },
-                              attrs: {
-                                to: {
-                                  name: "userDetail",
-                                  params: { id: n.visiter.id.toString() }
-                                }
-                              }
-                            },
+                        : _vm._e(),
+                      _vm._v(" "),
+                      n.action === "post"
+                        ? _c(
+                            "div",
                             [
-                              _vm._v(
-                                "\n            " +
-                                  _vm._s(n.visiter.name) +
-                                  "さんが募集しています\n          "
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "grey--text text--darken-3",
+                                  staticStyle: { "text-decoration": "none" },
+                                  attrs: {
+                                    to: {
+                                      name: "userDetail",
+                                      params: { id: n.visiter.id.toString() }
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n            " +
+                                      _vm._s(n.visiter.name) +
+                                      "さんが募集しています\n          "
+                                  )
+                                ]
                               )
-                            ]
+                            ],
+                            1
                           )
-                        ],
-                        1
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "d-flex flex-row-reverse" }, [
-                    _vm._v(
-                      "\n          " +
-                        _vm._s(_vm._f("moment")(n.created_at)) +
-                        "\n        "
-                    )
-                  ])
-                ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "d-flex flex-row-reverse" }, [
+                        _vm._v(
+                          "\n          " +
+                            _vm._s(_vm._f("moment")(n.created_at)) +
+                            "\n        "
+                        )
+                      ])
+                    ])
+                  ],
+                  1
+                )
               ],
               1
             )
+          }),
+          _vm._v(" "),
+          _vm.notifications.length === 0
+            ? _c(
+                "div",
+                {
+                  staticClass: "text-h5 blue-grey--text text--lighten-1",
+                  staticStyle: { "text-align": "center" }
+                },
+                [_vm._v("\n    通知はありません\n  ")]
+              )
+            : _vm._e()
+        ],
+        2
+      )
+    : _c("div", [
+        _c(
+          "div",
+          { staticClass: "mt-5", staticStyle: { "text-align": "center" } },
+          [
+            _c("v-progress-circular", {
+              attrs: { indeterminate: "", color: "purple" }
+            })
           ],
           1
         )
-      }),
-      _vm._v(" "),
-      _vm.notifications.length === 0
-        ? _c(
-            "div",
-            {
-              staticClass: "text-h5 blue-grey--text text--lighten-1",
-              staticStyle: { "text-align": "center" }
-            },
-            [_vm._v("\n    通知はありません\n  ")]
-          )
-        : _vm._e()
-    ],
-    2
-  )
+      ])
 }
 var staticRenderFns = []
 render._withStripped = true

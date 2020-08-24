@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5">
+  <div v-if="loading" class="mt-5">
     <div
       v-for="n in notifications"
       :key="n.id"
@@ -42,6 +42,14 @@
       通知はありません
     </div>
   </div>
+  <div v-else>
+    <div class="mt-5" style="text-align: center;">
+      <v-progress-circular
+        indeterminate
+        color="purple"
+      ></v-progress-circular>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -50,7 +58,8 @@ import moment from "moment";
 export default {
   data () {
     return {
-      notifications: []
+      notifications: [],
+      loading: false
     }
   },
   filters: {
@@ -64,6 +73,7 @@ export default {
       const response = await axios.get(`/api/notification`)
 
       this.notifications = response.data
+      this.loading = true
       console.log(this.notifications)
     }
   },
