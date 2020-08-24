@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Auth;
+
 class Post extends Model
 {
     protected $fillable = [
@@ -24,4 +26,23 @@ class Post extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    /**
+     * Follower投稿通知作成
+     */
+    public static function createNotificationFollowerPost()
+    {
+        $follower = Auth::user()->followers()->get();
+
+        if ($follower) {
+            foreach ($follower as $f) {
+                Notification::firstOrCreate([
+                    'visiter_id' => Auth::user()->id,
+                    'visited_id' => $f->id,
+                    'action' => 'post'
+                ]);
+            }
+        }
+    }
+
 }

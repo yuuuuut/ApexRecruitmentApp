@@ -48,6 +48,8 @@ class PostController extends Controller
             'private' => $request->private,
         ]);
 
+        Post::createNotificationFollowerPost();
+
         return response($post, 201);
     }
 }

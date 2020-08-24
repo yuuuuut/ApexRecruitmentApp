@@ -70,6 +70,36 @@ class NotificationApiTest extends TestCase
     /**
      * @test
      */
+    public function follow中のユーザーが投稿した場合通知が作成される()
+    {
+        $data = [
+            'user_id' => $this->user2->id,
+            'content' => 'TestContent',
+            'myid' => 'testid',
+            'platform' => 'PS4',
+            'legend' => 'レイス',
+            'private' => false
+        ];
+
+        $this->actingAs($this->user2)
+            ->json('POST', route('post.create'), $data);
+
+        $this->actingAs($this->user)
+            ->json('GET', '/api/notification');
+
+        $this->assertEquals(1, $this->user->passive_notifications()->count());
+
+        $this->assertDatabaseHas('notifications', [
+            'visiter_id' => "2",
+            'visited_id' => "1",
+            'action' => 'post',
+            'checked' => 1,
+        ]);
+    }
+
+    /**
+     * @test
+     */
     public function 通知を既読にできること()
     {
         $response = $this->actingAs($this->user2)

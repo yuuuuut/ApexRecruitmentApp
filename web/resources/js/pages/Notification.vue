@@ -19,6 +19,15 @@
               {{ n.visiter.name }}さんにフォローされました
             </router-link>
           </div>
+          <div v-if="n.action === 'post'">
+            <router-link
+              :to="{ name: 'userDetail', params: { id: n.visiter.id.toString() }}" 
+              class="grey--text text--darken-3"
+              style="text-decoration: none;"
+            >
+              {{ n.visiter.name }}さんが募集しています
+            </router-link>
+          </div>
           <div class="d-flex flex-row-reverse">
             {{ n.created_at | moment }}
           </div>

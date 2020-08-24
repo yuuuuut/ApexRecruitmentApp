@@ -3684,6 +3684,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -29827,6 +29836,35 @@ var render = function() {
                                 "\n            " +
                                   _vm._s(n.visiter.name) +
                                   "さんにフォローされました\n          "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  n.action === "post"
+                    ? _c(
+                        "div",
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "grey--text text--darken-3",
+                              staticStyle: { "text-decoration": "none" },
+                              attrs: {
+                                to: {
+                                  name: "userDetail",
+                                  params: { id: n.visiter.id.toString() }
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n            " +
+                                  _vm._s(n.visiter.name) +
+                                  "さんが募集しています\n          "
                               )
                             ]
                           )
